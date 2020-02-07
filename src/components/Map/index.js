@@ -13,8 +13,7 @@ class Map extends React.Component {
             modalBar: false,    // 小区排名条形图
             modalRadar: false,   // 雷达图
             rankTitle: "小区排名条形图",
-            radarTitle:"雷达图标题"
-
+            radarTitle: "雷达图标题"
         }
     }
     // 放大/缩小地图zoom
@@ -34,8 +33,6 @@ class Map extends React.Component {
     comHeight(cb) {
         const height = document.documentElement.offsetHeight;
         const rect = this.state.map.current.getBoundingClientRect();
-        console.log(height)
-        console.log(rect)
         if (cb) {
             this.setState({
                 height: height - rect.top - 2
@@ -80,12 +77,11 @@ class Map extends React.Component {
             }).then(geojson => {
                 let layer = L.geoJson(geojson, {
                     onEachFeature: (feature, layer) => {
-                        const { name } = feature.properties
-                        layer.bindPopup(`<button onclick="alert('22')">${name}</button>`);
+                        const { name } = feature.properties;
+                        layer.bindPopup(`<button onclick="alert('当前索引${this.props.activeIndex},0:传播风险，1:医疗资源，2:服务治理,3:居民构成,4:抵抗力总分')">${name}</button>`);
                     }
                 })
                 layer.addTo(map)
-                console.log(map)
             })
             fetch(url_str_beijing, {
                 method: "GET",
@@ -94,8 +90,6 @@ class Map extends React.Component {
             }).then(geojson => {
                 let layer = L.geoJson(geojson, {})
                 layer.addTo(map)
-                console.log(map)
-
             })
             this.setState({
                 instance: map

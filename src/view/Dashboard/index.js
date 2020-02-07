@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace />
-            <Map changeMapFull={() => { this.changeMapSize() }} />
+            <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} />
         </Wrap >)
     }
 }
