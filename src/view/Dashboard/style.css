@@ -1,0 +1,8 @@
+.s-input.am-search {
+  background: transparent;
+  padding: 0;
+}
+.s-input .am-search-input {
+  border-radius: 12px;
+  background-color: #eee;
+}

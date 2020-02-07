@@ -1,0 +1,44 @@
+{
+  "id": "1629882",
+  "name": "platmap",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1422726",
+      "name": "增加",
+      "font_class": "zengjia1",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "5363694",
+      "name": "排名",
+      "font_class": "paiming",
+      "unicode": "e7da",
+      "unicode_decimal": 59354
+    },
+    {
+      "icon_id": "5392465",
+      "name": "增加",
+      "font_class": "zengjia",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "9273208",
+      "name": "放大",
+      "font_class": "fangda",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "10531503",
+      "name": "减少-",
+      "font_class": "jianshao-",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    }
+  ]
+}
