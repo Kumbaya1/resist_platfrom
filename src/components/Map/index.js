@@ -96,6 +96,9 @@ class Map extends React.Component {
             })
         })
     }
+    searchDistrict(value){
+        console.log(`输入框提交的内容:${value}`)
+    }
     render() {
         return (
             <MapWrap >

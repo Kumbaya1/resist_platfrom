@@ -16,7 +16,8 @@ class Dashboard extends React.Component {
         this.state = {
             value: "",
             active: 0,
-            mapFull: false
+            mapFull: false,
+            mapRef: React.createRef()
         }
     }
     handleClickPlate(item, index) {
@@ -31,7 +32,7 @@ class Dashboard extends React.Component {
         })
     }
     onSubmit(value) {
-        console.log(value)
+        this.state.mapRef.current.searchDistrict(value)
     }
     changeMapSize() {
         this.setState((prevState, props) => ({
@@ -72,7 +73,7 @@ class Dashboard extends React.Component {
                 <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
 
             <WingBlank size="lg">
-                <SearchBar placeholder="搜素社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={this.onSubmit}></SearchBar>
+                <SearchBar placeholder="搜素社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val)=>{this.onSubmit(val)}}></SearchBar>
             </WingBlank>
             <WhiteSpace />
             <WingBlank size="lg">
@@ -88,7 +89,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace />
-            <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} />
+            <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} />
         </Wrap >)
     }
 }
