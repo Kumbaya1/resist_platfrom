@@ -8,9 +8,6 @@ class LineChart extends React.Component {
         this.state = {
             chart: React.createRef(),
             option: {
-                title: {
-                    text: '自定义雷达图'
-                },
                 legend: {
                     data: ['图一', '图二', '张三', '李四']
                 },
@@ -63,10 +60,8 @@ class LineChart extends React.Component {
                             }
                         },
                         data: [
-
                             {
-                                value: [89, 60, 30, 77],
-                                name: '图二',
+                                value: this.props.radarData,
                                 areaStyle: {
                                     color: 'rgba(255, 255, 255, 0.5)'
                                 }
@@ -83,7 +78,7 @@ class LineChart extends React.Component {
         instance.setOption(this.state.option)
     }
     render() {
-        return (<Chart ref={this.state.radar}></Chart>)
+        return (<Chart ref={this.state.chart}></Chart>)
     }
 }
 

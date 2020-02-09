@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "./static/css/main.60601ba7.chunk.css",
+    "main.js": "./static/js/main.2bade112.chunk.js",
+    "main.js.map": "./static/js/main.2bade112.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.fff41dd7.js",
+    "runtime-main.js.map": "./static/js/runtime-main.fff41dd7.js.map",
+    "static/css/2.0364ea26.chunk.css": "./static/css/2.0364ea26.chunk.css",
+    "static/js/2.c24cd898.chunk.js": "./static/js/2.c24cd898.chunk.js",
+    "static/js/2.c24cd898.chunk.js.map": "./static/js/2.c24cd898.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.cd256c8b7796f26b3a857b126f13aba8.js": "./precache-manifest.cd256c8b7796f26b3a857b126f13aba8.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.0364ea26.chunk.css.map": "./static/css/2.0364ea26.chunk.css.map",
+    "static/css/main.60601ba7.chunk.css.map": "./static/css/main.60601ba7.chunk.css.map",
+    "static/js/2.c24cd898.chunk.js.LICENSE.txt": "./static/js/2.c24cd898.chunk.js.LICENSE.txt",
+    "static/media/iconfont.css": "./static/media/iconfont.f2946df2.ttf",
+    "static/media/zhibiaotushi.png": "./static/media/zhibiaotushi.721cc515.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fff41dd7.js",
+    "static/css/2.0364ea26.chunk.css",
+    "static/js/2.c24cd898.chunk.js",
+    "static/css/main.60601ba7.chunk.css",
+    "static/js/main.2bade112.chunk.js"
+  ]
+}

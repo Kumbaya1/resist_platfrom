@@ -36,6 +36,9 @@ function About() {
             <div style={{ width: '80%', margin: "0 auto" }}>
                 <img src={zhibiaotushi} alt="指标图示" style={{ width: '100%' }} />
             </div>
+            <div style={{ color: "#000", fontWeight: "bold", fontSize: "16px", margin: "4px 0 6px", textAlign: "center" }}>社区疫情抵抗力评估维度图示</div>
+            <div style={{ color: "#000", fontSize: "14px", textAlign: "center" }}>作者：《北京社区疫情抵抗力地图》项目组</div>
+
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
             <Plate img={chuachuanbofengxiannbo} name="传播风险" detail="-疫情传入小区及内部传播可能性" />
