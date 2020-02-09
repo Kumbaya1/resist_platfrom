@@ -1,11 +1,8 @@
 import styled from 'styled-components'
 
-const Chart = styled.canvas.attrs({
-    height: "350",
-    width: 0
-})`
+const Chart = styled.div`
+    height:30vh
 `
-
 export {
     Chart
 }
