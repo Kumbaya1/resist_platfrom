@@ -46,8 +46,28 @@ class Map extends React.Component {
         this.props.changeMapFull();
         // this.comHeight();
     }
+    getBrowserInterfaceSize() {
+        var pageWidth = window.innerWidth;
+        var pageHeight = window.innerHeight;
+
+        if (typeof pageWidth !== "number") {
+            //在标准模式下面
+            if (document.compatMode === "CSS1Compat") {
+                pageWidth = document.documentElement.clientWidth;
+                pageHeight = document.documentElement.clientHeight;
+            } else {
+                pageWidth = document.body.clientWidth;
+                pageHeight = window.body.clientHeight;
+            }
+        }
+
+        return {
+            pageWidth: pageWidth,
+            pageHeight: pageHeight
+        }
+    }
     comHeight(cb) {
-        const height = document.documentElement.offsetHeight;
+        const height = this.getBrowserInterfaceSize().pageHeight;
         // alert(document.documentElement.offsetHeight)
         // alert(document.documentElement.clientHeight)
         const rect = this.state.map.current.getBoundingClientRect();
@@ -425,7 +445,7 @@ class Map extends React.Component {
                     style={{ width: "95%" }}
                 >
                     <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span><br />
-                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}</span>
+                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6767</span>
 
                     <RadarChart radarData={this.state.radarData}></RadarChart>
                     {this.state.radarTips.split(",").map((item, index) => {

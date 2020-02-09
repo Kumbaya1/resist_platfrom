@@ -37,7 +37,7 @@ const Wish = styled.div`
     text-align:center;
 `
 const ReturnHome = styled.div`
-    right: 20px;
+    right: 10px;
     bottom: 20px;
     position: fixed;
     background-color: #fff;
