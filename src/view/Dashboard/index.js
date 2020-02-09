@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
                 <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
 
             <WingBlank size="lg">
-                <SearchBar placeholder="搜素社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val)=>{this.onSubmit(val)}}></SearchBar>
+                <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val)=>{this.onSubmit(val)}}></SearchBar>
             </WingBlank>
             <WhiteSpace />
             <WingBlank size="lg">
