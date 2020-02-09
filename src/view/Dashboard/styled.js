@@ -12,7 +12,7 @@ const Title = styled.h1`
     color:rgb(0,174,102);
 `
 const Text = styled.p`
-    font-size:16px;
+    font-size:12px;
     line-height:30px;
     color:rgb(54,54,54);
     text-align:center;
@@ -30,6 +30,7 @@ const PlateWrap = styled.div`
 `
 const Plate = styled.div`
     text-align:center;
+    flex:1
 
 `
 export {

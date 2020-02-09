@@ -2,26 +2,24 @@ import React from 'react';
 import echarts from 'echarts';
 import { Chart } from "./styled"
 
-class LineChart extends React.Component {
+class RadarChart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             chart: React.createRef(),
             option: {
-                legend: {
-                    data: ['图一', '图二', '张三', '李四']
-                },
+               
                 radar: [
                     {
                         indicator: [
-                            { text: '传播风险', max: 100 },
-                            { text: '医疗资源', max: 100 },
-                            { text: '服务治理', max: 100 },
-                            { text: '居民构成', max: 100 },
+                            { text: '暴露情况\n' + parseFloat(this.props.radarData[0]).toFixed(2), max: 100 },
+                            { text: '医疗资源\n' + parseFloat(this.props.radarData[1]).toFixed(2), max: 100 },
+                            { text: '服务治理\n' + parseFloat(this.props.radarData[2]).toFixed(2), max: 100 },
+                            { text: '居民构成\n' + parseFloat(this.props.radarData[3]).toFixed(2), max: 100 },
 
                         ],
                         center: ['50%', '50%'],
-                        radius: 100,
+                        radius: "55%",
                         startAngle: 90,
                         splitNumber: 4,
                         shape: 'circle',
@@ -54,6 +52,14 @@ class LineChart extends React.Component {
                     {
                         name: '雷达图',
                         type: 'radar',
+                        // label: {
+                        //     show: true,
+                        //     formatter: (params) => {
+                        //         let value = params.value;
+                        //         let text = parseFloat(value).toFixed(2);
+                        //         return text;
+                        //     },
+                        // },
                         emphasis: {
                             lineStyle: {
                                 width: 5
@@ -82,4 +88,4 @@ class LineChart extends React.Component {
     }
 }
 
-export default LineChart
+export default RadarChart

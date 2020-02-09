@@ -10,7 +10,6 @@ const MapContainer = styled.div.attrs(
     }
 )`
     height:${props => props.height}px;
-    border:1px solid red;
     overflow:hidden;
 `
 const MapUtilsWrap = styled.div`

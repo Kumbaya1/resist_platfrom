@@ -1,12 +1,13 @@
 import React, { Fragment } from "react"
+import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
-import { Title, SectionTitle, SectionText, SectionSubTitle, Wish } from "./styled"
+import { Title, SectionTitle, SectionText, SectionSubTitle, Wish, ReturnHome } from "./styled"
 import Plate from "../../components/Plate"
 import zhibiaotushi from "../../assets/images/zhibiaotushi.png"
-import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
-import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
-import fuwuzhili from "../../assets/images/fuwuzhili.png"
-import jumingoucheng from "../../assets/images/jumingoucheng.png"
+import chuachuanbofengxiannbo from "../../assets/images/about/1.png"
+import yiliaoziyuan from "../../assets/images/about/2.png"
+import fuwuzhili from "../../assets/images/about/3.png"
+import jumingoucheng from "../../assets/images/about/4.png"
 function About() {
     return (
         <Fragment>
@@ -16,21 +17,25 @@ function About() {
             <SectionTitle>关于地图</SectionTitle>
             <WhiteSpace size="lg" />
             <WingBlank size="lg">
-                <SectionText>新型冠状病毒肺炎正处于爆发期，在这场没有硝烟的战争中，社区是城市抵抗疫情和措施落地的基本空间单元， 也是离你我生活最近的第一道防线。</SectionText>
+                <SectionText>新冠肺炎正处于爆发期，在这场没有硝烟的战争中，社区是城市抵抗疫情和措施落地的基本空间单元， 也是离你我生活最近的第一道防线。</SectionText>
             </WingBlank>
             <WhiteSpace size="lg" />
             <WingBlank size="lg">
-                <SectionText>社区的疫情抵抗力是由其自身属性决定的对疫情的抵御与抗击能力。在科学理论指引下，应用大数据技术可以在短时间内将众多社区的疫情抵抗力进行较细致的量化评估。我们结合以往防灾研究文献及此次疫情特征，构建了社区疫情抵抗力评价方法，在北京政府现阶段规定的2月9日假日结束前，对北京市XXXX个社区的疫情抵抗力进行量化评估，就是这张“社区疫情抵抗力地图”。</SectionText>
+                <SectionText>我们将社区的疫情抵抗力定义为由其自身属性决定的对疫情的抵御与抗击能力。在科学理论指引下，应用大数据技术可以在短时间内将城市内众多社区及其包含小区的疫情抵抗力进行较为细致的量化评估。我们结合以往防灾研究文献及此次疫情特征，构建了社区疫情抵抗力评价方法，在北京市政府现阶段规定的2月9日假期结束前，对北京市6727个小区的疫情抵抗力进行量化评估，形成这张“社区疫情抵抗力地图”。</SectionText>
             </WingBlank>
             <WhiteSpace size="lg" />
             <WingBlank size="lg">
-                <SectionText>您可以通过点击或搜索查看北京市小区的疫情抵抗力状况，看看自己小区疫情抵抗力的优势与劣势，并采取相应的措施。我们希望地图能够助力北京及其他城市社区居民自治及城市管理者的认知决策，构建更有力的社区堡垒，为战争的胜利及更好的城市贡献自己的力量。</SectionText>
+                <SectionText>疫情抵抗力地图与真实疫情地图不同。社区疫情抵抗力由其自身属性决定，而实际发生的疫情是外部疫情冲击强度与社区疫情抵抗力共同作用的结果。因此，社区疫情抵抗力地图首先对社区自身的防御抵抗能力进行考察，以引导城市和社区在疫情发生前认知自身状况并采取防疫措施。结合实际疫情情况，可以对社区疫情抵抗力的评估体系进行校验与优化。</SectionText>
+            </WingBlank>
+            <WhiteSpace size="lg" />
+            <WingBlank size="lg">
+                <SectionText>您可以通过点击或搜索查看北京市小区的疫情抵抗力状况，查看自己所在小区疫情抵抗力优势与劣势。对疫情抵抗力单项指标排名后50%的小区，地图会提示采取相应的防护措施。我们希望这张地图能够助力北京和其他城市社区居民自治及城市管理者的认知决策，构建更坚固的社区堡垒，为打赢这场疫情阻击战贡献自己的力量。</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
-            <SectionTitle>社区疫情抵抗力评估方法</SectionTitle>
+            <SectionTitle>社区疫情抵抗力评估指标</SectionTitle>
             <WhiteSpace size="lg" />
             <WingBlank size="lg">
-                <SectionText>结合文献研究以及此次疫情的特点，我们将社区疫情抵抗力分为传播风险、医疗资源、服务治理和居民构成四方面因素，并基于可用的数据建立量化评估方法：</SectionText>
+                <SectionText>结合文献研究以及此次疫情的特点，我们将社区疫情抵抗力分为暴露情况、医疗资源、服务治理和居民构成四方面因素，并基于可用的数据建立量化评估方法：</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
             <div style={{ width: '80%', margin: "0 auto" }}>
@@ -41,7 +46,7 @@ function About() {
 
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
-            <Plate img={chuachuanbofengxiannbo} name="传播风险" detail="-疫情传入小区及内部传播可能性" />
+            <Plate img={chuachuanbofengxiannbo} name="暴露情况" detail="-疫情传入小区及内部传播可能性" />
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括</SectionText>
@@ -110,12 +115,9 @@ function About() {
                 我们为奋战在一线的白衣天使们祈福，每人亦需坚守自己的堡垒，做出贡献愿天使凯旋，众生平安，城市更加美好
             </Wish>
             <WhiteSpace size="xl" />
+            {/* <SectionSubTitle>项目团队</SectionSubTitle> */}
+            <ReturnHome ><Link style={{color:"rgb(0,174,102)"}} to="/">回到<br />首页</Link></ReturnHome>
             <WhiteSpace size="xl" />
-            <SectionSubTitle>项目团队</SectionSubTitle>
-
-
-
-
         </Fragment>
     )
 }

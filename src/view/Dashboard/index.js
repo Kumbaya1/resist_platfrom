@@ -42,7 +42,7 @@ class Dashboard extends React.Component {
     render() {
         const Plates = [
             {
-                name: "传播风险",
+                name: "暴露情况",
                 img: chuachuanbofengxiannbo
             }, {
                 name: "医疗资源",
@@ -69,7 +69,7 @@ class Dashboard extends React.Component {
             ><Title>北京市社区抵抗力</Title></NavBar> */}
             <WhiteSpace />
             {this.state.mapFull === false ? (<Fragment><Title>北京市社区疫情抵抗力地图</Title>
-                <WingBlank size="lg"><Text> 共筑社区防线，查看北京7289个小区对疫情的抵抗力</Text></WingBlank>
+                <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
                 <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
 
             <WingBlank size="lg">
@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
                         return (
                             <Plate onClick={() => { this.handleClickPlate(item, index) }} key={index}>
                                 {this.state.mapFull === false ? (<img src={item.img} alt={item.name} />) : ""}
-                                <div style={{ marginTop: '8px', fontSize: '15px', color: this.state.active === index ? 'rgb(0,174,102)' : 'rgb(54,54,54)' }}>{item.name}</div>
+                                <div style={{ marginTop: '8px', fontSize: '12px', color: this.state.active === index ? 'rgb(0,174,102)' : 'rgb(54,54,54)' }}>{item.name}</div>
                             </Plate>
                         )
                     })}

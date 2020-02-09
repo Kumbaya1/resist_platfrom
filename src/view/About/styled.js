@@ -36,10 +36,28 @@ const Wish = styled.div`
     letter-space:0.01em;
     text-align:center;
 `
+const ReturnHome = styled.div`
+    right: 20px;
+    bottom: 20px;
+    position: fixed;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #409eff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 0 6px rgba(0,0,0,.12);
+    cursor: pointer;
+    z-index: 5;
+`
 export {
     Title,
     SectionTitle,
     SectionText,
     SectionSubTitle,
-    Wish
+    Wish,
+    ReturnHome
 }

@@ -25,7 +25,8 @@ class Map extends React.Component {
             rankData: [],
             radarData: [],
             radarScore: 0,
-            radarTips: ""
+            radarTips: "",
+            radarTotalscorerank: "0"
         }
     }
     getBarName() {
@@ -200,6 +201,7 @@ class Map extends React.Component {
                 let scoreC = properties['C服务治理']
                 let scoreD = properties['D居民构成']
                 let totalScore = properties['总分N']
+                let totalScoreRank = properties['总分排名']
                 let tips = "";
                 if (tipA1) {
                     tips += "," + tipA1
@@ -230,10 +232,11 @@ class Map extends React.Component {
                 }
                 tips = tips.substring(1);
                 let popupContent = "";
+                // const names = ["暴露情况总分","医疗资源总分","服务治理总分","居民构成总分","抵抗力总分"];
                 if (properties && properties['社区名称']) {
                     popupContent += "<p>" + properties['社区名称'] + "</p>"
                     popupContent += "<p>抵抗力评分：" + properties[scoreField].toFixed(2) + "</p>";
-                    popupContent += `<button id='detailBtn' data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
+                    popupContent += `<button id='detailBtn' data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
                 }
                 return popupContent
             }
@@ -321,6 +324,7 @@ class Map extends React.Component {
                         radarTips: btn.getAttribute("data-tips"),
                         radarScore: btn.getAttribute("data-score"),
                         radarTitle: btn.getAttribute("data-name"),
+                        radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
                         radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
                     })
                 }
@@ -391,10 +395,11 @@ class Map extends React.Component {
         })
     }
     render() {
+        const rankDetail = ["排名高的小区疫情传播风险相对较小", "排名高的小区周边医疗资源相对较好", "排名高的小区治理服务相对较好", "排名高的小区居民构成对抗击疫情较为有利", "排名高的小区对疫情的抵抗力相对较强"];
         return (
             <MapWrap >
                 <MapUtilsWrap >
-                    <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
+                    {/* <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil> */}
                     <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil>
                     <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil>
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
@@ -408,7 +413,8 @@ class Map extends React.Component {
                     onClose={() => { this.changeRankDialog('Bar', false) }}
                     style={{ width: "95%" }}
                 >
-                    <BarChart rankData={this.state.rankData} title={this.state.rankTitle} ></BarChart>
+                    <div style={{ textAlign: "right", color: "#aaa", fontSize: "12px" }}>*{rankDetail[this.props.activeIndex]}</div>
+                    <BarChart rankData={this.state.rankData} title={this.state.rankTitle}></BarChart>
                 </Modal>
                 <Modal
                     visible={this.state.modalRadar}
@@ -418,11 +424,13 @@ class Map extends React.Component {
                     onClose={() => { this.changeRankDialog('Radar', false) }}
                     style={{ width: "95%" }}
                 >
-                    <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span>
+                    <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span><br />
+                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}</span>
+
                     <RadarChart radarData={this.state.radarData}></RadarChart>
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
-                            <div key={index} style={{ color: "rgb(0,174,102)", textAlign: "left",fontSize:"14px" }} >·{item}</div>
+                            <div key={index} style={{ color: "rgb(0,174,102)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
                         )
                     })}
                 </Modal>
