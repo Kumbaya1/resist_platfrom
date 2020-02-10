@@ -113,9 +113,9 @@ function About(props) {
             <p style={{ textAlign: "center" }}>技术创新中心</p>
             <WhiteSpace size="xl" />
             <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>统筹策划</span>:李洋</p>
-            <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>指标研究</span>:李洋 褚鞒 张苗琳</p>
+            <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>指标研究</span>:李洋 褚峤 张苗琳</p>
             <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>数据准备</span>:张弘 贾道祥</p>
-            <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>数据分析</span>:褚诮 张弘 张苗琳</p>
+            <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>数据分析</span>:褚峤 张弘 张苗琳</p>
             <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>UI设计</span>:刘佳艺</p>
             <p style={{ textAlign: "center", lineHeight: "22px" }}><span style={{ fontWeight: "bold" }}>前端开发</span>:贾道祥 赵鑫</p>
             <WhiteSpace size="xl" />

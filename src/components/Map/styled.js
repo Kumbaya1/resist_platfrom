@@ -9,14 +9,16 @@ const MapContainer = styled.div.attrs(
         }
     }
 )`
-    height:${props => props.height}px;
     overflow:hidden;
+    height:calc(100vh - 240px)
 `
+// height:${props => props.height}px;
+
 const MapUtilsWrap = styled.div`
     position:absolute;
-    top:10px;
+    top:40px;
     right:10px;
-    z-index:999;
+    z-index:1001;
     border: 2px solid rgba(0,0,0,0.2);
     border-radius:4px;
 `

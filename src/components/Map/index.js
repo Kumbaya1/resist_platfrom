@@ -48,18 +48,18 @@ class Map extends React.Component {
     }
     getBrowserInterfaceSize() {
         var pageWidth = window.innerWidth;
-        var pageHeight = window.innerHeight;
+        var pageHeight = window.screen.availHeight;
 
-        if (typeof pageWidth !== "number") {
-            //在标准模式下面
-            if (document.compatMode === "CSS1Compat") {
-                pageWidth = document.documentElement.clientWidth;
-                pageHeight = document.documentElement.clientHeight;
-            } else {
-                pageWidth = document.body.clientWidth;
-                pageHeight = window.body.clientHeight;
-            }
-        }
+        // if (typeof pageWidth !== "number") {
+        //     //在标准模式下面
+        //     if (document.compatMode === "CSS1Compat") {
+        //         pageWidth = document.documentElement.clientWidth;
+        //         pageHeight = document.documentElement.clientHeight;
+        //     } else {
+        //         pageWidth = document.body.clientWidth;
+        //         pageHeight = window.body.clientHeight;
+        //     }
+        // }
 
         return {
             pageWidth: pageWidth,
@@ -68,8 +68,6 @@ class Map extends React.Component {
     }
     comHeight(cb) {
         const height = this.getBrowserInterfaceSize().pageHeight;
-        // alert(document.documentElement.offsetHeight)
-        // alert(document.documentElement.clientHeight)
         const rect = this.state.map.current.getBoundingClientRect();
         if (cb) {
             this.setState({
@@ -106,6 +104,8 @@ class Map extends React.Component {
         let self = this;
         this.comHeight(() => {
             const map = L.map('map').setView([40.054503749861944, 116.4022082099109], 14)
+            map.zoomControl.remove();
+            map.attributionControl.remove();
             // const url = "http://192.168.31.87:8085/geoserver/ncov/wms";
             // const params = {
             //     service: 'WFS',
@@ -187,8 +187,12 @@ class Map extends React.Component {
             let markersLayer = new L.featureGroup();
             map.addLayer(markersLayer);
             let searchControl = new L.Control.Search({
+                textPlaceholder: "搜索社区",
+                textCancel: "清除",
+                textErr: "未找到社区",
                 layer: featuresLayer,
                 propertyName: "社区名称",
+                position: "topright",
                 marker: false,
                 moveToLocation: function (latlng, title, map) {
                     markersLayer.clearLayers();
@@ -256,7 +260,7 @@ class Map extends React.Component {
                 if (properties && properties['社区名称']) {
                     popupContent += "<p>" + properties['社区名称'] + "</p>"
                     popupContent += "<p>抵抗力评分：" + properties[scoreField].toFixed(2) + "</p>";
-                    popupContent += `<button id='detailBtn' data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
+                    popupContent += `<button id='detailBtn' class='detailBtn' data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
                 }
                 return popupContent
             }
@@ -337,17 +341,19 @@ class Map extends React.Component {
             }
 
             map.on("popupopen", function () {
-                document.getElementById("detailBtn").onclick = function (e) {
-                    const btn = e.target;
-                    self.setState({
-                        modalRadar: true,
-                        radarTips: btn.getAttribute("data-tips"),
-                        radarScore: btn.getAttribute("data-score"),
-                        radarTitle: btn.getAttribute("data-name"),
-                        radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
-                        radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
-                    })
-                }
+                document.querySelectorAll(".detailBtn").forEach(item => {
+                    item.onclick = function (e) {
+                        const btn = e.target;
+                        self.setState({
+                            modalRadar: true,
+                            radarTips: btn.getAttribute("data-tips"),
+                            radarScore: btn.getAttribute("data-score"),
+                            radarTitle: btn.getAttribute("data-name"),
+                            radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
+                            radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
+                        })
+                    }
+                })
             });
             // searchControl.on('search:locationfound', function(e) {
             //     e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
