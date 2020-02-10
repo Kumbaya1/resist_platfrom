@@ -26,7 +26,8 @@ class Map extends React.Component {
             radarData: [],
             radarScore: 0,
             radarTips: "",
-            radarTotalscorerank: "0"
+            radarTotalscorerank: "0",
+            diffHeight: 210
         }
     }
     getBarName() {
@@ -44,6 +45,10 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
+        const diffHeight = this.state.diffHeight === 210 ? 96 : 210;
+        this.setState({
+            diffHeight
+        })
         // this.comHeight();
     }
     getBrowserInterfaceSize() {
@@ -208,8 +213,8 @@ class Map extends React.Component {
 
             // 格式化弹窗内容
             function getPopupContent(feature) {
-                let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
-                let scoreField = fieldlist[self.props.activeIndex] // 此处索引最好是当前指标索引
+                // let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
+                // let scoreField = fieldlist[self.props.activeIndex] // 此处索引最好是当前指标索引
                 let properties = feature.properties
                 let tipA1 = properties['A1提示']
                 let tipA2 = properties['A2提示']
@@ -259,7 +264,8 @@ class Map extends React.Component {
                 // const names = ["暴露情况总分","医疗资源总分","服务治理总分","居民构成总分","抵抗力总分"];
                 if (properties && properties['社区名称']) {
                     popupContent += "<p>" + properties['社区名称'] + "</p>"
-                    popupContent += "<p>抵抗力评分：" + properties[scoreField].toFixed(2) + "</p>";
+                    // popupContent += "<p>抵抗力评分：" + properties[scoreField].toFixed(2) + "</p>";
+                    popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                     popupContent += `<button id='detailBtn' class='detailBtn' data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
                 }
                 return popupContent
@@ -341,6 +347,15 @@ class Map extends React.Component {
             }
 
             map.on("popupopen", function () {
+                const names = ["暴露情况总分", "医疗资源总分", "服务治理总分", "居民构成总分", "抵抗力总分"];
+                const mapKeys = ["a", "b", "c", "d", ""];
+                const htmlStr = map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].getContent();
+                let div = document.createElement("div");
+                div.innerHTML = htmlStr;
+                const p = div.querySelector(".replace");
+                const btn = div.querySelector("button");
+                p.innerText = names[self.props.activeIndex] + ":" + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(2)
+                map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
                 document.querySelectorAll(".detailBtn").forEach(item => {
                     item.onclick = function (e) {
                         const btn = e.target;
@@ -425,12 +440,12 @@ class Map extends React.Component {
         return (
             <MapWrap >
                 <MapUtilsWrap >
-                    {/* <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil> */}
+                    <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
                     <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil>
                     <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil>
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
-                <MapContainer ref={this.state.map} id={this.state.id} height={this.state.height}></MapContainer>
+                <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
@@ -451,7 +466,7 @@ class Map extends React.Component {
                     style={{ width: "95%" }}
                 >
                     <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span><br />
-                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6767</span>
+                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6727</span>
 
                     <RadarChart radarData={this.state.radarData}></RadarChart>
                     {this.state.radarTips.split(",").map((item, index) => {

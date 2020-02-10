@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank, SearchBar } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Title, Text, AboutLink, PlateWrap, Plate } from "./styled"
+import { Wrap, Text, AboutLink, PlateWrap, Plate } from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -21,7 +21,6 @@ class Dashboard extends React.Component {
         }
     }
     handleClickPlate(item, index) {
-        console.log(item, index)
         this.setState({
             active: index
         })
@@ -66,14 +65,14 @@ class Dashboard extends React.Component {
                 style={{ background: 'rgb(17, 19, 27)' }}
                 rightContent={
                     <Icon key="0" type="ellipsis" />}
-            ><Title>北京市社区抵抗力</Title></NavBar> */}
+            ><Title>北京社区抵抗力</Title></NavBar> */}
             <WhiteSpace />
-            {this.state.mapFull === false ? (<Fragment><Title>北京市社区疫情抵抗力地图</Title>
+            {this.state.mapFull === false ? (<Fragment>
                 <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
                 <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
 
             <WingBlank size="lg">
-                <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val)=>{this.onSubmit(val)}}></SearchBar>
+                <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val) => { this.onSubmit(val) }}></SearchBar>
             </WingBlank>
             <WhiteSpace />
             <WingBlank size="lg">
