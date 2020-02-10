@@ -122,7 +122,7 @@ function About(props) {
             <SectionSubTitle>支持感谢</SectionSubTitle>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>梁军辉 蔡玉蘅</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>孙小明 吴纳维 李颖 刘海金 </p>
-            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>高铭 史未名 李靖 郑茜</p>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>高铭 史未名 李靖 郑茜 张彦军</p>
             <WhiteSpace size="xl" />
             <SectionSubTitle>联系方式</SectionSubTitle>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>联系人:易女士</p>
