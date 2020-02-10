@@ -31,9 +31,17 @@ const MapUtil = styled.div`
     text-align: center;
     border-bottom: 1px solid #ccc;
 `
+const Tip = styled.div`
+    position:absolute;
+    bottom:0px;
+    right:2px;
+    z-index:1000;
+    font-size:12px;
+`
 export {
     MapWrap,
     MapContainer,
     MapUtilsWrap,
-    MapUtil
+    MapUtil,
+    Tip
 }
