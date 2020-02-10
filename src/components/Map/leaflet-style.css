@@ -36,7 +36,7 @@
   text-align: center;
 }
 #map .search-input {
-  width: 120px;
+  width: 43vh;
 }
 #map .leaflet-control-search .search-input {
   margin-bottom: 0;
