@@ -10,24 +10,24 @@ const MapContainer = styled.div.attrs(
     }
 )`
     overflow:hidden;
-    height:calc(100vh - 240px)
-`
+    height:${props => ("calc(100vh - " + props.diffHeight + "px)")}
+    `
 // height:${props => props.height}px;
 
 const MapUtilsWrap = styled.div`
-    position:absolute;
-    top:40px;
-    right:10px;
-    z-index:1001;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-radius:4px;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    z-index: 1001;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 `
 const MapUtil = styled.div`
-    width:30px;
-    height:30px;
-    background:#fff;
-    line-height:30px;
-    text-align:center;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    line-height: 30px;
+    text-align: center;
     border-bottom: 1px solid #ccc;
 `
 export {

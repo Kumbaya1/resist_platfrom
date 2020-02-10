@@ -45,7 +45,7 @@ class BarChart extends React.Component {
                 series: [
                     {
                         type: 'bar',
-                        data: this.props.rankData.map(item => item.rank),
+                        data: this.props.rankData.map(item => item.score),
                         itemStyle: {
                             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
                                 offset: 0,
