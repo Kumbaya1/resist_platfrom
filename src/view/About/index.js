@@ -41,8 +41,8 @@ function About(props) {
             <div style={{ width: '80%', margin: "0 auto" }}>
                 <img src={zhibiaotushi} alt="指标图示" style={{ width: '100%' }} />
             </div>
-            <div style={{ color: "#000", fontWeight: "bold", fontSize: "16px", margin: "4px 0 6px", textAlign: "center" }}>社区疫情抵抗力评估维度图示</div>
-            <div style={{ color: "#000", fontSize: "14px", textAlign: "center" }}>作者：《北京社区疫情抵抗力地图》项目组</div>
+            <div style={{ color: "#ccc", fontWeight: "bold", fontSize: "14px", margin: "4px 0 6px", textAlign: "center" }}>社区疫情抵抗力评估维度图示</div>
+            <div style={{ color: "#ccc", fontSize: "14px", textAlign: "center" }}>作者：《北京社区疫情抵抗力地图》项目组</div>
 
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
@@ -122,7 +122,7 @@ function About(props) {
             <SectionSubTitle>支持感谢</SectionSubTitle>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>梁军辉 蔡玉蘅</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>孙小明 吴纳维 李颖 刘海金 </p>
-            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>高铭 史未名 李靖 郑茜</p>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>高铭 史未名 李靖 郑茜 张彦军</p>
             <WhiteSpace size="xl" />
             <SectionSubTitle>联系方式</SectionSubTitle>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>联系人:易女士</p>

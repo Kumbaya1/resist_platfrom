@@ -27,7 +27,7 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 210
+            diffHeight: 125
         }
     }
     getBarName() {
@@ -45,7 +45,7 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
-        const diffHeight = this.state.diffHeight === 210 ? 96 : 210;
+        const diffHeight = this.state.diffHeight === 125 ? 32 : 125;
         this.setState({
             diffHeight
         })
@@ -454,11 +454,12 @@ class Map extends React.Component {
             <MapWrap >
                 <MapUtilsWrap >
                     <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
-                    <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil>
-                    <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil>
+                    {/* <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil> */}
+                    {/* <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil> */}
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
+                <Tip>*注:红色标记处为已现疫情地点</Tip>
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
@@ -482,6 +483,7 @@ class Map extends React.Component {
                     <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6727</span>
 
                     <RadarChart radarData={this.state.radarData}></RadarChart>
+                    {this.state.radarTips.split(",").length > 0 ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
                             <div key={index} style={{ color: "rgb(0,174,102)", textAlign: "left", fontSize: "12px" }} >·{item}</div>

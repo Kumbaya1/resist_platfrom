@@ -16,11 +16,12 @@ const MapContainer = styled.div.attrs(
 
 const MapUtilsWrap = styled.div`
     position: absolute;
-    top: 40px;
+    top: 41px;
     right: 10px;
     z-index: 1001;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+    border-top:1px solid #ccc;
 `
 const MapUtil = styled.div`
     width: 30px;
@@ -30,9 +31,17 @@ const MapUtil = styled.div`
     text-align: center;
     border-bottom: 1px solid #ccc;
 `
+const Tip = styled.div`
+    position:absolute;
+    bottom:0px;
+    right:2px;
+    z-index:1000;
+    font-size:12px;
+`
 export {
     MapWrap,
     MapContainer,
     MapUtilsWrap,
-    MapUtil
+    MapUtil,
+    Tip
 }
