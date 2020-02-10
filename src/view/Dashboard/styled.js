@@ -33,11 +33,30 @@ const Plate = styled.div`
     flex:1
 
 `
+const AboutMap = styled.div`
+    left: 10px;
+    bottom: 20px;
+    position: fixed;
+    background-color: #fff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    color: #409eff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 0 6px rgba(0,0,0,.12);
+    cursor: pointer;
+    z-index: 999;
+    line-height:15px;
+`
 export {
     Wrap,
     Title,
     Text,
     AboutLink,
     PlateWrap,
-    Plate
+    Plate,
+    AboutMap
 }

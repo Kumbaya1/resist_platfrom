@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Text, AboutLink, PlateWrap, Plate } from "./styled"
+import { Wrap, Text, PlateWrap, Plate, AboutMap } from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -69,8 +69,8 @@ class Dashboard extends React.Component {
             <WhiteSpace />
             {this.state.mapFull === false ? (<Fragment>
                 <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
-                <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
-
+            </Fragment>) : ""}
+            {/* <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p> */}
             {/* <WingBlank size="lg">
                 <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val) => { this.onSubmit(val) }}></SearchBar>
             </WingBlank> */}
@@ -88,6 +88,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace />
+            <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>关于<br />地图</Link></AboutMap>
             <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={Plates[this.state.active].name} />
         </Wrap >)
     }
