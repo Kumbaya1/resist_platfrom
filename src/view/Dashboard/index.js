@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
-import { WhiteSpace, WingBlank, SearchBar } from 'antd-mobile';
+import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
 import { Wrap, Text, AboutLink, PlateWrap, Plate } from "./styled"
 import "./style.css"
@@ -71,17 +71,17 @@ class Dashboard extends React.Component {
                 <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
                 <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p></Fragment>) : ""}
 
-            <WingBlank size="lg">
+            {/* <WingBlank size="lg">
                 <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val) => { this.onSubmit(val) }}></SearchBar>
-            </WingBlank>
-            <WhiteSpace />
+            </WingBlank> */}
+            {/* <WhiteSpace /> */}
             <WingBlank size="lg">
                 <PlateWrap >
                     {Plates.map((item, index) => {
                         return (
                             <Plate onClick={() => { this.handleClickPlate(item, index) }} key={index}>
-                                {this.state.mapFull === false ? (<img src={item.img} alt={item.name} />) : ""}
-                                <div style={{ marginTop: '8px', fontSize: '12px', color: this.state.active === index ? 'rgb(0,174,102)' : 'rgb(54,54,54)' }}>{item.name}</div>
+                                {this.state.mapFull === false ? (<img style={{ marginTop: '8px' }} src={item.img} alt={item.name} />) : ""}
+                                <div style={{ fontSize: '12px', color: this.state.active === index ? 'rgb(0,174,102)' : 'rgb(54,54,54)' }}>{item.name}</div>
                             </Plate>
                         )
                     })}

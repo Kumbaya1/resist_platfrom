@@ -16,11 +16,12 @@ const MapContainer = styled.div.attrs(
 
 const MapUtilsWrap = styled.div`
     position: absolute;
-    top: 40px;
+    top: 41px;
     right: 10px;
     z-index: 1001;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+    border-top:1px solid #ccc;
 `
 const MapUtil = styled.div`
     width: 30px;

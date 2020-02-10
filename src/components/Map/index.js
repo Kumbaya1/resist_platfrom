@@ -27,7 +27,7 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 210
+            diffHeight: 155
         }
     }
     getBarName() {
@@ -45,7 +45,7 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
-        const diffHeight = this.state.diffHeight === 210 ? 96 : 210;
+        const diffHeight = this.state.diffHeight === 155 ? 32 : 155;
         this.setState({
             diffHeight
         })
@@ -441,8 +441,8 @@ class Map extends React.Component {
             <MapWrap >
                 <MapUtilsWrap >
                     <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
-                    <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil>
-                    <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil>
+                    {/* <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil> */}
+                    {/* <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil> */}
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
