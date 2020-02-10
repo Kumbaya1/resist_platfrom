@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Chart = styled.div`
-    height:50vh;
+    height:60vh;
     width:100%;
 `
 export {

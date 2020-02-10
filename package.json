@@ -2,6 +2,7 @@
   "name": "platform",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@antv/f2": "^3.5.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,6 +12,7 @@
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
+    "echarts": "^4.6.0",
     "leaflet": "^1.6.0",
     "leaflet-search": "^2.9.8",
     "less": "^3.10.3",
