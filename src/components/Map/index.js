@@ -253,9 +253,9 @@ class Map extends React.Component {
                 if (tipC2) {
                     tips += "," + tipC2
                 }
-                if (tipD1) {
-                    tips += "," + tipD1
-                }
+                // if (tipD1) {
+                //     tips += "," + tipD1
+                // }
                 if (tipD2) {
                     tips += "," + tipD2
                 }
