@@ -33,7 +33,7 @@ const MapUtil = styled.div`
 `
 const Tip = styled.div`
     position:absolute;
-    bottom:0px;
+    bottom:-2px;
     right:2px;
     z-index:1000;
     font-size:12px;
