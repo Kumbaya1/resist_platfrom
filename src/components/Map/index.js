@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
-import { MapContainer, MapWrap, MapUtilsWrap, MapUtil ,Tip} from "./styled"
+import { MapContainer, MapWrap, MapUtilsWrap, MapUtil, Tip } from "./styled"
 // import { bjxq } from './mapdata/bjxq'
 import { yqpoi } from './mapdata/yiqingpoi'
 import BarChart from "../BarChart"
@@ -437,7 +437,7 @@ class Map extends React.Component {
         featuresLayer.setStyle(function (feature) {
             return {
                 weight: 1,
-                opacity: 1,
+                opacity: 0,
                 color: 'white',
                 dashArray: '0',
                 fillOpacity: 0.6,
@@ -459,7 +459,7 @@ class Map extends React.Component {
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
-                <Tip>*注:红色标记处为已现疫情地点</Tip>
+                {/* <Tip>*注:红色标记处为已现疫情地点</Tip> */}
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
