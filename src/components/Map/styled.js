@@ -16,7 +16,7 @@ const MapContainer = styled.div.attrs(
 
 const MapUtilsWrap = styled.div`
     position: absolute;
-    top: 41px;
+    top: 43px;
     right: 10px;
     z-index: 1001;
     border: 2px solid rgba(0, 0, 0, 0.2);

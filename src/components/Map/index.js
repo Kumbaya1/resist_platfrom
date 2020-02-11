@@ -181,7 +181,7 @@ class Map extends React.Component {
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
-                    textPlaceholder: "搜索社区",
+                    textPlaceholder: "输入小区名称进行搜索",
                     textCancel: "清除",
                     textErr: "未找到社区",
                     layer: featuresLayer,
@@ -462,7 +462,7 @@ class Map extends React.Component {
                     <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
                     {/* <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil> */}
                     {/* <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil> */}
-                    <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
+                    <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i style={{fontSize:"25px"}}  className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
                 <Tip>*注:红色标记处为已现疫情地点</Tip>
