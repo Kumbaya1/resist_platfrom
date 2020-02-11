@@ -284,7 +284,7 @@ class Map extends React.Component {
                 //图层样式
                 function style(feature) {
                     return {
-                        weight: 1,
+                        weight: 0,
                         opacity: 1,
                         color: 'white',
                         dashArray: '0',
@@ -436,7 +436,7 @@ class Map extends React.Component {
         let featuresLayer = this.state.rendererLayer
         featuresLayer.setStyle(function (feature) {
             return {
-                weight: 1,
+                weight: 0,
                 opacity: 0,
                 color: 'white',
                 dashArray: '0',

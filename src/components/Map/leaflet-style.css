@@ -47,12 +47,12 @@
 }
 
 .leaflet-control-search .search-input {
-    width: 175px;
+    width: 43vh;
 }
 
-#map .search-input {
+/* #map .search-input {
     width: 43vh;
-  }
+  } */
   #map .leaflet-control-search .search-input {
     margin-bottom: 0;
   }
