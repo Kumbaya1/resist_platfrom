@@ -276,8 +276,8 @@ class Map extends React.Component {
                         from = grades[i];
                         to = grades[i + 1];
                         labels.push(
-                            '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                            from + '&ndash;' + to);// (to>=0 ? '&ndash;' + from : '+'));
+                            '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
+                            from + '&ndash;' + to +"</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
                     div.innerHTML = '<h4>抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
                     return div;
