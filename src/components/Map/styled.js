@@ -37,6 +37,7 @@ const Tip = styled.div`
     right:2px;
     z-index:1000;
     font-size:12px;
+    color:rgb(54, 54, 54);
 `
 export {
     MapWrap,
