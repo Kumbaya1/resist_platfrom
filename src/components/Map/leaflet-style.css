@@ -48,7 +48,7 @@
 }
 
 #map .search-input {
-  width: 75vw !important;
+  width: 74vw !important;
   max-width: unset !important;
 }
 #map .leaflet-control-search .search-input {

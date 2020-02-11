@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
-import { MapContainer, MapWrap, MapUtilsWrap, MapUtil ,Tip} from "./styled"
+import { MapContainer, MapWrap, MapUtilsWrap, MapUtil, Tip } from "./styled"
 // import { bjxq } from './mapdata/bjxq'
 import { yqpoi } from './mapdata/yiqingpoi'
 import BarChart from "../BarChart"
@@ -85,6 +85,9 @@ class Map extends React.Component {
         }
     }
     changeRankDialog(type, flag) {
+        if (!this.state.rendererLayer || !this.state.rendererLayer.getLayers) {
+            return
+        }
         this.setState({
             [`modal${type}`]: flag
         })
@@ -131,13 +134,13 @@ class Map extends React.Component {
             //     srsName: "EPSG:4326"
             // }
             const url_str = url + L.Util.getParamString(params, url);
-           // const url_str_beijing = url + L.Util.getParamString(paramsBeijing, url);
+            // const url_str_beijing = url + L.Util.getParamString(paramsBeijing, url);
             fetch(url_str, {
                 method: "GET",
             }).then(res => {
                 return res.json()
             }).then(geojson => {
-                 // 贾道祥 示例
+                // 贾道祥 示例
                 // 自定义定位点图标
                 const myCustomColour = '#FF0000'//'#009366'//'#583470'
                 const markerHtmlStyles = `
@@ -165,7 +168,7 @@ class Map extends React.Component {
                 // 疫情点
                 L.geoJSON(yqpoi, {
                     pointToLayer: function (geoJSONPoint, latlng) {
-                       // let name = geoJSONPoint.properties['name']
+                        // let name = geoJSONPoint.properties['name']
                         return L.marker(latlng, { icon: divIcon })//.bindPopup(`<p>${name}(已现疫情)</p>`).openPopup()
                     }
                 }).addTo(map)
@@ -174,7 +177,7 @@ class Map extends React.Component {
                     style: style,
                     onEachFeature: onEachFeature
                 }).addTo(map);
-    
+
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
@@ -185,18 +188,19 @@ class Map extends React.Component {
                     propertyName: "社区名称",
                     position: "topright",
                     marker: false,
+                    collapsed: false,
                     moveToLocation: function (latlng, title, map) {
                         markersLayer.clearLayers();
                         let feature = latlng.layer.feature
                         let popupContent = getPopupContent(feature)
-    
+
                         let marker = new L.Marker(latlng, { icon: divIcon }).addTo(map).bindPopup(popupContent).openPopup();
                         markersLayer.addLayer(marker);
                         var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-                        map.setView(latlng, zoom-1); // access the zoom
+                        map.setView(latlng, zoom - 1); // access the zoom
                     }
                 });
-    
+
                 // 格式化弹窗内容
                 function getPopupContent(feature) {
                     // let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
@@ -209,7 +213,7 @@ class Map extends React.Component {
                     let tipB2 = properties['B2提示']
                     let tipC1 = properties['C1提示']
                     let tipC2 = properties['C2提示']
-                    let tipD1 = properties['D1提示']
+                    // let tipD1 = properties['D1提示']
                     let tipD2 = properties['D2提示']
                     let scoreA = properties['A传播风险']
                     let scoreB = properties['B医疗资源']
@@ -270,17 +274,17 @@ class Map extends React.Component {
                         from, to;
                     for (var i = 0; i < grades.length - 1; i++) {
                         from = grades[i];
-                        to = grades[i+1];
+                        to = grades[i + 1];
                         labels.push(
                             '<i style="background:' + getColor(from + 1) + '"></i> ' +
                             from + '&ndash;' + to);// (to>=0 ? '&ndash;' + from : '+'));
                     }
-                    div.innerHTML = '<h4>抵抗力排名</h4>'+ labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    div.innerHTML = '<h4>抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
                     return div;
                 };
                 //添加图例
                 legend.addTo(map);
-    
+
                 //图层样式
                 function style(feature) {
                     return {
@@ -294,17 +298,17 @@ class Map extends React.Component {
                 }
                 function getColor(d) {
                     return d > 5762 ? '#FF0000' :
-                            d > 4798 ? '#FF5500' :
+                        d > 4798 ? '#FF5500' :
                             d > 3836 ? '#FFAA00' :
                                 d > 2875 ? '#FFFF00' :
                                     d > 1915 ? '#B0E000' :
-                                    d > 957 ? '#6FC400' :
-                                    '#38A800';
+                                        d > 957 ? '#6FC400' :
+                                            '#38A800';
                 }
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
                     var layer = e.target;
-    
+
                     layer.setStyle({
                         weight: 2,
                         color: 'blue',
@@ -323,9 +327,9 @@ class Map extends React.Component {
                 //缩放到要素范围
                 function zoomToFeature(e) {
                     markersLayer.clearLayers();
-                  //  map.fitBounds(e.target.getBounds());
+                    //  map.fitBounds(e.target.getBounds());
                     var zoom = map.getBoundsZoom(e.target.getBounds());
-                    map.setView(e.latlng, zoom-1); 
+                    map.setView(e.latlng, zoom - 1);
                 }
                 //每个要素绑定事件
                 function onEachFeature(feature, layer) {
@@ -337,7 +341,7 @@ class Map extends React.Component {
                     var popupContent = getPopupContent(feature)
                     layer.bindPopup(popupContent);
                 }
-    
+
                 map.on("popupopen", function () {
                     const names = ["暴露情况总分", "医疗资源总分", "服务治理总分", "居民构成总分", "抵抗力总分"];
                     const ranks = ['暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名', '抵抗力总分排名']
@@ -370,12 +374,12 @@ class Map extends React.Component {
                 //     if(e.layer._popup)
                 //         e.layer.openPopup();
                 // }).on('search:collapsed', function(e) {
-    
+
                 //     featuresLayer.eachLayer(function(layer) {	//restore feature color
                 //         featuresLayer.resetStyle(layer);
                 //     });	
                 // });
-    
+
                 map.addControl(searchControl);  //inizialize search control
                 self.setState({
                     rendererLayer: featuresLayer,
@@ -406,12 +410,12 @@ class Map extends React.Component {
     // 根据属性范围设置渲染颜色
     getColor(d) {
         return d > 5762 ? '#FF0000' :
-                d > 4798 ? '#FF5500' :
+            d > 4798 ? '#FF5500' :
                 d > 3836 ? '#FFAA00' :
                     d > 2875 ? '#FFFF00' :
-                         d > 1915 ? '#B0E000' :
-                         d > 957 ? '#6FC400' :
-                        '#38A800';
+                        d > 1915 ? '#B0E000' :
+                            d > 957 ? '#6FC400' :
+                                '#38A800';
         // 红色色系
         // return d > 5887 ? '#800026' :
         //       d > 5046 ? '#BD0026' :
@@ -430,7 +434,7 @@ class Map extends React.Component {
     }
     // 切换不同指标地图
     switchIndexMap(index) {
-      //  let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
+        //  let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
         let renderField = this.state.rankFieldList[index] //fieldlist[index]
         let self = this
         let featuresLayer = this.state.rendererLayer
