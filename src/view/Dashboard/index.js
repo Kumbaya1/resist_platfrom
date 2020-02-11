@@ -89,7 +89,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace />
-            <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>关于<br />地图</Link></AboutMap>
+            <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
             <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={Plates[this.state.active].name} />
         </Wrap >)
     }
