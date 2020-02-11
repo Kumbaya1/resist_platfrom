@@ -459,7 +459,7 @@ class Map extends React.Component {
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap>
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
-                <Tip>*注:红色标记处为已现疫情地点</Tip>
+                {/* <Tip>*注:红色标记处为已现疫情地点</Tip> */}
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
