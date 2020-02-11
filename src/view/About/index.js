@@ -42,7 +42,6 @@ function About(props) {
                 <img src={zhibiaotushi} alt="指标图示" style={{ width: '100%' }} />
             </div>
             <div style={{ color: "#ccc", fontWeight: "bold", fontSize: "14px", margin: "4px 0 6px", textAlign: "center" }}>社区疫情抵抗力评估维度图示</div>
-            <div style={{ color: "#ccc", fontSize: "14px", textAlign: "center" }}>作者：《北京社区疫情抵抗力地图》项目组</div>
 
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
@@ -50,11 +49,15 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
-                <SectionText>1.小区与人群密集场所的距离-人群流动是疫情传播的主要途径，地图选取了机场、火车站(特级、一级)、和商场三类人群居密集公共场所，小区与这些场所距离越近，被疫情传播的风险越高；(方法-POI数据分析)</SectionText>
+                <SectionText>1.小区与人群密集场所的距离-</SectionText>
+                <SectionText>人群流动是疫情传播的主要途径，地图选取了机场、火车站(特级、一级)、和商场三类人群居密集公共场所，小区与这些场所距离越近，被疫情传播的风险越高；(POI数据分析)</SectionText>
                 <WhiteSpace />
-                <SectionText>2.小区及周边人口密度-高密度的居住环境会加剧疫情的人际传播；(方法-手机信令数据分析)</SectionText>
+                <SectionText>2.小区及周边人口密度-</SectionText>
+                <SectionText>高密度的居住环境会加剧疫情的人际传播；(手机信令数据分析)</SectionText>
                 <WhiteSpace />
-                <SectionText>3.小区不稳定人口比例–小区范围人口的流动性越大，疫情传入的概率越高；(方法-手机信令数据分析)</SectionText>
+                <SectionText>3.小区不稳定人口比例–</SectionText>
+                <SectionText>小区范围人口的流动性越大，疫情传入的概率越高；(手机信令数据分析)</SectionText>
+
             </WingBlank>
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
@@ -62,9 +65,11 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
-                <SectionText>4.医疗资源可达性-医疗及隔离设施是社区抵御疫情的核心资源。小区居民对医疗机构的邻近程度，以及邻近医疗机构的规格水平，影响小区对疫情的抵抗力；(方法-POI数据分析)</SectionText>
+                <SectionText>4.医疗资源可达性-</SectionText>
+                <SectionText>医疗及隔离设施是社区抵御疫情的核心资源。小区居民对医疗机构的邻近程度，以及邻近医疗机构的规格水平，影响小区对疫情的抵抗力；(POI数据分析)</SectionText>
                 <WhiteSpace />
-                <SectionText>5.隔离设施可达性–隔离是战胜传染性疫情的重要方式，新冠肺炎爆发以来，酒店为密切接触人员提供有效的隔离场所。 地图选取酒店作为隔离设施考察其对设施居民的可达性，可达性越高，越有利于社区对抗疫情。(方法-POI数据分析)</SectionText>
+                <SectionText>5.隔离设施可达性–</SectionText>
+                <SectionText>隔离是战胜传染性疫情的重要方式，新冠肺炎爆发以来，酒店为密切接触人员提供有效的隔离场所。 地图选取酒店作为隔离设施考察其对设施居民的可达性，可达性越高，越有利于社区对抗疫情。(POI数据分析)</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
@@ -72,9 +77,11 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
-                <SectionText>6.社区服务可达性–社区服务设施在疫情期间的人员管理，知识宣传，卫生维护等服务水平对控制疫情蔓延至关重要，地图考察北京社区服务中心对各小区的可达性，可达性较好的社区对疫情抵抗力较强；(方法-POI数据分析)</SectionText>
+                <SectionText>6.社区服务可达性–</SectionText>
+                <SectionText>社区服务设施在疫情期间的人员管理，知识宣传，卫生维护等服务水平对控制疫情蔓延至关重要，地图考察北京社区服务中心对各小区的可达性，可达性较好的社区对疫情抵抗力较强；(POI数据分析)</SectionText>
                 <WhiteSpace />
-                <SectionText>7.区内基础服务设施水平-良好的基础设施供给是社区居民度过疫期的保障，地图选取超市，社区服务中心及体育设施三类与居民生活紧密相关的设施进行供给分析，供给较好的社区对疫情抵抗力较强；(方法-POI数据分析)</SectionText>
+                <SectionText>7.区内基础服务设施水平-</SectionText>
+                <SectionText>良好的基础设施供给是社区居民度过疫期的保障，地图选取超市，社区服务中心及体育设施三类与居民生活紧密相关的设施进行供给分析，供给较好的社区对疫情抵抗力较强；(POI数据分析)</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
@@ -82,9 +89,11 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
-                <SectionText>8.就业居民比例–就业居民有较稳定收入来源，使其家庭能够抵抗更大的由疫情导致的经济风险；居民就业比例高有助于社区抵御疫情；(方法-手机信令数据分析)</SectionText>
+                <SectionText>8.就业居民比例–</SectionText>
+                <SectionText>就业居民有较稳定收入来源，使其家庭能够抵抗更大的由疫情导致的经济风险；居民就业比例高有助于社区抵御疫情；(手机信令数据分析)</SectionText>
                 <WhiteSpace />
-                <SectionText>9.特殊人群比例-儿童和老人等人群，疫情时需要特殊照顾，此类人群较多的小区，对疫情抵抗力也相对较弱； (方法-手机信令数据分析)</SectionText>
+                <SectionText>9.特殊人群比例-</SectionText>
+                <SectionText>儿童和老人等人群，疫情时需要特殊照顾，此类人群较多的小区，对疫情抵抗力也相对较弱； (手机信令数据分析)</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
