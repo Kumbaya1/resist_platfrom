@@ -33,6 +33,12 @@ class BarChart extends React.Component {
                     boundaryGap: [0, 0.01],
                     axisTick: {
                         show: false
+                    },
+                    splitArea: {
+                        interval: 0
+                    },
+                    axisLabel: {
+                        interval: 0
                     }
                 },
                 yAxis: {
@@ -40,6 +46,13 @@ class BarChart extends React.Component {
                     data: this.props.rankData.map(item => item.name),
                     axisTick: {
                         show: false
+                    },
+                    splitArea: {
+                        interval: 0,
+                        show: true
+                    },
+                    axisLabel: {
+                        interval: 0
                     }
                 },
                 series: [

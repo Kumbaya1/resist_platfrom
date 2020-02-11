@@ -34,7 +34,7 @@ const MapUtil = styled.div`
 const Tip = styled.div`
     position:absolute;
     bottom:-2px;
-    right:2px;
+    right:10px;
     z-index:1000;
     font-size:12px;
     color:rgb(54, 54, 54);
