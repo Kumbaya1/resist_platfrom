@@ -2,7 +2,6 @@ import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
 import { MapContainer, MapWrap, MapUtilsWrap, MapUtil, Tip } from "./styled"
-// import { bjxq } from './mapdata/bjxq'
 import { yqpoi } from './mapdata/yiqingpoi'
 import BarChart from "../BarChart"
 import RadarChart from "../RadarChart"
@@ -114,9 +113,13 @@ class Map extends React.Component {
         let self = this;
         this.comHeight(() => {
             const map = L.map('map').setView([40.054503749861944, 116.4022082099109], 10)
+            //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                id: 'mapbox.light'
+            }).addTo(map);
             map.zoomControl.remove();
             map.attributionControl.remove();
-            const url = "http://115.28.163.137:8080/geoserver/ncov/wms";
+            const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
             const params = {
                 service: 'WFS',
                 version: '1.1.0',
@@ -161,10 +164,7 @@ class Map extends React.Component {
                     popupAnchor: [0, -36],
                     html: `<span style="${markerHtmlStyles}" />`
                 })
-                //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                    id: 'mapbox.light'
-                }).addTo(map);
+               
                 // 疫情点
                 L.geoJSON(yqpoi, {
                     pointToLayer: function (geoJSONPoint, latlng) {
@@ -438,16 +438,18 @@ class Map extends React.Component {
         let renderField = this.state.rankFieldList[index] //fieldlist[index]
         let self = this
         let featuresLayer = this.state.rendererLayer
-        featuresLayer.setStyle(function (feature) {
-            return {
-                weight: 0,
-                opacity: 0,
-                color: 'white',
-                dashArray: '0',
-                fillOpacity: 0.6,
-                fillColor: self.getColor(feature.properties[renderField])
-            };
-        })
+        if(featuresLayer){
+            featuresLayer.setStyle(function (feature) {
+                return {
+                    weight: 0,
+                    opacity: 0,
+                    color: 'white',
+                    dashArray: '0',
+                    fillOpacity: 0.6,
+                    fillColor: self.getColor(feature.properties[renderField])
+                };
+            })
+        }
         this.setState({
             index: index
         })
