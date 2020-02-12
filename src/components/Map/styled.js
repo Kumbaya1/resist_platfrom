@@ -16,7 +16,7 @@ const MapContainer = styled.div.attrs(
 
 const MapUtilsWrap = styled.div`
     position: absolute;
-    top: 41px;
+    top: 43px;
     right: 10px;
     z-index: 1001;
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -33,11 +33,13 @@ const MapUtil = styled.div`
 `
 const Tip = styled.div`
     position:absolute;
-    bottom:-2px;
-    right:10px;
+    bottom:0;
+    right:0;
+    left:0;
     z-index:1000;
     font-size:12px;
     color:rgb(54, 54, 54);
+    text-align:center;
 `
 export {
     MapWrap,

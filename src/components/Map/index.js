@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
-import { MapContainer, MapWrap, MapUtilsWrap, MapUtil, Tip } from "./styled"
+import { MapContainer, MapWrap, Tip } from "./styled"
 import { yqpoi } from './mapdata/yiqingpoi'
 import BarChart from "../BarChart"
 import RadarChart from "../RadarChart"
@@ -28,7 +28,7 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 125
+            diffHeight: 145
         }
     }
     getBarName() {
@@ -46,7 +46,7 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
-        const diffHeight = this.state.diffHeight === 125 ? 32 : 125;
+        const diffHeight = this.state.diffHeight === 145 ? 52 : 125;
         this.setState({
             diffHeight
         })
@@ -121,12 +121,6 @@ class Map extends React.Component {
             }).addTo(map);
             // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
             // }).addTo(map)
-           // var normalm = L.tileLayer('http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}').addTo(map)
-        //    L.layerGroup([L.tileLayer('http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
-        //         subdomains: "1234"
-        //     }), L.tileLayer('http://t{s}.tianditu.cn/DataServer?T=cta_w&X={x}&Y={y}&L={z}', {
-        //         subdomains: "1234"
-        //     })]).addTo(map)
            
            map.zoomControl.remove();
             map.attributionControl.remove();
@@ -197,7 +191,7 @@ class Map extends React.Component {
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
-                    textPlaceholder: "搜索社区",
+                    textPlaceholder: "输入小区名称进行搜索",
                     textCancel: "清除",
                     textErr: "未找到社区",
                     layer: featuresLayer,
@@ -271,7 +265,7 @@ class Map extends React.Component {
                     let popupContent = "";
                     // const names = ["暴露情况总分","医疗资源总分","服务治理总分","居民构成总分","抵抗力总分"];
                     if (properties && properties['社区名称']) {
-                        popupContent += "<p>" + properties['社区名称'] + "</p>"
+                        popupContent += "<p style='font-weight:bold'>" + properties['社区名称'] + "</p>"
                         popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
                         popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
@@ -291,7 +285,7 @@ class Map extends React.Component {
                         to = grades[i + 1];
                         labels.push(
                             '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
-                            from + '&ndash;' + to +"</div>");// (to>=0 ? '&ndash;' + from : '+'));
+                            from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
                     div.innerHTML = '<h4>已现疫情小区</h4><div><img src="/static/media/yiqingpoi2.9f40b254.png" style="width:20px;height:20px;margin-left:22px"/></div><h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
                     return div;
@@ -356,10 +350,10 @@ class Map extends React.Component {
                     layer.bindPopup(popupContent);
                 }
 
-                map.on("popupopen", function (e) {
-                    const names = ["抵抗力总分","暴露情况总分", "医疗资源总分", "服务治理总分", "居民构成总分"];
-                    const ranks = [ '抵抗力总分排名','暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名']
-                    const mapKeys = ["a", "b", "c", "d", ""];
+                map.on("popupopen", function () {
+                    const names = ['抵抗力总分', "暴露情况总分", "医疗资源总分", "服务治理总分", "居民构成总分"];
+                    const ranks = ['抵抗力总分排名', '暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名']
+                    const mapKeys = ["", "a", "b", "c", "d"];
                     const htmlStr = map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].getContent();
                     let div = document.createElement("div");
                     div.innerHTML = htmlStr;
@@ -481,14 +475,14 @@ class Map extends React.Component {
         const rankDetail = ["排名高的小区疫情传播风险相对较小", "排名高的小区周边医疗资源相对较好", "排名高的小区治理服务相对较好", "排名高的小区居民构成对抗击疫情较为有利", "排名高的小区对疫情的抵抗力相对较强"];
         return (
             <MapWrap >
-                <MapUtilsWrap >
+                {/* <MapUtilsWrap >
                     <MapUtil onClick={() => { this.changeMapContainer() }}> <i className="iconfont">&#xe666;</i> </MapUtil>
-                    {/* <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil> */}
-                    {/* <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil> */}
-                    <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i className="iconfont">&#xe7da;</i> </MapUtil>
-                </MapUtilsWrap>
+                    <MapUtil onClick={() => { this.changeZoom("add") }}> <i className="iconfont">&#xe627;</i> </MapUtil>
+                    <MapUtil onClick={() => { this.changeZoom("reduce") }}><i className="iconfont">&#xe660;</i> </MapUtil>
+                    <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i style={{ fontSize: "25px" }} className="iconfont">&#xe7da;</i> </MapUtil>
+                </MapUtilsWrap> */}
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
-                <Tip>*注:红色标记处为已现疫情地点</Tip>
+                <Tip><a href="mailto:ict@thupdi.com" style={{color:"rgb(54, 54, 54)"}}>ict@thupdi.com </a></Tip>
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
@@ -515,7 +509,7 @@ class Map extends React.Component {
                     {this.state.radarTips.split(",").length > 0 ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
-                            <div key={index} style={{ color: "rgb(0,174,102)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
+                            <div key={index} style={{ color: "rgb(54,54,54)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
                         )
                     })}
                 </Modal>

@@ -47,17 +47,25 @@
 }
 
 #map .search-input {
-  width: 74vw !important;
+  width: calc(100vw - 76px);
   max-width: unset !important;
 }
 #map .leaflet-control-search .search-input {
   margin-bottom: 0;
+  margin-top: 0;
+  border: 0;
+  height: 40px;
 }
 #map .leaflet-control-search.search-exp {
   border-width: 1px;
 }
 #map .leaflet-control-search.leaflet-control {
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 2px solid transparent;
+  border: 0;
   border-radius: 4px;
+}
+#map .leaflet-control-search.search-exp.leaflet-control .search-button{
+  margin-top: 5px;
+}
+#map .leaflet-control-search.search-exp.leaflet-control .search-cancel{
+  margin-top: 10px;
 }
