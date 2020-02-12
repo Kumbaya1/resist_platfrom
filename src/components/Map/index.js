@@ -301,7 +301,8 @@ class Map extends React.Component {
                             '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
                             from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
-                    div.innerHTML = '<h4>已现疫情小区</h4><div><img src="/static/media/yiqingpoi2.9f40b254.png" style="width:20px;height:20px;margin-left:22px"/></div><h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    div.innerHTML += '<div class="yqIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
                     return div;
                 };
                 //添加图例
