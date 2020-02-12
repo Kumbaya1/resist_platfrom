@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Text, PlateWrap, Plate, AboutMap, Title, TopRank } from "./styled"
+import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank } from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -79,7 +79,7 @@ class Dashboard extends React.Component {
                     <Icon key="0" type="ellipsis" />}
             ><Title>北京社区抵抗力</Title></NavBar> */}
             <WhiteSpace size="sm" />
-            <Title>北京社区疫情抵抗力地图</Title>
+            {/* <Title>北京社区疫情抵抗力地图</Title> */}
             {this.state.mapFull === false ? (<Fragment>
                 <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
             </Fragment>) : ""}

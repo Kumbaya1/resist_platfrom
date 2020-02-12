@@ -27,7 +27,7 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 127,
+            diffHeight: 92,
             head: [
                 {
                     label: "排名",
@@ -57,7 +57,7 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
-        const diffHeight = this.state.diffHeight === 127 ? 34 : 127;
+        const diffHeight = this.state.diffHeight === 92 ? 0 : 127;
         this.setState({
             diffHeight
         })
