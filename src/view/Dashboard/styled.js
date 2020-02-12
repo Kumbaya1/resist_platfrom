@@ -13,7 +13,7 @@ const Title = styled.h1`
 `
 const Text = styled.p`
     font-size:12px;
-    line-height:30px;
+    line-height:20px;
     color:rgb(54,54,54);
     text-align:center;
 `

@@ -3,8 +3,9 @@ import { Modal } from "antd-mobile"
 import L from "leaflet"
 import { MapContainer, MapWrap, Tip } from "./styled"
 import { yqpoi } from './mapdata/yiqingpoi'
-import BarChart from "../BarChart"
+// import BarChart from "../BarChart"
 import RadarChart from "../RadarChart"
+import MTable from "../MTable"
 import './leaflet-style.css'
 import 'leaflet-search'
 import 'leaflet-search/dist/leaflet-search.src.css'
@@ -26,7 +27,19 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 145
+            diffHeight: 127,
+            head: [
+                {
+                    label: "排名",
+                    prop: "rank"
+                }, {
+                    label: "小区名称",
+                    prop: "name"
+                }, {
+                    label: "评分",
+                    prop: "score"
+                }
+            ]
         }
     }
     getBarName() {
@@ -44,7 +57,7 @@ class Map extends React.Component {
     // 地图容器尺寸调整
     changeMapContainer() {
         this.props.changeMapFull();
-        const diffHeight = this.state.diffHeight === 145 ? 52 : 125;
+        const diffHeight = this.state.diffHeight === 127 ? 34 : 127;
         this.setState({
             diffHeight
         })
@@ -105,8 +118,9 @@ class Map extends React.Component {
         rankData.sort((a, b) => {
             return a.rank - b.rank
         })
+        console.log(rankData.slice(0, 20))
         this.setState({
-            rankData: rankData.slice(0, 20).reverse()
+            rankData: rankData.slice(0, 20)
         })
     }
     componentDidMount() {
@@ -465,7 +479,7 @@ class Map extends React.Component {
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i style={{ fontSize: "25px" }} className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap> */}
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
-                <Tip><a href="mailto:ict@thupdi.com" style={{color:"rgb(54, 54, 54)"}}>ict@thupdi.com </a></Tip>
+                <Tip><a href="mailto:ict@thupdi.com" style={{ color: "rgb(54, 54, 54)" }}>ict@thupdi.com </a></Tip>
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
@@ -474,8 +488,9 @@ class Map extends React.Component {
                     onClose={() => { this.changeRankDialog('Bar', false) }}
                     style={{ width: "95%" }}
                 >
-                    <div style={{ textAlign: "right", color: "#aaa", fontSize: "12px" }}>*{rankDetail[this.props.activeIndex]}</div>
-                    <BarChart rankData={this.state.rankData} title={this.state.rankTitle}></BarChart>
+                    <div style={{ textAlign: "center", color: "#aaa", fontSize: "12px" }}>{rankDetail[this.props.activeIndex]}</div>
+                    {/* <BarChart rankData={this.state.rankData} title={this.state.rankTitle}></BarChart> */}
+                    <MTable body={this.state.rankData} head={this.state.head} title={this.state.rankTitle} align="center"></MTable>
                 </Modal>
                 <Modal
                     visible={this.state.modalRadar}
