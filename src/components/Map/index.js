@@ -9,6 +9,7 @@ import MTable from "../MTable"
 import './leaflet-style.css'
 import 'leaflet-search'
 import 'leaflet-search/dist/leaflet-search.src.css'
+import markerIcon from '../../assets/images/yiqingpoi2.png'
 class Map extends React.Component {
     constructor(props) {
         super(props)
@@ -20,8 +21,9 @@ class Map extends React.Component {
             modalBar: false,    // 小区排名条形图
             modalRadar: false,   // 雷达图
             radarTitle: "雷达图标题",
-            renderFieldList: ['总分N', 'A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成'],
-            rankFieldList: ['总分排名', 'A排名', 'B排名', 'C排名', 'D排名'],
+            renderFieldList: ['总分N','A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成'],
+            rankFieldList: ['总分排名','A排名', 'B排名', 'C排名', 'D排名' ],
+            titleList: ['抵抗力总分排名','暴露情况排名','医疗资源排名','服务治理排名','居民构成排名'],
             rankData: [],
             radarData: [],
             radarScore: 0,
@@ -126,12 +128,15 @@ class Map extends React.Component {
     componentDidMount() {
         let self = this;
         this.comHeight(() => {
-            const map = L.map('map').setView([40.054503749861944, 116.4022082099109], 10)
-            //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            const map = L.map('map',{}).setView([39.904503749861944, 116.4022082099109], 10)
+            // //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                id: 'mapbox.light'
+                id: 'mapbox.light',
             }).addTo(map);
-            map.zoomControl.remove();
+            // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
+            // }).addTo(map)
+           
+           map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
             const params = {
@@ -173,17 +178,22 @@ class Map extends React.Component {
                     border: 1px solid #FFFFFF`
                 const divIcon = L.divIcon({
                     className: "my-custom-pin",
-                    iconAnchor: [0, 24],
+                    // iconAnchor: [0, 24],
                     labelAnchor: [-6, 0],
-                    popupAnchor: [0, -36],
+                    popupAnchor: [-23, -24],
                     html: `<span style="${markerHtmlStyles}" />`
                 })
-
+                const yqIcon = L.icon({
+                    iconUrl:markerIcon,
+                    iconSize: [20, 20],
+                    // iconAnchor: [20, 20]
+                  })
                 // 疫情点
-                L.geoJSON(yqpoi, {
+                let yqLayer = L.geoJSON(yqpoi, {
                     pointToLayer: function (geoJSONPoint, latlng) {
-                        // let name = geoJSONPoint.properties['name']
-                        return L.marker(latlng, { icon: divIcon })//.bindPopup(`<p>${name}(已现疫情)</p>`).openPopup()
+                        let name = geoJSONPoint.properties['name']
+                        let marker = L.marker(latlng,{icon: yqIcon})
+                        return marker.bindTooltip(`<p>${name}(已现疫情)</p>`,{direction: 'top'})//.openTooltip()
                     }
                 }).addTo(map)
                 //初始化图层，设置style，onEachFeature要素绑定
@@ -217,8 +227,6 @@ class Map extends React.Component {
 
                 // 格式化弹窗内容
                 function getPopupContent(feature) {
-                    // let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
-                    // let scoreField = fieldlist[self.props.activeIndex] // 此处索引最好是当前指标索引
                     let properties = feature.properties
                     let tipA1 = properties['A1提示']
                     let tipA2 = properties['A2提示']
@@ -283,7 +291,7 @@ class Map extends React.Component {
                 legend.onAdd = function (map) {
                     //创建图例div
                     var div = L.DomUtil.create('div', 'info legend'),
-                        grades = [0, 958, 1916, 2876, 3837, 4799, 5763, 6727],
+                        grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727],
                         labels = [],
                         from, to;
                     for (var i = 0; i < grades.length - 1; i++) {
@@ -293,7 +301,8 @@ class Map extends React.Component {
                             '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
                             from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
-                    div.innerHTML = '<h4>抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    div.innerHTML += '<div class="yqIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
                     return div;
                 };
                 //添加图例
@@ -307,17 +316,17 @@ class Map extends React.Component {
                         color: 'white',
                         dashArray: '0',
                         fillOpacity: 0.7,
-                        fillColor: getColor(feature.properties['A排名'])
+                        fillColor: getColor(feature.properties['总分排名'])
                     };
                 }
                 function getColor(d) {
-                    return d > 5762 ? '#FF0000' :
-                        d > 4798 ? '#FF5500' :
-                            d > 3836 ? '#FFAA00' :
-                                d > 2875 ? '#FFFF00' :
-                                    d > 1915 ? '#B0E000' :
-                                        d > 957 ? '#6FC400' :
-                                            '#38A800';
+                    return d > 6000 ? '#FF0000' :
+                            d > 5000 ? '#FF5500' :
+                                d > 4000 ? '#FFAA00' :
+                                    d > 3000 ? '#FFFF00' :
+                                        d > 2000 ? '#B0E000' :
+                                            d > 1000 ? '#6FC400' :
+                                                '#38A800';
                 }
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
@@ -366,33 +375,39 @@ class Map extends React.Component {
                     const p = div.querySelector(".replace");
                     const p2 = div.querySelector(".replace2");
                     const btn = div.querySelector("button");
-                    p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(2)
-                    p2.innerText = ranks[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`))
-                    map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
-                    document.querySelectorAll(".detailBtn").forEach(item => {
-                        item.onclick = function (e) {
-                            const btn = e.target;
-                            self.setState({
-                                modalRadar: true,
-                                radarTips: btn.getAttribute("data-tips"),
-                                radarScore: btn.getAttribute("data-score"),
-                                radarTitle: btn.getAttribute("data-name"),
-                                radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
-                                radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
-                            })
-                        }
-                    })
+                    if(p){
+                        p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(2)
+                        p2.innerText = ranks[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`))
+                        map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
+                        document.querySelectorAll(".detailBtn").forEach(item => {
+                            item.onclick = function (e) {
+                                const btn = e.target;
+                                self.setState({
+                                    modalRadar: true,
+                                    radarTips: btn.getAttribute("data-tips"),
+                                    radarScore: btn.getAttribute("data-score"),
+                                    radarTitle: btn.getAttribute("data-name"),
+                                    radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
+                                    radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
+                                })
+                            }
+                        })
+                    }
+                   
                 });
-                // searchControl.on('search:locationfound', function(e) {
-                //     e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
-                //     if(e.layer._popup)
-                //         e.layer.openPopup();
-                // }).on('search:collapsed', function(e) {
-
-                //     featuresLayer.eachLayer(function(layer) {	//restore feature color
-                //         featuresLayer.resetStyle(layer);
-                //     });	
-                // });
+                map.on('zoom', function(e) {
+                    console.log(e)
+                    let markers = yqLayer.getLayers()
+                    if(e.target.getZoom() >= 16) {
+                        markers.forEach((marker) => {
+                           marker.openTooltip()
+                        })
+                    } else{ 
+                        markers.forEach((marker) => {
+                           marker.closeTooltip()
+                        })
+                    }
+                });
 
                 map.addControl(searchControl);  //inizialize search control
                 self.setState({
@@ -423,12 +438,12 @@ class Map extends React.Component {
 
     // 根据属性范围设置渲染颜色
     getColor(d) {
-        return d > 5762 ? '#FF0000' :
-            d > 4798 ? '#FF5500' :
-                d > 3836 ? '#FFAA00' :
-                    d > 2875 ? '#FFFF00' :
-                        d > 1915 ? '#B0E000' :
-                            d > 957 ? '#6FC400' :
+        return d > 6000 ? '#FF0000' :
+            d > 5000 ? '#FF5500' :
+                d > 4000 ? '#FFAA00' :
+                    d > 3000 ? '#FFFF00' :
+                        d > 2000 ? '#B0E000' :
+                            d > 1000 ? '#6FC400' :
                                 '#38A800';
         // 红色色系
         // return d > 5887 ? '#800026' :
@@ -448,11 +463,14 @@ class Map extends React.Component {
     }
     // 切换不同指标地图
     switchIndexMap(index) {
-        //  let fieldlist = ['A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成', '总分N']
         let renderField = this.state.rankFieldList[index] //fieldlist[index]
         let self = this
         let featuresLayer = this.state.rendererLayer
-        if (featuresLayer) {
+        if(featuresLayer){
+            this.state.instance.closePopup()
+            let legendDiv = document.getElementsByClassName('info legend leaflet-control')[0]
+            let title = document.querySelector(".layerTitle");
+            legendDiv.innerHTML = legendDiv.innerHTML.replace(title.innerHTML, this.state.titleList[index])
             featuresLayer.setStyle(function (feature) {
                 return {
                     weight: 0,
