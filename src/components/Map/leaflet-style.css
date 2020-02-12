@@ -82,3 +82,6 @@
 #map .leaflet-control-search.search-exp.leaflet-control .search-cancel{
   margin-top: 10px;
 }
+.am-modal-mask{
+  z-index: 1000;
+}
