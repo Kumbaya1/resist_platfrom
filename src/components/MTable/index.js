@@ -4,7 +4,7 @@ class MTable extends React.Component {
     render() {
         const align = this.props.align || "left";
         return (
-            <table style={{ width: '100%' }}>
+            <table style={{ width: '100%', fontSize: '12px' }} >
                 <thead>
                     <tr style={{ textAlign: align }}>
                         {this.props.head.map(item => {
@@ -14,12 +14,12 @@ class MTable extends React.Component {
                         })}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ color: "rgb(54,54,54)" }}>
                     {this.props.body.map((item, index) => {
                         return (
                             <tr key={index} style={{ textAlign: align }}>
                                 {this.props.head.map(el => {
-                                    return (<td key={el.prop}>
+                                    return (<td key={el.prop} style={{ color: el.prop === 'score' ? 'rgb(0, 174, 102)' : "" }}>
                                         {item[el.prop]}
                                     </td>)
                                 })}

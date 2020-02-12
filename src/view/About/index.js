@@ -11,7 +11,7 @@ import jumingoucheng from "../../assets/images/about/4.png"
 function About(props) {
     return (
         <Fragment>
-            <WhiteSpace />
+            <WhiteSpace size="sm" />
             <Title>北京社区疫情抵抗力地图</Title>
             <WhiteSpace size="xl" />
             <SectionTitle>关于地图</SectionTitle>
