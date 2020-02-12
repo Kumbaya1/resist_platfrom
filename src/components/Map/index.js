@@ -205,7 +205,7 @@ class Map extends React.Component {
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
-                    textPlaceholder: "输入小区名称进行搜索",
+                    textPlaceholder: "请输入小区名称进行搜索",
                     textCancel: "清除",
                     textErr: "未找到社区",
                     layer: featuresLayer,
