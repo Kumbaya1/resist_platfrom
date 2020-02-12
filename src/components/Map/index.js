@@ -178,9 +178,9 @@ class Map extends React.Component {
                     border: 1px solid #FFFFFF`
                 const divIcon = L.divIcon({
                     className: "my-custom-pin",
-                    iconAnchor: [0, 24],
+                    // iconAnchor: [0, 24],
                     labelAnchor: [-6, 0],
-                    popupAnchor: [0, -36],
+                    popupAnchor: [-23, -24],
                     html: `<span style="${markerHtmlStyles}" />`
                 })
                 const yqIcon = L.icon({
