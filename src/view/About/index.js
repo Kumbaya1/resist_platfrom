@@ -121,6 +121,7 @@ function About(props) {
             <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>北京清华同衡规划设计研究院</p>
             <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>技术创新中心</p>
             <WhiteSpace size="xl" />
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>项目指导</span>:林文棋</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>统筹策划</span>:李洋</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}><span style={{ fontWeight: "bold" }}>指标研究</span>:李洋 褚峤 张苗琳</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>数据准备</span>:张弘 贾道祥</p>

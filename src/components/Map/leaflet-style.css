@@ -55,6 +55,7 @@
   margin-top: 0;
   border: 0;
   height: 40px;
+  font-size: 16px;
 }
 #map .leaflet-control-search.search-exp {
   border-width: 1px;
