@@ -21,9 +21,9 @@ class Map extends React.Component {
             modalBar: false,    // 小区排名条形图
             modalRadar: false,   // 雷达图
             radarTitle: "雷达图标题",
-            renderFieldList: ['总分N','A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成'],
-            rankFieldList: ['总分排名','A排名', 'B排名', 'C排名', 'D排名' ],
-            titleList: ['抵抗力总分排名','暴露情况排名','医疗资源排名','服务治理排名','居民构成排名'],
+            renderFieldList: ['总分N', 'A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成'],
+            rankFieldList: ['总分排名', 'A排名', 'B排名', 'C排名', 'D排名'],
+            titleList: ['抵抗力总分排名', '暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名'],
             rankData: [],
             radarData: [],
             radarScore: 0,
@@ -128,15 +128,15 @@ class Map extends React.Component {
     componentDidMount() {
         let self = this;
         this.comHeight(() => {
-            const map = L.map('map',{}).setView([39.904503749861944, 116.4022082099109], 10)
+            const map = L.map('map', {}).setView([39.904503749861944, 116.4022082099109], 10)
             // //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 id: 'mapbox.light',
             }).addTo(map);
             // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
             // }).addTo(map)
-           
-           map.zoomControl.remove();
+
+            map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
             const params = {
@@ -184,16 +184,16 @@ class Map extends React.Component {
                     html: `<span style="${markerHtmlStyles}" />`
                 })
                 const yqIcon = L.icon({
-                    iconUrl:markerIcon,
+                    iconUrl: markerIcon,
                     iconSize: [20, 20],
                     // iconAnchor: [20, 20]
-                  })
+                })
                 // 疫情点
                 let yqLayer = L.geoJSON(yqpoi, {
                     pointToLayer: function (geoJSONPoint, latlng) {
                         let name = geoJSONPoint.properties['name']
-                        let marker = L.marker(latlng,{icon: yqIcon})
-                        return marker.bindTooltip(`<p>${name}(已现疫情)</p>`,{direction: 'top'})//.openTooltip()
+                        let marker = L.marker(latlng, { icon: yqIcon })
+                        return marker.bindTooltip(`<p>${name}(已现疫情)</p>`, { direction: 'top' })//.openTooltip()
                     }
                 }).addTo(map)
                 //初始化图层，设置style，onEachFeature要素绑定
@@ -321,12 +321,12 @@ class Map extends React.Component {
                 }
                 function getColor(d) {
                     return d > 6000 ? '#FF0000' :
-                            d > 5000 ? '#FF5500' :
-                                d > 4000 ? '#FFAA00' :
-                                    d > 3000 ? '#FFFF00' :
-                                        d > 2000 ? '#B0E000' :
-                                            d > 1000 ? '#6FC400' :
-                                                '#38A800';
+                        d > 5000 ? '#FF5500' :
+                            d > 4000 ? '#FFAA00' :
+                                d > 3000 ? '#FFFF00' :
+                                    d > 2000 ? '#B0E000' :
+                                        d > 1000 ? '#6FC400' :
+                                            '#38A800';
                 }
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
@@ -375,7 +375,7 @@ class Map extends React.Component {
                     const p = div.querySelector(".replace");
                     const p2 = div.querySelector(".replace2");
                     const btn = div.querySelector("button");
-                    if(p){
+                    if (p) {
                         p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(2)
                         p2.innerText = ranks[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`))
                         map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
@@ -393,18 +393,18 @@ class Map extends React.Component {
                             }
                         })
                     }
-                   
+
                 });
-                map.on('zoom', function(e) {
+                map.on('zoom', function (e) {
                     console.log(e)
                     let markers = yqLayer.getLayers()
-                    if(e.target.getZoom() >= 16) {
+                    if (e.target.getZoom() >= 16) {
                         markers.forEach((marker) => {
-                           marker.openTooltip()
+                            marker.openTooltip()
                         })
-                    } else{ 
+                    } else {
                         markers.forEach((marker) => {
-                           marker.closeTooltip()
+                            marker.closeTooltip()
                         })
                     }
                 });
@@ -466,7 +466,7 @@ class Map extends React.Component {
         let renderField = this.state.rankFieldList[index] //fieldlist[index]
         let self = this
         let featuresLayer = this.state.rendererLayer
-        if(featuresLayer){
+        if (featuresLayer) {
             this.state.instance.closePopup()
             let legendDiv = document.getElementsByClassName('info legend leaflet-control')[0]
             let title = document.querySelector(".layerTitle");
@@ -487,7 +487,7 @@ class Map extends React.Component {
         })
     }
     render() {
-        const rankDetail = ["排名高的小区疫情传播风险相对较小", "排名高的小区周边医疗资源相对较好", "排名高的小区治理服务相对较好", "排名高的小区居民构成对抗击疫情较为有利", "排名高的小区对疫情的抵抗力相对较强"];
+        const rankDetail = ["排名高的小区对疫情的抵抗力相对较强", "排名高的小区疫情传播风险相对较小", "排名高的小区周边医疗资源相对较好", "排名高的小区治理服务相对较好", "排名高的小区居民构成对抗击疫情较为有利"];
         return (
             <MapWrap >
                 {/* <MapUtilsWrap >
