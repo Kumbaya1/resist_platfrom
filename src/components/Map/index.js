@@ -130,12 +130,14 @@ class Map extends React.Component {
         this.comHeight(() => {
             const map = L.map('map', {}).setView([39.904503749861944, 116.4022082099109], 10)
             // //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                id: 'mapbox.light',
-            }).addTo(map);
+            // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            //     id: 'mapbox.light',
+            // }).addTo(map);
             // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
             // }).addTo(map)
-
+            L.tileLayer('http://mt0.google.cn/vt/lyrs=m@160000000&hl=zh-CN&gl=CN&src=app&y={y}&x={x}&z={z}&s=Ga', {
+                attribution: '&copy; <a href="http://osm.org/copyright">测试</a> contributors'
+            }).addTo(map)            
             map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
@@ -275,6 +277,9 @@ class Map extends React.Component {
                     if (tipD2) {
                         tips += "," + tipD2
                     }
+                    if(properties['社区名称']=='上地佳园'){
+                        debugger
+                    }
                     tips = tips.substring(1);
                     let popupContent = "";
                     // const names = ["暴露情况总分","医疗资源总分","服务治理总分","居民构成总分","抵抗力总分"];
@@ -282,7 +287,7 @@ class Map extends React.Component {
                         popupContent += "<p style='font-weight:bold'>" + properties['社区名称'] + "</p>"
                         popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
-                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
+                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
                     }
                     return popupContent
                 }
