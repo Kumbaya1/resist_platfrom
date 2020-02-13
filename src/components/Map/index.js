@@ -130,14 +130,14 @@ class Map extends React.Component {
         this.comHeight(() => {
             const map = L.map('map', {}).setView([39.904503749861944, 116.4022082099109], 10)
             // //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            //     id: 'mapbox.light',
-            // }).addTo(map);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                id: 'mapbox.light',
+            }).addTo(map);
             // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
             // }).addTo(map)
-            L.tileLayer('http://mt0.google.cn/vt/lyrs=m@160000000&hl=zh-CN&gl=CN&src=app&y={y}&x={x}&z={z}&s=Ga', {
-                attribution: '&copy; <a href="http://osm.org/copyright">测试</a> contributors'
-            }).addTo(map)            
+            // L.tileLayer('http://mt0.google.cn/vt/lyrs=m@160000000&hl=zh-CN&gl=CN&src=app&y={y}&x={x}&z={z}&s=Ga', {
+            //     attribution: '&copy; <a href="http://osm.org/copyright">测试</a> contributors'
+            // }).addTo(map)            
             map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
