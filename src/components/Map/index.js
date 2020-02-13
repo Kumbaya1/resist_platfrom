@@ -524,7 +524,7 @@ class Map extends React.Component {
                     <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6727</span>
 
                     <RadarChart radarData={this.state.radarData}></RadarChart>
-                    {this.state.radarTips.split(",").length > 0 ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : ""}
+                    {this.state.radarTips.split(",").length > 0 ?(this.state.radarTips.split(",")[0].length>0)? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>):"" : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
                             <div key={index} style={{ color: "rgb(54,54,54)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
