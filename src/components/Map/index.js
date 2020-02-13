@@ -277,9 +277,6 @@ class Map extends React.Component {
                     if (tipD2) {
                         tips += "," + tipD2
                     }
-                    if(properties['社区名称']=='上地佳园'){
-                        debugger
-                    }
                     tips = tips.substring(1);
                     let popupContent = "";
                     // const names = ["暴露情况总分","医疗资源总分","服务治理总分","居民构成总分","抵抗力总分"];
