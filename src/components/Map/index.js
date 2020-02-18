@@ -21,7 +21,7 @@ class Map extends React.Component {
             modalBar: false,    // 小区排名条形图
             modalRadar: false,   // 雷达图
             radarTitle: "雷达图标题",
-            renderFieldList: ['总分N', 'A传播风险', 'B医疗资源', 'C服务治理', 'D居民构成'],
+            renderFieldList: ['总分N', 'A暴露情况', 'B医疗资源', 'C服务治理', 'D居民构成'],
             rankFieldList: ['总分排名', 'A排名', 'B排名', 'C排名', 'D排名'],
             titleList: ['抵抗力总分排名', '暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名'],
             rankData: [],
@@ -129,13 +129,13 @@ class Map extends React.Component {
         let self = this;
         this.comHeight(() => {
             const map = L.map('map', {}).setView([39.904503749861944, 116.4022082099109], 10)
-            // //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-                id: 'mapbox.light',
-            }).addTo(map);
-            // L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
-            // }).addTo(map)
-
+            //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            //     id: 'mapbox.light',
+            // }).addTo(map);
+             L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
+               maxZoom:16
+             }).addTo(map)
             map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
@@ -143,7 +143,7 @@ class Map extends React.Component {
                 service: 'WFS',
                 version: '1.1.0',
                 request: 'GetFeature',
-                typeName: "BeijingCommunity",
+                typeName: "BeijingCommunity_offset_gcj02new",
                 outputFormat: 'application/json',
                 srsName: "EPSG:4326"
             }
@@ -162,7 +162,6 @@ class Map extends React.Component {
             }).then(res => {
                 return res.json()
             }).then(geojson => {
-                // 贾道祥 示例
                 // 自定义定位点图标
                 const myCustomColour = '#FF0000'//'#009366'//'#583470'
                 const markerHtmlStyles = `
@@ -205,7 +204,7 @@ class Map extends React.Component {
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
-                    textPlaceholder: "输入小区名称进行搜索",
+                    textPlaceholder: "请输入小区名称进行搜索",
                     textCancel: "清除",
                     textErr: "未找到社区",
                     layer: featuresLayer,
@@ -237,7 +236,7 @@ class Map extends React.Component {
                     let tipC2 = properties['C2提示']
                     // let tipD1 = properties['D1提示']
                     let tipD2 = properties['D2提示']
-                    let scoreA = properties['A传播风险']
+                    let scoreA = properties['A暴露情况']
                     let scoreB = properties['B医疗资源']
                     let scoreC = properties['C服务治理']
                     let scoreD = properties['D居民构成']
@@ -282,7 +281,7 @@ class Map extends React.Component {
                         popupContent += "<p style='font-weight:bold'>" + properties['社区名称'] + "</p>"
                         popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
-                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips=${tips}  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
+                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
                     }
                     return popupContent
                 }
@@ -350,7 +349,7 @@ class Map extends React.Component {
                 //缩放到要素范围
                 function zoomToFeature(e) {
                     markersLayer.clearLayers();
-                    //  map.fitBounds(e.target.getBounds());
+                    map.fitBounds(e.target.getBounds());
                     var zoom = map.getBoundsZoom(e.target.getBounds());
                     map.setView(e.latlng, zoom - 1);
                 }
@@ -522,7 +521,7 @@ class Map extends React.Component {
                     <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6727</span>
 
                     <RadarChart radarData={this.state.radarData}></RadarChart>
-                    {this.state.radarTips.split(",").length > 0 ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : ""}
+                    {this.state.radarTips.split(",").length > 0 ?(this.state.radarTips.split(",")[0].length>0)? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>):"" : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
                             <div key={index} style={{ color: "rgb(54,54,54)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
