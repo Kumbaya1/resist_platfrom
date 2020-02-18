@@ -75,7 +75,8 @@ const yqpoi = {
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.5559828817,40.1012855221]},"properties":{"lng":116.555982882,"行政区":"顺义区","lat":40.1012855221,"name":"空港街道龙湖滟澜山","FID":69}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.6485361664,40.1314343295]},"properties":{"lng":116.648536166,"行政区":"顺义区","lat":40.1314343295,"name":"胜利街道义宾南区","FID":70}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.7889352019,40.3427994693]},"properties":{"lng":116.788935202,"行政区":"密云区","lat":40.3427994693,"name":"十里堡镇河槽村","FID":71}}
-    ]
+    ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.2066786377,39.7668286324]},"properties":{"lng":116.2066786377,"行政区":"房山区","lat":39.7668286324,"name":"长阳镇康泽佳苑小区","FID":72}}  
+  ]
   }
   
   
