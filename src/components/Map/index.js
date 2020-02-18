@@ -522,7 +522,7 @@ class Map extends React.Component {
                     style={{ width: "95%" }}
                 >
                     <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span><br />
-                    <span style={{ color: "rgb(0,174,102)" }}>得分超过{(((6727 - this.state.radarTotalscorerank) / 6727) * 100).toFixed(2)}%的小区</span>
+                    <span style={{ color: "rgb(0,174,102)" }}>得分超过{parseInt(((6727 - this.state.radarTotalscorerank) / 6727) * 100)}%的小区</span>
 
                     <RadarChart radarData={this.state.radarData} rank={{ rankA: this.state.rankA, rankB: this.state.rankB, rankC: this.state.rankC, rankD: this.state.rankD }}></RadarChart>
                     {this.state.radarTips.split(",").length > 0 ? (this.state.radarTips.split(",")[0].length > 0) ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : "" : ""}
