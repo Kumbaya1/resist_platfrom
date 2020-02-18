@@ -133,9 +133,9 @@ class Map extends React.Component {
             // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             //     id: 'mapbox.light',
             // }).addTo(map);
-             L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}',{
-               maxZoom:16
-             }).addTo(map)
+            L.tileLayer('http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 16
+            }).addTo(map)
             map.zoomControl.remove();
             map.attributionControl.remove();
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
@@ -387,7 +387,11 @@ class Map extends React.Component {
                                     radarScore: btn.getAttribute("data-score"),
                                     radarTitle: btn.getAttribute("data-name"),
                                     radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
-                                    radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")]
+                                    radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")],
+                                    rankA: btn.getAttribute("data-ranka"),
+                                    rankB: btn.getAttribute("data-rankb"),
+                                    rankC: btn.getAttribute("data-rankc"),
+                                    rankD: btn.getAttribute("data-rankd")
                                 })
                             }
                         })
@@ -518,10 +522,10 @@ class Map extends React.Component {
                     style={{ width: "95%" }}
                 >
                     <span style={{ color: "rgb(0,174,102)" }}>抵抗力总分:{parseFloat(this.state.radarScore).toFixed(2)}</span><br />
-                    <span style={{ color: "rgb(0,174,102)" }}>排名:{this.state.radarTotalscorerank}/6727</span>
+                    <span style={{ color: "rgb(0,174,102)" }}>得分超过{(((6727 - this.state.radarTotalscorerank) / 6727) * 100).toFixed(2)}%的小区</span>
 
-                    <RadarChart radarData={this.state.radarData}></RadarChart>
-                    {this.state.radarTips.split(",").length > 0 ?(this.state.radarTips.split(",")[0].length>0)? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>):"" : ""}
+                    <RadarChart radarData={this.state.radarData} rank={{ rankA: this.state.rankA, rankB: this.state.rankB, rankC: this.state.rankC, rankD: this.state.rankD }}></RadarChart>
+                    {this.state.radarTips.split(",").length > 0 ? (this.state.radarTips.split(",")[0].length > 0) ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : "" : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
                             <div key={index} style={{ color: "rgb(54,54,54)", textAlign: "left", fontSize: "12px" }} >·{item}</div>

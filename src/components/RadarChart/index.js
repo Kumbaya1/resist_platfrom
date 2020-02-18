@@ -5,21 +5,26 @@ import { Chart } from "./styled"
 class RadarChart extends React.Component {
     constructor(props) {
         super(props)
+        console.log(window.innerWidth)
+        const width = window.innerWidth || document.documentElement.offsetWidth;
+        const w = 200;
+        const p = Math.floor(((width - w) / width) * 100)
+        console.log(w)
+        console.log(p)
         this.state = {
             chart: React.createRef(),
             option: {
-               
                 radar: [
                     {
                         indicator: [
-                            { text: '暴露情况\n' + parseFloat(this.props.radarData[0]).toFixed(2), max: 100 },
-                            { text: '医疗资源\n' + parseFloat(this.props.radarData[1]).toFixed(2), max: 100 },
-                            { text: '服务治理\n' + parseFloat(this.props.radarData[2]).toFixed(2), max: 100 },
-                            { text: '居民构成\n' + parseFloat(this.props.radarData[3]).toFixed(2), max: 100 },
+                            { text: '暴露情况\n' + parseFloat(this.props.radarData[0]).toFixed(2) + '\n>' + parseInt(((6727 - this.props.rank.rankA) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '医疗资源\n' + parseFloat(this.props.radarData[1]).toFixed(2) + '\n>' + parseInt(((6727 - this.props.rank.rankB) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '服务治理\n' + parseFloat(this.props.radarData[2]).toFixed(2) + '\n>' + parseInt(((6727 - this.props.rank.rankC) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '居民构成\n' + parseFloat(this.props.radarData[3]).toFixed(2) + '\n>' + parseInt(((6727 - this.props.rank.rankD) / 6727) * 100) + '%的小区', max: 100 },
 
                         ],
                         center: ['50%', '50%'],
-                        radius: "55%",
+                        radius: `${p}%`,
                         startAngle: 90,
                         splitNumber: 4,
                         shape: 'circle',
