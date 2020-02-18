@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank } from "./styled"
+import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank ,Join} from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -101,6 +101,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace size="sm" />
+            <Join><a href='https://www.wjx.cn/jq/58194197.aspx' style={{ color: "rgb(0,174,102)" }}>我要<br />参与</a></Join>
             <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
             <TopRank onClick={() => { this.state.mapRef.current.changeRankDialog('Bar', true) }}>TOP<br />&nbsp;20</TopRank>
             <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={Plates[this.state.active].name} />
