@@ -49,7 +49,7 @@ const yqpoi = {
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.2938845869,39.8479647821]},"properties":{"lng":116.293884587,"行政区":"丰台区","lat":39.8479647821,"name":"丰台街道建国街一里","FID":43}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.4311389561,39.8570390433]},"properties":{"lng":116.431138956,"行政区":"丰台区","lat":39.8570390433,"name":"东铁营街道定安东里","FID":44}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.319180979,39.8810992197]},"properties":{"lng":116.319180979,"行政区":"丰台区","lat":39.8810992197,"name":"太平桥街道华源四里","FID":45}}
-    ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.2828059673,39.8372224668]},"properties":{"lng":116.282805967,"行政区":"丰台区","lat":39.8372224668,"name":"新村街道富丰园","FID":46}}
+    ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.2828059673,39.8372224668]},"properties":{"lng":116.282805967,"行政区":"丰台区","lat":39.8372224668,"name":"新村街道富丰园小区","FID":46}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.426304304,39.7976125004]},"properties":{"lng":116.426304304,"行政区":"丰台区","lat":39.7976125004,"name":"东高地街道万源南里小区","FID":47}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.3024399585,39.8382037723]},"properties":{"lng":116.302439959,"行政区":"丰台区","lat":39.8382037723,"name":"新村街道刘孟家园小区","FID":48}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.3091143717,39.8184380049]},"properties":{"lng":116.309114372,"行政区":"丰台区","lat":39.8184380049,"name":"花乡街道幸福家园小区东区","FID":49}}
@@ -71,6 +71,10 @@ const yqpoi = {
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.417480195979,40.0761928968892]},"properties":{"lng":116.417480196,"行政区":"昌平区","lat":40.0761928969,"name":"天通苑北街道天通北苑一区","FID":65}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.338879595178,39.8982680669229]},"properties":{"lng":116.338879595,"行政区":"西城区","lat":39.8982680669,"name":"月坛街道莲花池东路甲5号院","FID":66}}
     ,{"type":"Feature","geometry":{"type":"Point","coordinates":[116.502035585544,40.0917486772114]},"properties":{"lng":116.502035586,"行政区":"顺义区","lat":40.0917486772,"name":"龙湖滟澜山","FID":67}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.3427783059, 39.9161875923]}, 'properties': {'lng': 116.3427783059, '行政区': '西城区', 'lat': 39.9161875923, 'name': '月坛街道三里河一区', 'FID': 68}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.3330398565, 39.8888528301]}, 'properties': {'lng': 116.3330398565, '行政区': '西城区', 'lat': 39.8888528301, 'name': '广安门外街道三义东里', 'FID': 69}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.4234992736, 39.9623884354]}, 'properties': {'lng': 116.4234992736, '行政区': '朝阳区', 'lat': 39.9623884354, 'name': '和平街和平家园10区', 'FID': 70}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.6025543697, 39.9264900873]}, 'properties': {'lng': 116.6025543697, '行政区': '朝阳区', 'lat': 39.9264900873, 'name': '常营（地区）乡常营中路6号院', 'FID': 71}}
   ]
   }
   

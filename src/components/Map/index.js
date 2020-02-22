@@ -10,6 +10,8 @@ import './leaflet-style.css'
 import 'leaflet-search'
 import 'leaflet-search/dist/leaflet-search.src.css'
 import markerIcon from '../../assets/images/yiqingpoi2.png'
+import hospitalIcon from '../../assets/images/hospital.png'
+import hospital from './mapdata/hospital'
 class Map extends React.Component {
     constructor(props) {
         super(props)
@@ -156,7 +158,6 @@ class Map extends React.Component {
             //     srsName: "EPSG:4326"
             // }
             const url_str = url + L.Util.getParamString(params, url);
-            // const url_str_beijing = url + L.Util.getParamString(paramsBeijing, url);
             fetch(url_str, {
                 method: "GET",
             }).then(res => {
@@ -187,6 +188,11 @@ class Map extends React.Component {
                     iconSize: [20, 20],
                     // iconAnchor: [20, 20]
                 })
+                const hosIcon = L.icon({
+                    iconUrl: hospitalIcon,
+                    iconSize: [20, 20],
+                    // iconAnchor: [20, 20]
+                })
                 // 疫情点
                 let yqLayer = L.geoJSON(yqpoi, {
                     pointToLayer: function (geoJSONPoint, latlng) {
@@ -195,6 +201,18 @@ class Map extends React.Component {
                         return marker.bindTooltip(`<p>${name}(已现疫情)</p>`, { direction: 'top' })//.openTooltip()
                     }
                 }).addTo(map)
+               
+
+                let hospitalLayer = new L.featureGroup()
+                for(let i in hospital) {
+                    var name = hospital[i].name,	//value searched
+                        loc = hospital[i].location,		//position found
+                        marker = new L.Marker(new L.latLng(loc),{ icon: hosIcon });//se property searched
+                    marker.bindTooltip(`<p>${name}</p>`, { direction: 'top' });
+                    hospitalLayer.addLayer(marker);
+                }
+                //hospitalLayer.addTo(map)
+               
                 //初始化图层，设置style，onEachFeature要素绑定
                 let featuresLayer = L.geoJson(geojson, {
                     style: style,
@@ -301,7 +319,8 @@ class Map extends React.Component {
                             from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
                     div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
-                    div.innerHTML += '<div class="yqIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
+                    div.innerHTML += '<div class="markerIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
+                    
                     return div;
                 };
                 //添加图例
@@ -400,15 +419,21 @@ class Map extends React.Component {
                 });
                 map.on('zoom', function (e) {
                     console.log(e)
-                    let markers = yqLayer.getLayers()
+                    // let markers = yqLayer.getLayers()
                     if (e.target.getZoom() >= 16) {
-                        markers.forEach((marker) => {
+                        yqLayer.eachLayer((marker) => {
                             marker.openTooltip()
                         })
+                        hospitalLayer.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
                     } else {
-                        markers.forEach((marker) => {
+                        yqLayer.eachLayer((marker) => {
                             marker.closeTooltip()
                         })
+                        hospitalLayer.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
                     }
                 });
 
@@ -416,17 +441,11 @@ class Map extends React.Component {
                 self.setState({
                     rendererLayer: featuresLayer,
                     markersLayer: markersLayer,
-                    searchControl: searchControl
+                    searchControl: searchControl,
+                    hospitalLayer: hospitalLayer
                 })
             })
-            // fetch(url_str_beijing, {
-            //     method: "GET",
-            // }).then(res => {
-            //     return res.json()
-            // }).then(geojson => {
-            //     let layer = L.geoJson(geojson, {})
-            //     layer.addTo(map)
-            // })
+
 
             this.setState({
                 instance: map,
@@ -438,7 +457,6 @@ class Map extends React.Component {
         this.state.searchControl.searchText(value)
         console.log(`输入框提交的内容:${value}`)
     }
-
     // 根据属性范围设置渲染颜色
     getColor(d) {
         return d > 6000 ? '#FF0000' :
@@ -469,6 +487,7 @@ class Map extends React.Component {
         let renderField = this.state.rankFieldList[index] //fieldlist[index]
         let self = this
         let featuresLayer = this.state.rendererLayer
+        let hosLegendDiv =  `<div id="hos" class="markerIcon"><img src=${hospitalIcon}  />  发热门诊医院</div>`
         if (featuresLayer) {
             this.state.instance.closePopup()
             let legendDiv = document.getElementsByClassName('info legend leaflet-control')[0]
@@ -484,9 +503,23 @@ class Map extends React.Component {
                     fillColor: self.getColor(feature.properties[renderField])
                 };
             })
+            if(index===2){
+                this.state.instance.addLayer(this.state.hospitalLayer)
+               
+                if(legendDiv.innerHTML.indexOf('发热门诊医院')===-1){
+                    legendDiv.innerHTML += hosLegendDiv
+                }
+            }else{
+                this.state.instance.removeLayer(this.state.hospitalLayer)
+                var e = document.getElementById('hos');
+                if(e){
+                    legendDiv.removeChild(e);
+                    console.log(legendDiv.innerHTML)
+                }
+            }
         }
         this.setState({
-            index: index
+            index: index,
         })
     }
     render() {
