@@ -10,7 +10,7 @@ import './leaflet-style.css'
 import 'leaflet-search'
 import 'leaflet-search/dist/leaflet-search.src.css'
 import markerIcon from '../../assets/images/yiqingpoi2.png'
-import hospitalIcon from '../../assets/images/hospital.png'
+import hospitalIcon from '../../assets/images/hospital_green.png'
 import hospital from './mapdata/hospital'
 class Map extends React.Component {
     constructor(props) {
