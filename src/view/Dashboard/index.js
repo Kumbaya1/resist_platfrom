@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank ,Join} from "./styled"
+import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank ,Join, Locate} from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -14,6 +14,7 @@ import un_yiliaoziyuan from "../../assets/images/un_yiliaoziyuan.png"
 import un_fuwuzhili from "../../assets/images/un_fuwuzhili.png"
 import un_jumingoucheng from "../../assets/images/un_jumingoucheng.png"
 import un_dikanglizongfen from "../../assets/images/un_dikanglizongfen.png"
+import location from '../../assets/images/location_green3.png'
 // import { head, body } from "../../dataSource/topTen"
 class Dashboard extends React.Component {
     constructor(props) {
@@ -101,6 +102,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace size="sm" />
+            <Locate onClick={() => this.state.mapRef.current.reLocate()}><img src={location} style={{width:'25px', height:'25px'}} alt='' /></Locate>
             <Join><a href='https://www.wjx.cn/jq/58194197.aspx' style={{ color: "rgb(0,174,102)" }}>我要<br />参与</a></Join>
             <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
             <TopRank onClick={() => { this.state.mapRef.current.changeRankDialog('Bar', true) }}>TOP<br />&nbsp;20</TopRank>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
+import {Map as Amap} from 'react-amap'
 import { MapContainer, MapWrap, Tip } from "./styled"
 import { yqpoi } from './mapdata/yiqingpoi'
 // import BarChart from "../BarChart"
@@ -11,7 +12,9 @@ import 'leaflet-search'
 import 'leaflet-search/dist/leaflet-search.src.css'
 import markerIcon from '../../assets/images/yiqingpoi2.png'
 import hospitalIcon from '../../assets/images/hospital_green.png'
+import locationIcon from '../../assets/images/loc.png'
 import hospital from './mapdata/hospital'
+import 'leaflet.locatecontrol'
 class Map extends React.Component {
     constructor(props) {
         super(props)
@@ -43,8 +46,14 @@ class Map extends React.Component {
                     label: "评分",
                     prop: "score"
                 }
-            ]
+            ],
+            center: { longitude: 115, latitude: 30 },
         }
+        // 高德地图 Map 实例
+        this.mapInstance = undefined;
+        // 地图定位点
+        this.locPoint = L.featureGroup()
+
     }
     getBarName() {
         return `小区按${this.props.rankTypeName}评分排名TOP20`;
@@ -127,6 +136,48 @@ class Map extends React.Component {
             rankData: rankData.slice(0, 20)
         })
     }
+    reLocate() {
+        let self = this
+        // let map = this.state.instance
+        let positionIcon = L.icon({
+            iconUrl: locationIcon,
+            iconSize: [23, 23],
+            // iconAnchor: [20, 20]
+        })
+        //eslint-disable-next-line
+        AMap.plugin('AMap.Geolocation', function() {
+            //eslint-disable-next-line
+           var geolocation = new AMap.Geolocation({
+               enableHighAccuracy: true,//是否使用高精度定位，默认:true
+               timeout: 10000,          //超过10秒后停止定位，默认：5s
+               buttonPosition:'RB',    //定位按钮的停靠位置
+                //eslint-disable-next-line
+               buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+               zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+   
+           });
+           self.mapInstance.addControl(geolocation);
+           geolocation.getCurrentPosition(function(status,result){
+               if(status==='complete'){
+                   self.locPoint.clearLayers()
+                   //解析定位结果
+                   let lng = result.position.lng
+                   let lat = result.position.lat
+                   let loc = [lat, lng]
+                   self.state.currentLocation= loc;
+                   let latlng = new L.latLng(loc)
+                   self.locPoint.addLayer(L.marker(latlng,{icon:positionIcon}));
+                   self.locPoint.addLayer(L.circle(latlng, {
+                       radius: 2000,
+                       weight:0,
+                       fillOpacity: 0.3
+                   }));
+               }else{
+                   alert(result.message)
+               }
+           });
+       });
+    }
     componentDidMount() {
         let self = this;
         this.comHeight(() => {
@@ -140,6 +191,14 @@ class Map extends React.Component {
             }).addTo(map)
             map.zoomControl.remove();
             map.attributionControl.remove();
+            self.locPoint.addTo(map);
+            self.amapEvents = {
+                created: mapInstance => {
+                    self.mapInstance = mapInstance;
+                    //eslint-disable-next-line
+                    self.reLocate()
+                }
+            };
             const url = "http://39.98.108.189:9528/geoserver/ncov/wms";
             const params = {
                 service: 'WFS',
@@ -149,14 +208,6 @@ class Map extends React.Component {
                 outputFormat: 'application/json',
                 srsName: "EPSG:4326"
             }
-            // const paramsBeijing = {
-            //     service: 'WFS',
-            //     version: '1.1.0',
-            //     request: 'GetFeature',
-            //     typeName: "Beijing",
-            //     outputFormat: 'application/json',
-            //     srsName: "EPSG:4326"
-            // }
             const url_str = url + L.Util.getParamString(params, url);
             fetch(url_str, {
                 method: "GET",
@@ -382,7 +433,32 @@ class Map extends React.Component {
                     var popupContent = getPopupContent(feature)
                     layer.bindPopup(popupContent);
                 }
+                // map.locate({
+                //     // setView : true,
+                //     drawCircle: true,
+                //     // maxZoom: 16
+                // });
+                // //添加定位的control
+                // L.control.locate({
+                //     drawCircle: true,
+                //     locateOptions: {
+                //         enableHighAccuracy: true //说是精准定位，但其实我觉得没差
+                //     },
+                //     strings: {
+                //         title: "Show me where I am, yo!"
+                //     }
+                // }).addTo(map);
+                // map.on('locationfound', function(e) {
+                //     var radius = e.accuracy / 2;
+                //     alert(e.latlng)
+                //     L.marker(e.latlng).addTo(map).bindTooltip("你就在这个圈内");
+                //     L.circle(e.latlng, radius*10).addTo(map);
+                // });
 
+                // map.on('locationerror', function(e) {
+                //     console.log('定位出错=====>', e);
+                //     alert(e.message)
+                // });
                 map.on("popupopen", function () {
                     const names = ['抵抗力总分', "暴露情况总分", "医疗资源总分", "服务治理总分", "居民构成总分"];
                     const ranks = ['抵抗力总分排名', '暴露情况排名', '医疗资源排名', '服务治理排名', '居民构成排名']
@@ -533,6 +609,7 @@ class Map extends React.Component {
                     <MapUtil onClick={() => { this.changeRankDialog('Bar', true) }}><i style={{ fontSize: "25px" }} className="iconfont">&#xe7da;</i> </MapUtil>
                 </MapUtilsWrap> */}
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
+                <Amap plugins={['ToolBar']} events={this.amapEvents} amapkey='4da1355b7376039312f14745617f02f9' center={this.state.center}></Amap>
                 <Tip><a href="mailto:ict@thupdi.com" style={{ color: "rgb(54, 54, 54)" }}>ict@thupdi.com </a></Tip>
                 <Modal
                     visible={this.state.modalBar}
