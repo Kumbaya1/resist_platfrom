@@ -360,7 +360,7 @@ class Map extends React.Component {
                     //创建图例div
                     var div = L.DomUtil.create('div', 'info legend'),
                         grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727],
-                        grades_name = ['','非常高', '很&nbsp;&nbsp;&nbsp;高','较&nbsp;&nbsp;&nbsp;高','一&nbsp;&nbsp;&nbsp;般','较&nbsp;&nbsp;&nbsp;低','很&nbsp;&nbsp;&nbsp;低','非常低'],
+                        grades_name = ['','非常高', '很&nbsp;&nbsp;&nbsp;&nbsp;高','较&nbsp;&nbsp;&nbsp;&nbsp;高','一&nbsp;&nbsp;&nbsp;&nbsp;般','较&nbsp;&nbsp;&nbsp;&nbsp;低','很&nbsp;&nbsp;&nbsp;&nbsp;低','非常低'],
                         labels = [],
                         from, label;
                        
