@@ -75,6 +75,7 @@ const yqpoi = {
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.3330398565, 39.8888528301]}, 'properties': {'lng': 116.3330398565, '行政区': '西城区', 'lat': 39.8888528301, 'name': '广安门外街道三义东里', 'FID': 69}}
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.4234992736, 39.9623884354]}, 'properties': {'lng': 116.4234992736, '行政区': '朝阳区', 'lat': 39.9623884354, 'name': '和平街和平家园10区', 'FID': 70}}
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.6025543697, 39.9264900873]}, 'properties': {'lng': 116.6025543697, '行政区': '朝阳区', 'lat': 39.9264900873, 'name': '常营（地区）乡常营中路6号院', 'FID': 71}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.387280934, 39.9743840039]}, 'properties': {'lng': 116.387280934, '行政区': '朝阳区', 'lat': 39.9743840039, 'name': '安贞街道裕民路甲3号', 'FID': 72}}
   ]
   }
   
