@@ -360,14 +360,19 @@ class Map extends React.Component {
                     //创建图例div
                     var div = L.DomUtil.create('div', 'info legend'),
                         grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727],
+                        grades_name = ['','非常高', '很&nbsp;&nbsp;&nbsp;高','较&nbsp;&nbsp;&nbsp;高','一&nbsp;&nbsp;&nbsp;般','较&nbsp;&nbsp;&nbsp;低','很&nbsp;&nbsp;&nbsp;低','非常低'],
                         labels = [],
-                        from, to;
+                        from, label;
+                       
                     for (var i = 0; i < grades.length - 1; i++) {
                         from = grades[i];
-                        to = grades[i + 1];
+                        label = grades_name[i + 1];
                         labels.push(
                             '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
-                            from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
+                            label + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
+                        // labels.push(
+                        //     '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
+                        //     from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
                     }
                     div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
                     div.innerHTML += '<div class="markerIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
