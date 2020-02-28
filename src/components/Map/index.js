@@ -322,7 +322,7 @@ class Map extends React.Component {
                     let tipB2 = properties['B2提示']
                     let tipC1 = properties['C1提示']
                     let tipC2 = properties['C2提示']
-                    // let tipD1 = properties['D1提示']
+                    let tipD1 = properties['D1提示']
                     let tipD2 = properties['D2提示']
                     let scoreA = properties['风险规避']
                     let scoreB = properties['医疗资源']
@@ -364,9 +364,9 @@ class Map extends React.Component {
                     if (tipC2) {
                         tips += "," + tipC2
                     }
-                    // if (tipD1) {
-                    //     tips += "," + tipD1
-                    // }
+                    if (tipD1) {
+                        tips += "," + tipD1
+                    }
                     if (tipD2) {
                         tips += "," + tipD2
                     }
