@@ -17,10 +17,10 @@ class RadarChart extends React.Component {
                 radar: [
                     {
                         indicator: [
-                            { text: '暴露情况\n' + parseFloat(this.props.radarData[0]).toFixed(0) + '\n>' + parseInt(((6727 - this.props.rank.rankA) / 6727) * 100) + '%的小区', max: 100 },
-                            { text: '医疗资源\n' + parseFloat(this.props.radarData[1]).toFixed(0) + '\n>' + parseInt(((6727 - this.props.rank.rankB) / 6727) * 100) + '%的小区', max: 100 },
-                            { text: '服务治理\n' + parseFloat(this.props.radarData[2]).toFixed(0) + '\n>' + parseInt(((6727 - this.props.rank.rankC) / 6727) * 100) + '%的小区', max: 100 },
-                            { text: '居民构成\n' + parseFloat(this.props.radarData[3]).toFixed(0) + '\n>' + parseInt(((6727 - this.props.rank.rankD) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '风险规避\n' + parseInt(this.props.radarData[0]) + '\n>' + parseInt(((6727 - this.props.rank.rankA) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '医疗资源\n' + parseInt(this.props.radarData[1]) + '\n>' + parseInt(((6727 - this.props.rank.rankB) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '服务治理\n' + parseInt(this.props.radarData[2]) + '\n>' + parseInt(((6727 - this.props.rank.rankC) / 6727) * 100) + '%的小区', max: 100 },
+                            { text: '居民特征\n' + parseInt(this.props.radarData[3]) + '\n>' + parseInt(((6727 - this.props.rank.rankD) / 6727) * 100) + '%的小区', max: 100 },
 
                         ],
                         center: ['50%', '50%'],
