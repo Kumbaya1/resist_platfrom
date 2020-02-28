@@ -534,9 +534,6 @@ class Map extends React.Component {
                         });
                     }
                 });
-                map.on('click',function(e){
-                    console.log(e)
-                })
 
                 map.addControl(searchControl);  //inizialize search control
                 self.setState({
