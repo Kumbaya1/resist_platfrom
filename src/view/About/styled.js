@@ -9,17 +9,22 @@ const Title = styled.h1`
     color:rgb(0,174,102);
 `
 const SectionTitle = styled.h2`
-    font-size:20px;
+    font-size:16px;
     text-align:center;
     height:35px;
     line-height:35px;
     color:rgb(0,174,102);
     font-weight:300;
 `
+const SectionTitleNum = styled.span`
+    font-size:24px;
+    font-weight: bold;
+`
 const SectionText = styled.p`
     color:rgb(54,54,54);
     line-height:28px;
     letter-space:0.01em;
+    font-weight:700;
 `
 const SectionSubTitle = styled.h3`
     font-size:16px;
@@ -54,11 +59,33 @@ const ReturnHome = styled.div`
     z-index: 5;
     line-height:15px;
 `
+const NewsText = styled.p`
+    font-size:16px;
+    font-style:italic;
+    width:74%;
+    margin:0 auto;
+    letter-spacing: 0.1em;
+    text-align: justify;
+`
+const GrayText = styled.p`
+    color:#909399;
+    line-height:28px;
+    letter-space:0.01em;
+`
+const NorText = styled.p`
+    line-height:28px;
+    letter-space:0.01em;
+    font-weight:300;
+`
 export {
     Title,
     SectionTitle,
     SectionText,
     SectionSubTitle,
     Wish,
-    ReturnHome
+    ReturnHome,
+    SectionTitleNum,
+    NewsText,
+    GrayText,
+    NorText,
 }

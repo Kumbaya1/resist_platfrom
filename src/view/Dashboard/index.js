@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React  from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, Text, PlateWrap, Plate, AboutMap, TopRank ,Join, Locate} from "./styled"
+import { Wrap, PlateWrap, Plate, AboutMap, TopRank, Join, Locate } from "./styled"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/chuanbofengxian.png"
 import yiliaoziyuan from "../../assets/images/yiliaoziyuan.png"
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
                 unImg: un_dikanglizongfen
             },
             {
-                name: "暴露情况",
+                name: "风险规避",
                 img: chuachuanbofengxiannbo,
                 unImg: un_chuachuanbofengxiannbo
             }, {
@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
                 unImg: un_fuwuzhili
             },
             {
-                name: "居民构成",
+                name: "居民特征",
                 img: jumingoucheng,
                 unImg: un_jumingoucheng
             },
@@ -81,9 +81,6 @@ class Dashboard extends React.Component {
             ><Title>北京社区抵抗力</Title></NavBar> */}
             <WhiteSpace size="sm" />
             {/* <Title>北京社区疫情抵抗力地图</Title> */}
-            {this.state.mapFull === false ? (<Fragment>
-                <WingBlank size="lg"><Text> 共筑社区防线，查看北京6727个小区对疫情的抵抗力</Text></WingBlank>
-            </Fragment>) : ""}
             {/* <p style={{ textAlign: 'center' }}><AboutLink><Link to="/about" style={{ color: 'rgb(0,174,102)' }}>关于地图</Link> </AboutLink></p> */}
             {/* <WingBlank size="lg">
                 <SearchBar placeholder="搜索社区" value={this.state.value} onChange={this.onChange} className='s-input' onSubmit={(val) => { this.onSubmit(val) }}></SearchBar>
@@ -102,7 +99,7 @@ class Dashboard extends React.Component {
                 </PlateWrap>
             </WingBlank>
             <WhiteSpace size="sm" />
-            <Locate onClick={() => this.state.mapRef.current.reLocate()}><img src={location} style={{width:'25px', height:'25px'}} alt='' /></Locate>
+            <Locate onClick={() => this.state.mapRef.current.reLocate()}><img src={location} style={{ width: '25px', height: '25px' }} alt='' /></Locate>
             <Join><a href='https://www.wjx.cn/jq/58194197.aspx' style={{ color: "rgb(0,174,102)" }}>我要<br />参与</a></Join>
             <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
             <TopRank onClick={() => { this.state.mapRef.current.changeRankDialog('Bar', true) }}>TOP<br />&nbsp;20</TopRank>

@@ -6405,6 +6405,11 @@ leaflet-search@^2.9.8:
   dependencies:
     leaflet "*"
 
+leaflet.locatecontrol@^0.70.0:
+  version "0.70.0"
+  resolved "https://registry.npm.taobao.org/leaflet.locatecontrol/download/leaflet.locatecontrol-0.70.0.tgz#924e6a0986bdd7297e485502e072740a6a505ea9"
+  integrity sha1-kk5qCYa91yl+SFUC4HJ0CmpQXqk=
+
 leaflet@*, leaflet@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npm.taobao.org/leaflet/download/leaflet-1.6.0.tgz#aecbb044b949ec29469eeb31c77a88e2f448f308"
@@ -8713,6 +8718,11 @@ rc-util@4.x, rc-util@^4.0.4, rc-util@^4.15.3, rc-util@^4.4.0:
     prop-types "^15.5.10"
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
+
+react-amap@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.npm.taobao.org/react-amap/download/react-amap-1.2.8.tgz#cb5a6441c5e83acb0d7b2e8a1b20dc539b759d9b"
+  integrity sha1-y1pkQcXoOssNey6KGyDcU5t1nZs=
 
 react-app-polyfill@^1.0.6:
   version "1.0.6"

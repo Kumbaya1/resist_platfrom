@@ -1,17 +1,131 @@
 import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
-import { Title, SectionTitle, SectionText, ReturnHome, SectionSubTitle } from "./styled"
-import Plate from "../../components/Plate"
-import zhibiaotushi from "../../assets/images/about/zhibiaotushi.png"
-import chuachuanbofengxiannbo from "../../assets/images/about/1.png"
-import yiliaoziyuan from "../../assets/images/about/2.png"
-import fuwuzhili from "../../assets/images/about/3.png"
-import jumingoucheng from "../../assets/images/about/4.png"
+import { Title, SectionTitle, SectionText, SectionTitleNum, ReturnHome, SectionSubTitle, NewsText, GrayText, NorText } from "./styled"
+// import Plate from "../../components/Plate"
+import img_0 from "../../assets/images/about/2/0.jpg"
+import img_1 from "../../assets/images/about/2/1.jpg"
+import img_2 from "../../assets/images/about/2/2.jpg"
+import img_3 from "../../assets/images/about/2/3.jpg"
+import img_4 from "../../assets/images/about/2/4.jpg"
+import img_1_1 from "../../assets/images/about/2/1_1.jpg"
+import img_2_2 from "../../assets/images/about/2/2_2.jpg"
+import img_3_3 from "../../assets/images/about/2/3_3.jpg"
+import img_4_4 from "../../assets/images/about/2/4_4.jpg"
+import img_ewm from "../../assets/images/about/2/ewm.jpg"
+// import zhibiaotushi from "../../assets/images/about/zhibiaotushi.png"
+// import chuachuanbofengxiannbo from "../../assets/images/about/1.png"
+// import yiliaoziyuan from "../../assets/images/about/2.png"
+// import fuwuzhili from "../../assets/images/about/3.png"
+// import jumingoucheng from "../../assets/images/about/4.png"
 function About(props) {
     return (
         <Fragment>
             <WhiteSpace size="sm" />
+            <Title>《北京社区疫情抵抗力地图2.0》</Title>
+            <SectionText style={{ textAlign: "center" }} >大家关心的问题与解答</SectionText>
+            <WhiteSpace size="lg" />
+            <SectionTitle ><SectionTitleNum>1.</SectionTitleNum>如何理解“社区的疫情抵抗力”？</SectionTitle>
+            <WingBlank size="lg">
+                <SectionText>由社区自身属性决定的对疫情的抵御与抗击能力。抵抗力不仅针对传染病的防治，还是使社区能够抵御疫情并且使其居民平安渡过疫期的能力</SectionText>
+            </WingBlank>
+            <WhiteSpace size="lg" />
+            <SectionTitle ><SectionTitleNum>2.</SectionTitleNum>为什么要关注社区的疫情抵抗力？</SectionTitle>
+            <WingBlank size="lg">
+                <SectionText>社区是城市抗击疫情的基层堡垒，也是这场战役离你我最近、最关键的战线之一。然而，在人力短缺、事务繁多的情况下，社区防疫压力较大。现象的背后，也反映出提高居民对于社区防疫的意识，发动居民主动性的重要性与紧迫性。</SectionText>
+            </WingBlank>
+            <WhiteSpace />
+            <NewsText>1月24日，国家卫健委牵头成立包括32个部门的应对新型冠状病毒感染的肺炎疫情联防联控工作机制发布《关于加强新型冠状病毒感染的肺炎疫情社区防控工作的通知》。《通知》要求各地肺炎疫情联防联控工作机制“充分发挥社区动员能力...群防群控，稳防稳控，有效落实综合性防控措施，防止疫情输入、蔓延、输出，控制疾病传播”。</NewsText>
+            <WhiteSpace />
+            <WingBlank size="lg">
+                <SectionText>我们希望地图能够增强各方对社区/小区防疫工作的认知，以这场疫情为契机，促进居民参与的基层治理共同体的构建。</SectionText>
+            </WingBlank>
+            <WhiteSpace size="lg" />
+            <SectionTitle ><SectionTitleNum>3.</SectionTitleNum>地图中，抵抗力的评价体系建立的依据是什么？</SectionTitle>
+            <WingBlank size="lg">
+                <SectionText>疫情抵抗力相关因素，可分为“防范”与“抗击”两大类别：前者是与病毒传播有关的“被动”因素，后者包括处理病例、维持社区疫情期间生活运行等“主动”因素。在实际生活中，抵抗力因素对应着四类社区防疫场景。地图依据这些场景构建疫情抵抗力评价体系，以指导居民与治理团体对抵抗力的提升措施。</SectionText>
+            </WingBlank>
+            <WhiteSpace />
+            <WingBlank size="lg">
+                <GrayText>对社区抵抗力相关因素的量化评估，可以助力社区及居民团体：1.合理判断疫情风险2.理解居民自身抗疫优劣势 3.评估调配医疗资源4. 统筹完善社区服务。</GrayText>
+            </WingBlank>
+            <div style={{ width: '80%', margin: "0 auto" }}>
+                <img src={img_0} alt="" style={{ width: '100%' }} />
+            </div>
+            <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
+                <div style={{ width: "200%" }}>
+                    <img src={img_1} alt="" style={{ width: '50%' }} />
+                    <img src={img_1_1} alt="" style={{ width: '50%' }} />
+                </div>
+                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
+            </div>
+            <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
+                <div style={{ width: "200%" }}>
+                    <img src={img_2} alt="" style={{ width: '50%' }} />
+                    <img src={img_2_2} alt="" style={{ width: '50%' }} />
+                </div>
+                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
+            </div>
+            <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
+                <div style={{ width: "200%" }}>
+                    <img src={img_3} alt="" style={{ width: '50%' }} />
+                    <img src={img_3_3} alt="" style={{ width: '50%' }} />
+                </div>
+                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
+            </div>
+            <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
+                <div style={{ width: "200%" }}>
+                    <img src={img_4} alt="" style={{ width: '50%' }} />
+                    <img src={img_4_4} alt="" style={{ width: '50%' }} />
+                </div>
+                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
+            </div>
+            <WhiteSpace size="lg" />
+            <SectionTitle ><SectionTitleNum>4.</SectionTitleNum>新版地图有哪些改进？</SectionTitle>
+            <WhiteSpace />
+            <SectionText style={{ textAlign: "center" }} >指标调整 – 更加合理易懂</SectionText>
+            <WingBlank size="lg">
+                <NorText>•指标名称调整：“暴露情况”改为“风险规避“，“居民构成”改为“居民特征”</NorText>
+                <NorText>•指标分类调整：人口密度纳入“居民特征”分类</NorText>
+                <NorText>•考虑返工时期情况，在“风险规避”中，加入“通勤人口比例”指标</NorText>
+            </WingBlank>
+            <WhiteSpace />
+            <SectionText style={{ textAlign: "center" }} >算法的验证与改进– 分析结论更加精准</SectionText>
+            <WingBlank size="lg">
+                <NorText>•基于公众及专家反馈结果，对各指标权重进行修正</NorText>
+                <NorText>•通过将当前疫情发生地与抵抗力指标进行关联性分析，我们发现并提取出了与疫情发生显著相关的抵抗力因素。通过近一步研究分析，模型拟合优度具有统计意义（P&lt;0.05）,模型预测在当前研究环境显示出较高准确率（>90%），可以使用上述显著相关因素对小区疫情发生风险预警评估。</NorText>
+                <NorText>•基于以上分析结果，地图加入了“<span style={{ fontWeight: 700 }}>疫情预测</span>”功能，对各小区疫情出现风险进行预测与预警</NorText>
+            </WingBlank>
+            <WhiteSpace />
+            <SectionText style={{ textAlign: "center" }} >更友好的界面与相关信息提供</SectionText>
+            <WingBlank size="lg">
+                <NorText>•加入定位功能按钮，一键定位到用户所在小区(安卓用户推荐使用手机浏览器)</NorText>
+                <NorText>•地图使用中文底图</NorText>
+                <NorText>•查看“医疗资源”选项时，显示北京最新公布发热门诊医院名称及地点</NorText>
+                <NorText>•抵抗力分项因素得分排名显示“超过XX%”的小区</NorText>
+                <NorText>•其他界面细节调整</NorText>
+            </WingBlank>
+            <WhiteSpace size="lg" />
+            <SectionTitle ><SectionTitleNum>5.</SectionTitleNum>如何一起让地图变得更好？</SectionTitle>
+            <WingBlank size="lg">
+                <NorText>为了更好地收集批评与建议，地图于2月18日开启了公共调查参与通道（在地图中点击“我要参与”按钮，或者直接扫描下面二维码参与），我们基于得到的初步意见，定制了问卷, 就大家关心的问题进行进一步反馈收集工作, 大家也可以通过问卷提出自己对于地图以及社区防疫工作的任何意见与建议。</NorText>
+            </WingBlank>
+            <WhiteSpace />
+            <div style={{ width: '80%', margin: "0 auto" }}>
+                <img src={img_ewm} alt="" style={{ width: '100%' }} />
+            </div>
+            <WhiteSpace />
+            <WhiteSpace size="lg" />
+            <WingBlank size="lg">
+                <NorText>作为一次将专业城市研究与公众参与服务结合的实验性尝试，地图的优化工作采用专业研究与公众调查结合的路径。在开放公众调查的同时，我们也平行地从专业角度进行研究。</NorText>
+                <WhiteSpace />
+                <NorText>大家的反馈将与研究成果一起，成为未来《社区疫情抵抗力地图》优化工作的重要参考，让《地图》为社区防疫以及基层治理共同体的构建带来更多价值。</NorText>
+                <WhiteSpace />
+                <NorText>衷心感谢每一位支持《地图》的朋友，我们一如既往地期待您给予宝贵的批评与建议。</NorText>
+                <WhiteSpace />
+                <NorText>望疫情早日结束，我们的城市更加安全美好。</NorText>
+            </WingBlank>
+            {/* <WhiteSpace size="sm" />
             <Title>北京社区疫情抵抗力地图</Title>
             <WhiteSpace size="xl" />
             <SectionTitle>关于地图</SectionTitle>
@@ -35,17 +149,17 @@ function About(props) {
             <SectionTitle>社区疫情抵抗力评估指标</SectionTitle>
             <WhiteSpace size="lg" />
             <WingBlank size="lg">
-                <SectionText>结合文献研究以及此次疫情的特点，我们将社区疫情抵抗力分为暴露情况、医疗资源、服务治理和居民构成四方面因素，并基于可用的数据建立量化评估方法：</SectionText>
+                <SectionText>结合文献研究以及此次疫情的特点，我们将社区疫情抵抗力分为风险规避、医疗资源、服务治理和居民特征四方面因素，并基于可用的数据建立量化评估方法：</SectionText>
             </WingBlank>
             <WhiteSpace size="xl" />
             <div style={{ width: '80%', margin: "0 auto" }}>
-                <img src={zhibiaotushi} alt="指标图示" style={{ width: '100%' }} />
+                <img src={zhibiaotushi} alt=""="指标图示" style={{ width: '100%' }} />
             </div>
             <div style={{ color: "#ccc", fontWeight: "bold", fontSize: "14px", margin: "4px 0 6px", textAlign: "center" }}>社区疫情抵抗力评估维度图示</div>
 
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
-            <Plate img={chuachuanbofengxiannbo} name="暴露情况" detail="疫情传入小区及内部传播可能性" />
+            <Plate img={chuachuanbofengxiannbo} name="风险规避" detail="疫情传入小区及内部传播可能性" />
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
@@ -85,7 +199,7 @@ function About(props) {
             </WingBlank>
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
-            <Plate img={jumingoucheng} name="居民构成" detail="小区居民群体结构" />
+            <Plate img={jumingoucheng} name="居民特征" detail="小区居民群体结构" />
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>次级指标包括:</SectionText>
@@ -113,8 +227,7 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WingBlank size="lg">
                 <SectionText>愿这场战役早日结束，我们的城市更加安全美好。</SectionText>
-            </WingBlank>
-            <WhiteSpace size="xl" />
+            </WingBlank> */}
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
             <SectionSubTitle>项目团队</SectionSubTitle>
