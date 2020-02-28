@@ -66,6 +66,8 @@ const NewsText = styled.p`
     margin:0 auto;
     letter-spacing: 0.1em;
     text-align: justify;
+    color:#909399;
+    line-height: 24px;
 `
 const GrayText = styled.p`
     color:#909399;
