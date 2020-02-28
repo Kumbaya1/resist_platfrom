@@ -26,8 +26,8 @@ class Map extends React.Component {
             modalBar: false,    // 小区排名条形图
             modalRadar: false,   // 雷达图
             radarTitle: "雷达图标题",
-            renderFieldList: ['总分N', 'A暴露情况', 'B医疗资源', 'C服务治理', 'D居民构成'],
-            rankFieldList: ['总分排名', 'A排名', 'B排名', 'C排名', 'D排名'],
+            scoreFieldList: ['总分', '风险规避', '医疗资源', '服务治理', '居民特征'],
+            rankFieldList: ['r总分', 'r风险规避', 'r医疗资源', 'r服务治理', 'r居民特征'],
             titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名'],
             rankData: [],
             radarData: [],
@@ -52,7 +52,10 @@ class Map extends React.Component {
         // 高德地图 Map 实例
         this.mapInstance = undefined;
         // 地图定位点
-        this.locPoint = L.featureGroup()
+        this.locPoint = L.featureGroup().on('click', function(e) {
+            // console.log(e)
+            //  alert('Clicked on a member of the group!');
+        })
 
     }
     getBarName() {
@@ -116,7 +119,7 @@ class Map extends React.Component {
         this.setState({
             [`modal${type}`]: flag
         })
-        let scoreField = this.state.renderFieldList[this.props.activeIndex]
+        let scoreField = this.state.scoreFieldList[this.props.activeIndex]
         let rankfield = this.state.rankFieldList[this.props.activeIndex]
         let layers = this.state.rendererLayer.getLayers()
         let rankData = []
@@ -137,9 +140,9 @@ class Map extends React.Component {
             rankData: rankData.slice(0, 20)
         })
     }
-    reLocate() {
+    reLocate(isClick) {
         let self = this
-        // let map = this.state.instance
+        let map = this.state.instance
         let positionIcon = L.icon({
             iconUrl: locationIcon,
             iconSize: [23, 23],
@@ -153,31 +156,40 @@ class Map extends React.Component {
                 timeout: 10000,          //超过10秒后停止定位，默认：5s
                 buttonPosition: 'RB',    //定位按钮的停靠位置
                 //eslint-disable-next-line
-                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-                zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
-
-            });
-            self.mapInstance.addControl(geolocation);
-            geolocation.getCurrentPosition(function (status, result) {
-                if (status === 'complete') {
-                    self.locPoint.clearLayers()
-                    //解析定位结果
-                    let lng = result.position.lng
-                    let lat = result.position.lat
-                    let loc = [lat, lng]
-                    self.state.currentLocation = loc;
-                    let latlng = new L.latLng(loc)
-                    self.locPoint.addLayer(L.marker(latlng, { icon: positionIcon }));
-                    self.locPoint.addLayer(L.circle(latlng, {
-                        radius: 2000,
-                        weight: 0,
-                        fillOpacity: 0.3
-                    }));
-                } else {
-                    alert(result.message)
-                }
-            });
-        });
+               buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+               zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+   
+           });
+           self.mapInstance.addControl(geolocation);
+           geolocation.getCurrentPosition(function(status,result){
+               if(status==='complete'){
+                   self.locPoint.clearLayers()
+                   //解析定位结果
+                   let lng = result.position.lng
+                   let lat = result.position.lat
+                   let loc = [lat, lng]
+                   self.state.currentLocation= loc;
+                   let latlng = new L.latLng(loc)
+                  
+                   self.locPoint.addLayer(L.marker(latlng,{icon:positionIcon}));
+                   self.locPoint.addLayer(L.circle(latlng, {
+                       radius: 1000,
+                       weight:0,
+                       fillOpacity: 0.3
+                   }));
+                   if(isClick){
+                        var zoom = map.getZoom();
+                        map.setView(latlng, zoom+6);
+                   }
+                   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                        self.locPoint.bringToBack()
+                   }
+                   
+               }else{
+                   alert(result.message)
+               }
+           });
+       });
     }
     componentDidMount() {
         let self = this;
@@ -205,7 +217,7 @@ class Map extends React.Component {
                 service: 'WFS',
                 version: '1.1.0',
                 request: 'GetFeature',
-                typeName: "BeijingCommunity_offset_gcj02new",
+                typeName: "BeijingCommunity",
                 outputFormat: 'application/json',
                 srsName: "EPSG:4326"
             }
@@ -306,16 +318,23 @@ class Map extends React.Component {
                     let tipC2 = properties['C2提示']
                     // let tipD1 = properties['D1提示']
                     let tipD2 = properties['D2提示']
-                    let scoreA = properties['A暴露情况']
-                    let scoreB = properties['B医疗资源']
-                    let scoreC = properties['C服务治理']
-                    let scoreD = properties['D居民构成']
-                    let totalScore = properties['总分N']
-                    let rankA = properties['A排名']
-                    let rankB = properties['B排名']
-                    let rankC = properties['C排名']
-                    let rankD = properties['D排名']
-                    let totalScoreRank = properties['总分排名']
+                    let scoreA = properties['风险规避']
+                    let scoreB = properties['医疗资源']
+                    let scoreC = properties['服务治理']
+                    let scoreD = properties['居民特征']
+                    let totalScore = properties['总分']
+                    let rankA = properties['r风险规避']
+                    let rankB = properties['r医疗资源']
+                    let rankC = properties['r服务治理']
+                    let rankD = properties['r居民特征']
+                    let totalScoreRank = properties['r总分']
+
+                    let rankAName = getRankName(properties['r风险规避'])
+                    let rankBName = getRankName(properties['r医疗资源'])
+                    let rankCName = getRankName(properties['r服务治理'])
+                    let rankDName = getRankName(properties['r居民特征'])
+                    let totalScoreRankName = getRankName(properties['r总分'])
+
                     let tips = "";
                     if (tipA1) {
                         tips += "," + tipA1
@@ -350,7 +369,7 @@ class Map extends React.Component {
                         popupContent += "<p style='font-weight:bold'>" + properties['社区名称'] + "</p>"
                         popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
-                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankA}  data-rankb=${rankB} data-rankc=${rankC} data-rankd=${rankD} data-rank=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank} style='color:#fff;cursor:pointer;background: transparent;border-right:0px;border-bottom: 1px solid #fff;border-left:0px;border-top:0px;'>详细情况> </button>`
+                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankAName}  data-rankb=${rankBName} data-rankc=${rankCName} data-rankd=${rankDName} data-rank=${totalScoreRankName} data-rankaS=${rankA}  data-rankbS=${rankB} data-rankcS=${rankC} data-rankdS=${rankD} data-rankS=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank}>详细情况> </button>`
                     }
                     return popupContent
                 }
@@ -360,7 +379,7 @@ class Map extends React.Component {
                     //创建图例div
                     var div = L.DomUtil.create('div', 'info legend'),
                         grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727],
-                        grades_name = ['', '非常高', '很&nbsp;&nbsp;&nbsp;&nbsp;高', '较&nbsp;&nbsp;&nbsp;&nbsp;高', '一&nbsp;&nbsp;&nbsp;&nbsp;般', '较&nbsp;&nbsp;&nbsp;&nbsp;低', '很&nbsp;&nbsp;&nbsp;&nbsp;低', '非常低'],
+                        grades_name = ['','非常高', '很高','较高','一般','较低','很低','非常低'],
                         labels = [],
                         from, label;
 
@@ -390,7 +409,7 @@ class Map extends React.Component {
                         color: 'white',
                         dashArray: '0',
                         fillOpacity: 0.7,
-                        fillColor: getColor(feature.properties['总分排名'])
+                        fillColor: getColor(feature.properties['r总分'])
                     };
                 }
                 function getColor(d) {
@@ -401,6 +420,15 @@ class Map extends React.Component {
                                     d > 2000 ? '#B0E000' :
                                         d > 1000 ? '#6FC400' :
                                             '#38A800';
+                }
+                function getRankName(d) {
+                    return d > 6000 ? '非常低' :
+                        d > 5000 ? '很低' :
+                            d > 4000 ? '较低' :
+                                d > 3000 ? '一般' :
+                                    d > 2000 ? '较高' :
+                                        d > 1000 ? '很高' :
+                                            '非常高';
                 }
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
@@ -438,32 +466,7 @@ class Map extends React.Component {
                     var popupContent = getPopupContent(feature)
                     layer.bindPopup(popupContent);
                 }
-                // map.locate({
-                //     // setView : true,
-                //     drawCircle: true,
-                //     // maxZoom: 16
-                // });
-                // //添加定位的control
-                // L.control.locate({
-                //     drawCircle: true,
-                //     locateOptions: {
-                //         enableHighAccuracy: true //说是精准定位，但其实我觉得没差
-                //     },
-                //     strings: {
-                //         title: "Show me where I am, yo!"
-                //     }
-                // }).addTo(map);
-                // map.on('locationfound', function(e) {
-                //     var radius = e.accuracy / 2;
-                //     alert(e.latlng)
-                //     L.marker(e.latlng).addTo(map).bindTooltip("你就在这个圈内");
-                //     L.circle(e.latlng, radius*10).addTo(map);
-                // });
-
-                // map.on('locationerror', function(e) {
-                //     console.log('定位出错=====>', e);
-                //     alert(e.message)
-                // });
+           
                 map.on("popupopen", function () {
                     const names = ['抵抗力总分', "风险规避总分", "医疗资源总分", "服务治理总分", "居民特征总分"];
                     const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名']
@@ -475,9 +478,8 @@ class Map extends React.Component {
                     const p2 = div.querySelector(".replace2");
                     const btn = div.querySelector("button");
                     if (p) {
-                        // p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(2)
-                        p.innerText = names[self.props.activeIndex] + ": " + parseInt(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`))
-                        p2.innerText = ranks[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`))
+                        p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(0)
+                        p2.innerText = ranks[self.props.activeIndex] + ": " + btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`)
                         map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
                         document.querySelectorAll(".detailBtn").forEach(item => {
                             item.onclick = function (e) {
@@ -487,15 +489,16 @@ class Map extends React.Component {
                                     radarTips: btn.getAttribute("data-tips"),
                                     radarScore: btn.getAttribute("data-score"),
                                     radarTitle: btn.getAttribute("data-name"),
-                                    radarTotalscorerank: btn.getAttribute("data-totalscorerank"),
+                                    radarTotalscorerank: parseInt(btn.getAttribute("data-totalscorerank")),
                                     radarData: [btn.getAttribute("data-scorea"), btn.getAttribute("data-scoreb"), btn.getAttribute("data-scorec"), btn.getAttribute("data-scored")],
-                                    rankA: btn.getAttribute("data-ranka"),
-                                    rankB: btn.getAttribute("data-rankb"),
-                                    rankC: btn.getAttribute("data-rankc"),
-                                    rankD: btn.getAttribute("data-rankd")
+                                    rankA: btn.getAttribute("data-rankaS"),
+                                    rankB: btn.getAttribute("data-rankbS"),
+                                    rankC: btn.getAttribute("data-rankcS"),
+                                    rankD: btn.getAttribute("data-rankdS")
                                 })
                             }
                         })
+                        console.log(self.state.radarTotalscorerank)
                     }
 
                 });
@@ -518,6 +521,9 @@ class Map extends React.Component {
                         });
                     }
                 });
+                map.on('click',function(e){
+                    console.log(e)
+                })
 
                 map.addControl(searchControl);  //inizialize search control
                 self.setState({
