@@ -27,8 +27,8 @@ class Map extends React.Component {
             modalRadar: false,   // 雷达图
             radarTitle: "雷达图标题",
             scoreFieldList: ['总分', '风险规避', '医疗资源', '服务治理', '居民特征'],
-            rankFieldList: ['r总分', 'r风险规避', 'r医疗资源', 'r服务治理', 'r居民特征'],
-            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名'],
+            rankFieldList: ['r总分', 'r风险规避', 'r医疗资源', 'r服务治理', 'r居民特征', '预测分段'],
+            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名','预测分段'],
             rankData: [],
             radarData: [],
             radarScore: 0,
@@ -140,6 +140,7 @@ class Map extends React.Component {
             rankData: rankData.slice(0, 20)
         })
     }
+    // 地图定位
     reLocate(isClick) {
         let self = this
         let map = this.state.instance
@@ -191,6 +192,10 @@ class Map extends React.Component {
            });
        });
     }
+    // 疫情预测
+    forecastPlague(){
+        this.switchIndexMap(5)
+    }
     componentDidMount() {
         let self = this;
         this.comHeight(() => {
@@ -227,6 +232,8 @@ class Map extends React.Component {
             }).then(res => {
                 return res.json()
             }).then(geojson => {
+                let curObj = self
+                console.log(curObj)
                 // 自定义定位点图标
                 const myCustomColour = '#FF0000'//'#009366'//'#583470'
                 const markerHtmlStyles = `
@@ -282,7 +289,6 @@ class Map extends React.Component {
                     style: style,
                     onEachFeature: onEachFeature
                 }).addTo(map);
-
                 let markersLayer = new L.featureGroup();
                 map.addLayer(markersLayer);
                 let searchControl = new L.Control.Search({
@@ -307,7 +313,7 @@ class Map extends React.Component {
                 });
 
                 // 格式化弹窗内容
-                function getPopupContent(feature) {
+                function getPopupContent(feature,index) {
                     let properties = feature.properties
                     let tipA1 = properties['A1提示']
                     let tipA2 = properties['A2提示']
@@ -335,6 +341,7 @@ class Map extends React.Component {
                     let rankDName = getRankName(properties['r居民特征'])
                     let totalScoreRankName = getRankName(properties['r总分'])
 
+                    let foreBreak = properties['预测分段']
                     let tips = "";
                     if (tipA1) {
                         tips += "," + tipA1
@@ -369,8 +376,9 @@ class Map extends React.Component {
                         popupContent += "<p style='font-weight:bold'>" + properties['社区名称'] + "</p>"
                         popupContent += "<p class='replace'>抵抗力评分:分数占位符</p>";
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
-                        popupContent += `<button id='detailBtn' class='detailBtn' data-ranka=${rankAName}  data-rankb=${rankBName} data-rankc=${rankCName} data-rankd=${rankDName} data-rank=${totalScoreRankName} data-rankaS=${rankA}  data-rankbS=${rankB} data-rankcS=${rankC} data-rankdS=${rankD} data-rankS=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank}>详细情况> </button>`
+                        popupContent += `<button id='detailBtn' class='detailBtn' data-fore=${foreBreak} data-ranka=${rankAName}  data-rankb=${rankBName} data-rankc=${rankCName} data-rankd=${rankDName} data-rank=${totalScoreRankName} data-rankaS=${rankA}  data-rankbS=${rankB} data-rankcS=${rankC} data-rankdS=${rankD} data-rankS=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank}>详细情况> </button>`
                     }
+ 
                     return popupContent
                 }
                 //创建图例
@@ -378,49 +386,33 @@ class Map extends React.Component {
                 legend.onAdd = function (map) {
                     //创建图例div
                     var div = L.DomUtil.create('div', 'info legend'),
-                        grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727],
-                        grades_name = ['','非常高', '很高','较高','一般','较低','很低','非常低'],
+                        grades,
+                        grades_name,
                         labels = [],
                         from, label;
-
-                    for (var i = 0; i < grades.length - 1; i++) {
-                        from = grades[i];
-                        label = grades_name[i + 1];
-                        labels.push(
-                            '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
-                            label + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
-                        // labels.push(
-                        //     '<div><i style="background:' + getColor(from + 1) + '"></i> ' +
-                        //     from + '&ndash;' + to + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
-                    }
-                    div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4>' + labels.join('<div style="margin-bottom:2px;font-size:100"></div>');
+                    // if(curObj.state.index<5){
+                        grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727]
+                        grades_name = ['','非常高', '很高','较高','一般','较低','很低','非常低']
+                        for (let i = 0; i < grades.length - 1; i++) {
+                            from = grades[i];
+                            label = grades_name[i + 1];
+                            labels.push(
+                                '<div><i style="background:' + curObj.getColor(from + 1) + '"></i> ' +
+                                label + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
+                        }
+     
+                    let labelStr = labels.join('<div style="margin-bottom:2px;font-size:100"></div>')
+                    div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4><div class="labels">' + labelStr + '</div>';
                     div.innerHTML += '<div class="markerIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
 
+                    self.setState({
+                        labelStr: labelStr
+                    })
                     return div;
                 };
                 //添加图例
                 legend.addTo(map);
 
-                //图层样式
-                function style(feature) {
-                    return {
-                        weight: 0,
-                        opacity: 1,
-                        color: 'white',
-                        dashArray: '0',
-                        fillOpacity: 0.7,
-                        fillColor: getColor(feature.properties['r总分'])
-                    };
-                }
-                function getColor(d) {
-                    return d > 6000 ? '#FF0000' :
-                        d > 5000 ? '#FF5500' :
-                            d > 4000 ? '#FFAA00' :
-                                d > 3000 ? '#FFFF00' :
-                                    d > 2000 ? '#B0E000' :
-                                        d > 1000 ? '#6FC400' :
-                                            '#38A800';
-                }
                 function getRankName(d) {
                     return d > 6000 ? '非常低' :
                         d > 5000 ? '很低' :
@@ -430,6 +422,20 @@ class Map extends React.Component {
                                         d > 1000 ? '很高' :
                                             '非常高';
                 }
+
+                //图层样式
+                function style(feature) {
+                    return {
+                        weight: 0,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '0',
+                        fillOpacity: 0.7,
+                        fillColor: curObj.getColor(feature.properties['r总分'])
+                    };
+                }
+               
+               
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
                     var layer = e.target;
@@ -469,7 +475,7 @@ class Map extends React.Component {
            
                 map.on("popupopen", function () {
                     const names = ['抵抗力总分', "风险规避总分", "医疗资源总分", "服务治理总分", "居民特征总分"];
-                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名']
+                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名','预测分段']
                     const mapKeys = ["", "a", "b", "c", "d"];
                     const htmlStr = map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].getContent();
                     let div = document.createElement("div");
@@ -478,8 +484,14 @@ class Map extends React.Component {
                     const p2 = div.querySelector(".replace2");
                     const btn = div.querySelector("button");
                     if (p) {
-                        p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(0)
-                        p2.innerText = ranks[self.props.activeIndex] + ": " + btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`)
+                        let activeIndex = self.state.index?self.state.index:self.props.activeIndex
+                        if(activeIndex<5){
+                            p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(0)
+                            p2.innerText = ranks[self.props.activeIndex] + ": " + btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`)    
+                        }else{
+                            p.innerText = ranks[5] + ": " + btn.getAttribute(`data-fore`)  
+                            p2.innerText = '' 
+                        }
                         map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
                         document.querySelectorAll(".detailBtn").forEach(item => {
                             item.onclick = function (e) {
@@ -494,7 +506,8 @@ class Map extends React.Component {
                                     rankA: btn.getAttribute("data-rankaS"),
                                     rankB: btn.getAttribute("data-rankbS"),
                                     rankC: btn.getAttribute("data-rankcS"),
-                                    rankD: btn.getAttribute("data-rankdS")
+                                    rankD: btn.getAttribute("data-rankdS"),
+                                    foreBreak: btn.getAttribute("data-fore"),
                                 })
                             }
                         })
@@ -547,13 +560,22 @@ class Map extends React.Component {
     }
     // 根据属性范围设置渲染颜色
     getColor(d) {
-        return d > 6000 ? '#FF0000' :
+        if(typeof d === 'number'){
+            return d > 6000 ? '#FF0000' :
             d > 5000 ? '#FF5500' :
                 d > 4000 ? '#FFAA00' :
                     d > 3000 ? '#FFFF00' :
                         d > 2000 ? '#B0E000' :
                             d > 1000 ? '#6FC400' :
                                 '#38A800';
+        }else{
+            // 红色色系
+            return d === '高' ? '#800026' :
+            d === '较高' ? '#BD0026' :
+            d === '一般' ? '#FC4E2A' :
+            d === '较低' ? '#FD8D3C' :
+                '#FED976'
+        }
         // 红色色系
         // return d > 5887 ? '#800026' :
         //       d > 5046 ? '#BD0026' :
@@ -580,6 +602,7 @@ class Map extends React.Component {
             this.state.instance.closePopup()
             let legendDiv = document.getElementsByClassName('info legend leaflet-control')[0]
             let title = document.querySelector(".layerTitle");
+            let labelsDiv = document.querySelector(".labels")
             legendDiv.innerHTML = legendDiv.innerHTML.replace(title.innerHTML, this.state.titleList[index])
             featuresLayer.setStyle(function (feature) {
                 return {
@@ -592,12 +615,26 @@ class Map extends React.Component {
                 };
             })
             if (index === 2) {
+                
                 this.state.instance.addLayer(this.state.hospitalLayer)
-
+                legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, this.state.labelStr)
                 if (legendDiv.innerHTML.indexOf('发热门诊医院') === -1) {
                     legendDiv.innerHTML += hosLegendDiv
                 }
             } else {
+                if(index === 5) {
+                    let breaks = ['高','较高','一般','较低','低']
+                    let labels=[]
+                    for (let i = 0; i < breaks.length; i++) {
+                        let label = breaks[i];
+                        labels.push('<div><i style="background:' + self.getColor(label) + '"></i> ' + label + "</div>");
+                    }
+                    let labelStr =  labels.join('<div style="margin-bottom:2px;font-size:100"></div>')
+                    // labelsDiv.innerHTML = labelStr
+                    legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, labelStr)
+                }else{
+                    legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, this.state.labelStr)
+                }
                 this.state.instance.removeLayer(this.state.hospitalLayer)
                 var e = document.getElementById('hos');
                 if (e) {
