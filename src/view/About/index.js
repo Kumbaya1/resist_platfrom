@@ -57,29 +57,29 @@ function About(props) {
                     <img src={img_1} alt="" style={{ width: '50%' }} />
                     <img src={img_1_1} alt="" style={{ width: '50%' }} />
                 </div>
-                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             </div>
+            <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
                 <div style={{ width: "200%" }}>
                     <img src={img_2} alt="" style={{ width: '50%' }} />
                     <img src={img_2_2} alt="" style={{ width: '50%' }} />
                 </div>
-                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             </div>
+            <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
                 <div style={{ width: "200%" }}>
                     <img src={img_3} alt="" style={{ width: '50%' }} />
                     <img src={img_3_3} alt="" style={{ width: '50%' }} />
                 </div>
-                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             </div>
+            <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             <div style={{ width: '80%', margin: "0 auto", overflowX: "auto", overflowY: "hidden" }}>
                 <div style={{ width: "200%" }}>
                     <img src={img_4} alt="" style={{ width: '50%' }} />
                     <img src={img_4_4} alt="" style={{ width: '50%' }} />
                 </div>
-                <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             </div>
+            <p style={{ textAlign: "center", color: "#909399" }}>左滑查看指标解释&lt;&lt;</p>
             <WhiteSpace size="lg" />
             <SectionTitle ><SectionTitleNum>4.</SectionTitleNum>新版地图有哪些改进？</SectionTitle>
             <WhiteSpace />
