@@ -28,7 +28,7 @@ class Map extends React.Component {
             radarTitle: "雷达图标题",
             scoreFieldList: ['总分', '风险规避', '医疗资源', '服务治理', '居民特征'],
             rankFieldList: ['r总分', 'r风险规避', 'r医疗资源', 'r服务治理', 'r居民特征', '预测分段'],
-            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '预测分段'],
+            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '疫情发生概率'],
             rankData: [],
             radarData: [],
             radarScore: 0,
