@@ -47,6 +47,13 @@ class Map extends React.Component {
                     prop: "score"
                 }
             ],
+            head1: [{
+                label: "小区名称",
+                prop: "name"
+            }, {
+                label: "评分",
+                prop: "score"
+            }],
             center: { longitude: 115, latitude: 30 },
         }
         // 高德地图 Map 实例
@@ -677,7 +684,7 @@ class Map extends React.Component {
                 >
                     <div style={{ textAlign: "center", color: "#aaa", fontSize: "12px" }}>{this.props.activeIndex === -1 ? "排名高的小区疫情发生概率较高" : rankDetail[this.props.activeIndex]}</div>
                     {/* <BarChart rankData={this.state.rankData} title={this.state.rankTitle}></BarChart> */}
-                    <MTable body={this.state.rankData} head={this.state.head} title={this.state.rankTitle} align="center"></MTable>
+                    <MTable body={this.state.rankData} head={this.props.activeIndex === -1 ? this.state.head1 : this.state.head} title={this.state.rankTitle} align="center"></MTable>
                 </Modal>
                 <Modal
                     visible={this.state.modalRadar}
