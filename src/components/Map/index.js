@@ -28,7 +28,7 @@ class Map extends React.Component {
             radarTitle: "雷达图标题",
             scoreFieldList: ['总分', '风险规避', '医疗资源', '服务治理', '居民特征'],
             rankFieldList: ['r总分', 'r风险规避', 'r医疗资源', 'r服务治理', 'r居民特征', '预测分段'],
-            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名','预测分段'],
+            titleList: ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '预测分段'],
             rankData: [],
             radarData: [],
             radarScore: 0,
@@ -52,14 +52,18 @@ class Map extends React.Component {
         // 高德地图 Map 实例
         this.mapInstance = undefined;
         // 地图定位点
-        this.locPoint = L.featureGroup().on('click', function(e) {
+        this.locPoint = L.featureGroup().on('click', function (e) {
             // console.log(e)
             //  alert('Clicked on a member of the group!');
         })
 
     }
     getBarName() {
-        return `小区按${this.props.rankTypeName}评分排名TOP20`;
+        if (this.props.rankTypeName === "疫情发生概率预测") {
+            return "小区按疫情发生概率预测排名"
+        } else {
+            return `小区按${this.props.rankTypeName}评分排名TOP20`;
+        }
     }
     // 放大/缩小地图zoom
     changeZoom(type = 'add') {
@@ -119,26 +123,32 @@ class Map extends React.Component {
         this.setState({
             [`modal${type}`]: flag
         })
-        let scoreField = this.state.scoreFieldList[this.props.activeIndex]
-        let rankfield = this.state.rankFieldList[this.props.activeIndex]
-        let layers = this.state.rendererLayer.getLayers()
-        let rankData = []
-        for (let i = 0; i < layers.length; i++) {
-            let properties = layers[i].feature.properties
-            rankData.push({
-                name: properties['社区名称'],
-                score: parseInt(properties[scoreField]),
-                // score: properties[scoreField].toFixed(2),
-                rank: properties[rankfield]
+        if (this.props.activeIndex === -1) {
+            // 小区按疫情发生概率预测排名 
+            // TODO...
+        } else {
+            let scoreField = this.state.scoreFieldList[this.props.activeIndex]
+            let rankfield = this.state.rankFieldList[this.props.activeIndex]
+            let layers = this.state.rendererLayer.getLayers()
+            let rankData = []
+            for (let i = 0; i < layers.length; i++) {
+                let properties = layers[i].feature.properties
+                rankData.push({
+                    name: properties['社区名称'],
+                    score: parseInt(properties[scoreField]),
+                    // score: properties[scoreField].toFixed(2),
+                    rank: properties[rankfield]
+                })
+            }
+            rankData.sort((a, b) => {
+                return a.rank - b.rank
+            })
+            console.log(rankData.slice(0, 20))
+            this.setState({
+                rankData: rankData.slice(0, 20)
             })
         }
-        rankData.sort((a, b) => {
-            return a.rank - b.rank
-        })
-        console.log(rankData.slice(0, 20))
-        this.setState({
-            rankData: rankData.slice(0, 20)
-        })
+
     }
     // 地图定位
     reLocate(isClick) {
@@ -157,43 +167,43 @@ class Map extends React.Component {
                 timeout: 10000,          //超过10秒后停止定位，默认：5s
                 buttonPosition: 'RB',    //定位按钮的停靠位置
                 //eslint-disable-next-line
-               buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-               zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
-   
-           });
-           self.mapInstance.addControl(geolocation);
-           geolocation.getCurrentPosition(function(status,result){
-               if(status==='complete'){
-                   self.locPoint.clearLayers()
-                   //解析定位结果
-                   let lng = result.position.lng
-                   let lat = result.position.lat
-                   let loc = [lat, lng]
-                   self.state.currentLocation= loc;
-                   let latlng = new L.latLng(loc)
-                  
-                   self.locPoint.addLayer(L.marker(latlng,{icon:positionIcon}));
-                   self.locPoint.addLayer(L.circle(latlng, {
-                       radius: 1000,
-                       weight:0,
-                       fillOpacity: 0.3
-                   }));
-                   if(isClick){
+                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+
+            });
+            self.mapInstance.addControl(geolocation);
+            geolocation.getCurrentPosition(function (status, result) {
+                if (status === 'complete') {
+                    self.locPoint.clearLayers()
+                    //解析定位结果
+                    let lng = result.position.lng
+                    let lat = result.position.lat
+                    let loc = [lat, lng]
+                    self.state.currentLocation = loc;
+                    let latlng = new L.latLng(loc)
+
+                    self.locPoint.addLayer(L.marker(latlng, { icon: positionIcon }));
+                    self.locPoint.addLayer(L.circle(latlng, {
+                        radius: 1000,
+                        weight: 0,
+                        fillOpacity: 0.3
+                    }));
+                    if (isClick) {
                         var zoom = map.getZoom();
-                        map.setView(latlng, zoom+6);
-                   }
-                   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                        map.setView(latlng, zoom + 6);
+                    }
+                    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                         self.locPoint.bringToBack()
-                   }
-                   
-               }else{
-                   alert(result.message)
-               }
-           });
-       });
+                    }
+
+                } else {
+                    alert(result.message)
+                }
+            });
+        });
     }
     // 疫情预测
-    forecastPlague(){
+    forecastPlague() {
         this.switchIndexMap(5)
     }
     componentDidMount() {
@@ -313,7 +323,7 @@ class Map extends React.Component {
                 });
 
                 // 格式化弹窗内容
-                function getPopupContent(feature,index) {
+                function getPopupContent(feature, index) {
                     let properties = feature.properties
                     let tipA1 = properties['A1提示']
                     let tipA2 = properties['A2提示']
@@ -378,7 +388,7 @@ class Map extends React.Component {
                         popupContent += "<p class='replace2'>抵抗力排名:排名占位符</p>";
                         popupContent += `<button id='detailBtn' class='detailBtn' data-fore=${foreBreak} data-ranka=${rankAName}  data-rankb=${rankBName} data-rankc=${rankCName} data-rankd=${rankDName} data-rank=${totalScoreRankName} data-rankaS=${rankA}  data-rankbS=${rankB} data-rankcS=${rankC} data-rankdS=${rankD} data-rankS=${totalScoreRank} data-scorea=${scoreA}  data-scoreb=${scoreB} data-scorec=${scoreC} data-scored=${scoreD} data-tips='${tips}'  data-name=${properties['社区名称']}  data-score=${totalScore} data-totalscorerank=${totalScoreRank}>详细情况> </button>`
                     }
- 
+
                     return popupContent
                 }
                 //创建图例
@@ -391,16 +401,16 @@ class Map extends React.Component {
                         labels = [],
                         from, label;
                     // if(curObj.state.index<5){
-                        grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727]
-                        grades_name = ['','非常高', '很高','较高','一般','较低','很低','非常低']
-                        for (let i = 0; i < grades.length - 1; i++) {
-                            from = grades[i];
-                            label = grades_name[i + 1];
-                            labels.push(
-                                '<div><i style="background:' + curObj.getColor(from + 1) + '"></i> ' +
-                                label + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
-                        }
-     
+                    grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727]
+                    grades_name = ['', '非常高', '很高', '较高', '一般', '较低', '很低', '非常低']
+                    for (let i = 0; i < grades.length - 1; i++) {
+                        from = grades[i];
+                        label = grades_name[i + 1];
+                        labels.push(
+                            '<div><i style="background:' + curObj.getColor(from + 1) + '"></i> ' +
+                            label + "</div>");// (to>=0 ? '&ndash;' + from : '+'));
+                    }
+
                     let labelStr = labels.join('<div style="margin-bottom:2px;font-size:100"></div>')
                     div.innerHTML = '<h4 class="layerTitle">抵抗力排名</h4><div class="labels">' + labelStr + '</div>';
                     div.innerHTML += '<div class="markerIcon"><img src="/static/media/yiqingpoi2.9f40b254.png"/>  已现疫情小区</div>'
@@ -434,8 +444,8 @@ class Map extends React.Component {
                         fillColor: curObj.getColor(feature.properties['r总分'])
                     };
                 }
-               
-               
+
+
                 //根据要素属性设置特殊渲染样式
                 function highlightFeature(e) {
                     var layer = e.target;
@@ -472,10 +482,10 @@ class Map extends React.Component {
                     var popupContent = getPopupContent(feature)
                     layer.bindPopup(popupContent);
                 }
-           
+
                 map.on("popupopen", function () {
                     const names = ['抵抗力总分', "风险规避总分", "医疗资源总分", "服务治理总分", "居民特征总分"];
-                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名','预测分段']
+                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '预测分段']
                     const mapKeys = ["", "a", "b", "c", "d"];
                     const htmlStr = map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].getContent();
                     let div = document.createElement("div");
@@ -484,13 +494,13 @@ class Map extends React.Component {
                     const p2 = div.querySelector(".replace2");
                     const btn = div.querySelector("button");
                     if (p) {
-                        let activeIndex = self.state.index?self.state.index:self.props.activeIndex
-                        if(activeIndex<5){
+                        let activeIndex = self.state.index ? self.state.index : self.props.activeIndex
+                        if (activeIndex < 5) {
                             p.innerText = names[self.props.activeIndex] + ": " + parseFloat(btn.getAttribute(`data-score${mapKeys[self.props.activeIndex]}`)).toFixed(0)
-                            p2.innerText = ranks[self.props.activeIndex] + ": " + btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`)    
-                        }else{
-                            p.innerText = ranks[5] + ": " + btn.getAttribute(`data-fore`)  
-                            p2.innerText = '' 
+                            p2.innerText = ranks[self.props.activeIndex] + ": " + btn.getAttribute(`data-rank${mapKeys[self.props.activeIndex]}`)
+                        } else {
+                            p.innerText = ranks[5] + ": " + btn.getAttribute(`data-fore`)
+                            p2.innerText = ''
                         }
                         map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].setContent(div.innerHTML);
                         document.querySelectorAll(".detailBtn").forEach(item => {
@@ -557,21 +567,21 @@ class Map extends React.Component {
     }
     // 根据属性范围设置渲染颜色
     getColor(d) {
-        if(typeof d === 'number'){
+        if (typeof d === 'number') {
             return d > 6000 ? '#FF0000' :
-            d > 5000 ? '#FF5500' :
-                d > 4000 ? '#FFAA00' :
-                    d > 3000 ? '#FFFF00' :
-                        d > 2000 ? '#B0E000' :
-                            d > 1000 ? '#6FC400' :
-                                '#38A800';
-        }else{
+                d > 5000 ? '#FF5500' :
+                    d > 4000 ? '#FFAA00' :
+                        d > 3000 ? '#FFFF00' :
+                            d > 2000 ? '#B0E000' :
+                                d > 1000 ? '#6FC400' :
+                                    '#38A800';
+        } else {
             // 红色色系
             return d === '高' ? '#800026' :
-            d === '较高' ? '#FF0000' :
-            d === '一般' ? '#FFAA00' :
-            d === '较低' ? '#B0E000' :
-                '#38A800'
+                d === '较高' ? '#FF0000' :
+                    d === '一般' ? '#FFAA00' :
+                        d === '较低' ? '#B0E000' :
+                            '#38A800'
         }
         // 红色色系
         // return d > 5887 ? '#800026' :
@@ -612,24 +622,24 @@ class Map extends React.Component {
                 };
             })
             if (index === 2) {
-                
+
                 this.state.instance.addLayer(this.state.hospitalLayer)
                 legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, this.state.labelStr)
                 if (legendDiv.innerHTML.indexOf('发热门诊医院') === -1) {
                     legendDiv.innerHTML += hosLegendDiv
                 }
             } else {
-                if(index === 5) {
-                    let breaks = ['高','较高','一般','较低','低']
-                    let labels=[]
+                if (index === 5) {
+                    let breaks = ['高', '较高', '一般', '较低', '低']
+                    let labels = []
                     for (let i = 0; i < breaks.length; i++) {
                         let label = breaks[i];
                         labels.push('<div><i style="background:' + self.getColor(label) + '"></i> ' + label + "</div>");
                     }
-                    let labelStr =  labels.join('<div style="margin-bottom:2px;font-size:100"></div>')
+                    let labelStr = labels.join('<div style="margin-bottom:2px;font-size:100"></div>')
                     // labelsDiv.innerHTML = labelStr
                     legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, labelStr)
-                }else{
+                } else {
                     legendDiv.innerHTML = legendDiv.innerHTML.replace(labelsDiv.innerHTML, this.state.labelStr)
                 }
                 this.state.instance.removeLayer(this.state.hospitalLayer)
@@ -665,7 +675,7 @@ class Map extends React.Component {
                     onClose={() => { this.changeRankDialog('Bar', false) }}
                     style={{ width: "95%" }}
                 >
-                    <div style={{ textAlign: "center", color: "#aaa", fontSize: "12px" }}>{rankDetail[this.props.activeIndex]}</div>
+                    <div style={{ textAlign: "center", color: "#aaa", fontSize: "12px" }}>{this.props.activeIndex === -1 ? "排名高的小区疫情发生概率较高" : rankDetail[this.props.activeIndex]}</div>
                     {/* <BarChart rankData={this.state.rankData} title={this.state.rankTitle}></BarChart> */}
                     <MTable body={this.state.rankData} head={this.state.head} title={this.state.rankTitle} align="center"></MTable>
                 </Modal>

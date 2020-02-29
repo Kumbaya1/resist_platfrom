@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
@@ -44,6 +44,12 @@ class Dashboard extends React.Component {
         this.setState((prevState, props) => ({
             mapFull: !prevState.mapFull
         }))
+    }
+    handleClickForecast() {
+        this.state.mapRef.current.forecastPlague()
+        this.setState({
+            active: -1
+        })
     }
     render() {
         const Plates = [
@@ -100,11 +106,11 @@ class Dashboard extends React.Component {
             </WingBlank>
             <WhiteSpace size="sm" />
             <Locate onClick={() => this.state.mapRef.current.reLocate(true)}><img src={location} style={{ width: '25px', height: '25px' }} alt='' /></Locate>
-            <Forecast onClick={() => this.state.mapRef.current.forecastPlague()} style={{ color: "rgb(0,174,102)" }}>疫情<br />预测</Forecast>
+            <Forecast onClick={() => { this.handleClickForecast() }} style={{ color: this.state.active === -1 ? "#F56C6C" : "rgb(0,174,102)" }}>疫情<br />预测</Forecast>
             <Join><a href='https://www.wjx.cn/jq/58194197.aspx' style={{ color: "rgb(0,174,102)" }}>我要<br />参与</a></Join>
             <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
             <TopRank onClick={() => { this.state.mapRef.current.changeRankDialog('Bar', true) }}>TOP<br />&nbsp;20</TopRank>
-            <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={Plates[this.state.active].name} />
+            <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={this.state.active !== -1 ? Plates[this.state.active].name : '疫情发生概率预测'} />
         </Wrap >)
     }
 }

@@ -90,11 +90,16 @@ function About(props) {
                 <NorText>•考虑返工时期情况，在“风险规避”中，加入“通勤人口比例”指标</NorText>
             </WingBlank>
             <WhiteSpace />
-            <SectionText style={{ textAlign: "center" }} >算法的验证与改进– 分析结论更加精准</SectionText>
+            <SectionText style={{ textAlign: "center" }} >算法的验证与改进 – 分析结论更加精准</SectionText>
             <WingBlank size="lg">
                 <NorText>•基于公众及专家反馈结果，对各指标权重进行修正</NorText>
-                <NorText>•通过将当前疫情发生地与抵抗力指标进行关联性分析，我们发现并提取出了与疫情发生显著相关的抵抗力因素。通过近一步研究分析，模型拟合优度具有统计意义（P&lt;0.05）,模型预测在当前研究环境显示出较高准确率（>90%），可以使用上述显著相关因素对小区疫情发生风险预警评估。</NorText>
-                <NorText>•基于以上分析结果，地图加入了“<span style={{ fontWeight: 700 }}>疫情预测</span>”功能，对各小区疫情出现风险进行预测与预警</NorText>
+                <NorText>•通过将当前疫情发生地与抵抗力指标进行关联性分析，我们发现并提取出了与疫情发生显著相关的抵抗力因素。通过近一步研究分析，模型拟合优度具有统计意义（P&lt;0.05）,模型预测在当前研究环境显示出较高准确率（&gt;90%），可以使用上述显著相关因素对小区疫情发生风险预警评估</NorText>
+            </WingBlank>
+            <WhiteSpace />
+            <SectionText style={{ textAlign: "center" }} >加入“疫情预测”功能</SectionText>
+            <WingBlank size="lg">
+                <NorText>•基于以上分析结果，地图加入了“<span style={{ fontWeight: 700 }}>疫情预测</span>”功能，对各小区疫情出现风险进行预测与预警。点击地图左侧“疫情预测”按钮，可查看个小区疫情发生概率预测结果</NorText>
+                <NorText>•用户可通过“疫情预测”查看小区疫情发生概率，并通过查看各项抵抗力指标得分，识别小区疫情抵抗力短板，采取相应的应对措施</NorText>
             </WingBlank>
             <WhiteSpace />
             <SectionText style={{ textAlign: "center" }} >更友好的界面与相关信息提供</SectionText>
