@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
             <Forecast onClick={() => { this.handleClickForecast() }} style={{ color: this.state.active === -1 ? "#F56C6C" : "rgb(0,174,102)" }}>疫情<br />预测</Forecast>
             <Join><a href='https://www.wjx.cn/jq/58194197.aspx' style={{ color: "rgb(0,174,102)" }}>我要<br />参与</a></Join>
             <AboutMap><Link to="/about" style={{ color: "rgb(0,174,102)" }}>了解<br />更多</Link></AboutMap>
-            <TopRank onClick={() => { this.state.mapRef.current.changeRankDialog('Bar', true) }}>TOP<br />&nbsp;20</TopRank>
+            <TopRank onClick={() => { if (this.state.active !== -1) { this.state.mapRef.current.changeRankDialog('Bar', true) } }}>TOP<br />&nbsp;20</TopRank>
             <Map changeMapFull={() => { this.changeMapSize() }} activeIndex={this.state.active} ref={this.state.mapRef} rankTypeName={this.state.active !== -1 ? Plates[this.state.active].name : '疫情发生概率预测'} />
         </Wrap >)
     }
