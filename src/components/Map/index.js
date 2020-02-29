@@ -492,7 +492,7 @@ class Map extends React.Component {
 
                 map.on("popupopen", function () {
                     const names = ['抵抗力总分', "风险规避总分", "医疗资源总分", "服务治理总分", "居民特征总分"];
-                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '预测分段']
+                    const ranks = ['抵抗力总分排名', '风险规避排名', '医疗资源排名', '服务治理排名', '居民特征排名', '疫情发生概率']
                     const mapKeys = ["", "a", "b", "c", "d"];
                     const htmlStr = map._layers[Object.keys(map._layers)[Object.keys(map._layers).length - 1]].getContent();
                     let div = document.createElement("div");
