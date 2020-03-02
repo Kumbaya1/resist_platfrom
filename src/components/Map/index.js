@@ -408,8 +408,8 @@ class Map extends React.Component {
                         labels = [],
                         from, label;
                     // if(curObj.state.index<5){
-                    grades = [0, 1000, 2000, 3000, 4000, 5000, 6000, 6727]
-                    grades_name = ['', '非常高', '很高', '较高', '一般', '较低', '很低', '非常低']
+                    grades = [0, 1500,  3000, 4500, 6000, 6727]
+                    grades_name = ['', '高', '较高', '一般', '较低', '低']
                     for (let i = 0; i < grades.length - 1; i++) {
                         from = grades[i];
                         label = grades_name[i + 1];
@@ -431,13 +431,13 @@ class Map extends React.Component {
                 legend.addTo(map);
 
                 function getRankName(d) {
-                    return d > 6000 ? '非常低' :
-                        d > 5000 ? '很低' :
-                            d > 4000 ? '较低' :
+                    return d > 6000 ? '低' :
+                        // d > 5000 ? '很低' :
+                            d > 4500 ? '较低' :
                                 d > 3000 ? '一般' :
-                                    d > 2000 ? '较高' :
-                                        d > 1000 ? '很高' :
-                                            '非常高';
+                                    // d > 2000 ? '较高' :
+                                        d > 1500 ? '较高' :
+                                            '高';
                 }
 
                 //图层样式
@@ -576,11 +576,11 @@ class Map extends React.Component {
     getColor(d) {
         if (typeof d === 'number') {
             return d > 6000 ? '#FF0000' :
-                d > 5000 ? '#FF5500' :
-                    d > 4000 ? '#FFAA00' :
+                // d > 5000 ? '#FF5500' :
+                    d > 4500 ? '#FFAA00' :
                         d > 3000 ? '#FFFF00' :
-                            d > 2000 ? '#B0E000' :
-                                d > 1000 ? '#6FC400' :
+                            d > 1500 ? '#B0E000' :
+                                // d > 1000 ? '#6FC400' :
                                     '#38A800';
         } else {
             // 红色色系

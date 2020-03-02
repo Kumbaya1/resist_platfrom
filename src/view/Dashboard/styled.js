@@ -100,7 +100,7 @@ const Forecast = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     box-shadow: 0 0 6px rgba(0,0,0,.12);
     cursor: pointer;
     z-index: 999;
