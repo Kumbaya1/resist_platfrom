@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 import { WhiteSpace, WingBlank } from 'antd-mobile';
-import { Title, SectionTitle, SectionText, SectionTitleNum, ReturnHome, SectionSubTitle, NewsText, GrayText, NorText } from "./styled"
+import { Title, SectionTitle, SectionText, SectionTitleNum, ReturnHome, SectionSubTitle, GrayText, NorText } from "./styled"
 // import Plate from "../../components/Plate"
 import img_0 from "../../assets/images/about/2/0.jpg"
 import img_1 from "../../assets/images/about/2/1.jpg"
@@ -27,18 +27,21 @@ function About(props) {
             <WhiteSpace size="lg" />
             <SectionTitle ><SectionTitleNum>1.</SectionTitleNum>如何理解“社区的疫情抵抗力”？</SectionTitle>
             <WingBlank size="lg">
-                <SectionText>由社区自身属性决定的对疫情的抵御与抗击能力。抵抗力不仅针对传染病的防治，还是使社区能够抵御疫情并且使其居民平安渡过疫期的能力</SectionText>
+                <SectionText>《社区疫情抵抗力地图》与“疫情地图”不同，它并不反映实际疫情，而是重点对社区自身的抵抗疫情的能力进行研究考察。所谓“抵抗力”，是由社区自身属性决定的对疫情的抵御与抗击能力。地图的核心目的是帮助大众及包括居民与管理者在内的基层团体提高社区防疫意识、识别社区自身防疫优劣势，引导各方共同提升社区疫情抵抗力，保障复工复产安全有序进行。</SectionText>
             </WingBlank>
             <WhiteSpace size="lg" />
             <SectionTitle ><SectionTitleNum>2.</SectionTitleNum>为什么要关注社区的疫情抵抗力？</SectionTitle>
             <WingBlank size="lg">
-                <SectionText>社区是城市抗击疫情的基层堡垒，也是这场战役离你我最近、最关键的战线之一。然而，在人力短缺、事务繁多的情况下，社区防疫压力较大。现象的背后，也反映出提高居民对于社区防疫的意识，发动居民主动性的重要性与紧迫性。</SectionText>
+                <SectionText>1月24日，国家卫健委牵头成立包括32个部门的应对新型冠状病毒感染的肺炎疫情联防联控工作机制发布《关于加强新型冠状病毒感染的肺炎疫情社区防控工作的通知》。《通知》要求各地肺炎疫情联防联控工作机制“充分发挥社区动员能力...群防群控，稳防稳控，有效落实综合性防控措施，防止疫情输入、蔓延、输出，控制疾病传播”。</SectionText>
             </WingBlank>
             <WhiteSpace />
-            <NewsText>1月24日，国家卫健委牵头成立包括32个部门的应对新型冠状病毒感染的肺炎疫情联防联控工作机制发布《关于加强新型冠状病毒感染的肺炎疫情社区防控工作的通知》。《通知》要求各地肺炎疫情联防联控工作机制“充分发挥社区动员能力...群防群控，稳防稳控，有效落实综合性防控措施，防止疫情输入、蔓延、输出，控制疾病传播”。</NewsText>
+            <WingBlank size="lg">
+                <SectionText>社区是城市抗击疫情的基层堡垒，也是这场战役中离普通市民最近、最关键的战线之一。然而，在人力短缺、事务繁多的情况下，社区防疫压力较大。现象的背后，也反映出提高居民对于社区防疫的意识，调动居民积极主动抗击疫情的重要性与紧迫性。</SectionText>
+            </WingBlank>
+            {/* <NewsText>1月24日，国家卫健委牵头成立包括32个部门的应对新型冠状病毒感染的肺炎疫情联防联控工作机制发布《关于加强新型冠状病毒感染的肺炎疫情社区防控工作的通知》。《通知》要求各地肺炎疫情联防联控工作机制“充分发挥社区动员能力...群防群控，稳防稳控，有效落实综合性防控措施，防止疫情输入、蔓延、输出，控制疾病传播”。</NewsText> */}
             <WhiteSpace />
             <WingBlank size="lg">
-                <SectionText>我们希望地图能够增强各方对社区/小区防疫工作的认知，以这场疫情为契机，促进居民参与的基层治理共同体的构建。</SectionText>
+                <SectionText>我们希望地图能够增强各方对社区/小区防疫工作的认知，在助力社区防疫、复工复产的同时，以这场疫情为契机，促进居民参与的基层治理共同体的构建。</SectionText>
             </WingBlank>
             <WhiteSpace size="lg" />
             <SectionTitle ><SectionTitleNum>3.</SectionTitleNum>地图中，抵抗力的评价体系建立的依据是什么？</SectionTitle>
@@ -93,13 +96,14 @@ function About(props) {
             <SectionText style={{ textAlign: "center" }} >算法的验证与改进 – 分析结论更加精准</SectionText>
             <WingBlank size="lg">
                 <NorText>•基于公众及专家反馈结果，对各指标权重进行修正</NorText>
-                <NorText>•通过将当前疫情发生地与抵抗力指标进行关联性分析，我们发现并提取出了与疫情发生显著相关的抵抗力因素。通过近一步研究分析，模型拟合优度具有统计意义（P&lt;0.05）,模型预测在当前研究环境显示出较高准确率（&gt;90%），可以使用上述显著相关因素对小区疫情发生风险预警评估</NorText>
+                <NorText>•通过将当前疫情发生地与抵抗力指标进行关联性分析，我们发现并提取出了与疫情发生显著相关的抵抗力因素。通过近一步研究分析，模型拟合优度具有统计意义（P&lt;0.05）,模型预测在当前研究环境显示出较高准确率（&gt;90%），可以使用上述显著相关因素对小区的安全度进行预测。</NorText>
             </WingBlank>
             <WhiteSpace />
-            <SectionText style={{ textAlign: "center" }} >加入“疫情预测”功能</SectionText>
+            <SectionText style={{ textAlign: "center" }} >加入“安全度预测”功能</SectionText>
             <WingBlank size="lg">
-                <NorText>•基于以上分析结果，地图加入了“<span style={{ fontWeight: 700 }}>疫情预测</span>”功能，对各小区疫情出现风险进行预测与预警。点击地图左侧“疫情预测”按钮，可查看个小区疫情发生概率预测结果</NorText>
-                <NorText>•用户可通过“疫情预测”查看小区疫情发生概率，并通过查看各项抵抗力指标得分，识别小区疫情抵抗力短板，采取相应的应对措施</NorText>
+                <NorText>•基于以上分析结果，地图加入了“<span style={{ fontWeight: 700 }}>安全度预测</span>”功能。点击地图左侧“安全度预测”按钮，地图对各小区安全度预测结果进行可视化表达。</NorText>
+                <NorText>•<span style={{ fontWeight: 700 }}>安全度预测与抵抗力得分均较高的小区</span>，总体抗疫形式较好，对于其居民复工也更加有利</NorText>
+                <NorText>•<span style={{ fontWeight: 700 }}>安全度预测或抵抗力较低的小区</span>，则需要重点加强防范，通过地图提供的抵抗力指数，小区用户及相关治理方可以识别自身防疫“短板”，地图也针对小区抵抗力劣势方面，在“重点防范”中提出增强抵抗力、助力复工复产的对策建议。</NorText>
             </WingBlank>
             <WhiteSpace />
             <SectionText style={{ textAlign: "center" }} >更友好的界面与相关信息提供</SectionText>
@@ -255,7 +259,7 @@ function About(props) {
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>Email:287470717@qq.com</p>
             <WhiteSpace size="xl" />
             <SectionSubTitle>声明</SectionSubTitle>
-            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>本地图成果及结论仅限研究学习交流之用<br/>欢迎业界学界同仁提出批评与建议</p>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>本地图成果及结论仅限研究学习交流之用<br />欢迎业界学界同仁提出批评与建议</p>
             {/* <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>联系人:易女士</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>电话:010-82818411</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>18350068279(疫情期间)</p>
