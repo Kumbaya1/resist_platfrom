@@ -236,8 +236,7 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
             <SectionSubTitle>项目团队</SectionSubTitle>
-            <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>北京清华同衡规划设计研究院</p>
-            <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>技术创新中心</p>
+            <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>城市社区大数据技术研究小组</p>
             <WhiteSpace size="xl" />
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>项目指导</span>:林文棋</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>统筹策划</span>:李洋</p>
@@ -252,13 +251,17 @@ function About(props) {
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>孙小明 吴纳维 李颖 刘海金 高铭 史未名 李靖 郑茜</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>张彦军 于佳 刘斌 孔宪娟 李昊杰 何慧灵 谢盼 何雅楠</p>
             <WhiteSpace size="xl" />
-            <SectionSubTitle>联系方式</SectionSubTitle>
-            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>联系人:易女士</p>
+            <SectionSubTitle>联系我们</SectionSubTitle>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>Email:287470717@qq.com</p>
+            <WhiteSpace size="xl" />
+            <SectionSubTitle>声明</SectionSubTitle>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>本地图成果及结论仅限研究学习交流之用<br/>欢迎业界学界同仁提出批评与建议</p>
+            {/* <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>联系人:易女士</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>电话:010-82818411</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>18350068279(疫情期间)</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>Email:ict@thupdi.com</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>地址：北京市海淀区清河嘉园甲1号楼西塔22层</p>
-            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>邮政编码:100085</p>
+            <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54)" }}>邮政编码:100085</p> */}
             {/* <ReturnHome ><a href="#" style={{ color: "rgb(0,174,102)" }} onClick={() => { props.history.push("/") }}>回到<br />首页</a></ReturnHome> */}
             <ReturnHome ><Link to="/" style={{ color: "rgb(0,174,102)" }}>回到<br />地图</Link></ReturnHome>
             <WhiteSpace size="xl" />

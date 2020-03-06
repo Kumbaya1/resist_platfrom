@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from "antd-mobile"
 import L from "leaflet"
 import { Map as Amap } from 'react-amap'
-import { MapContainer, MapWrap, Tip } from "./styled"
+import { MapContainer, MapWrap } from "./styled"
 import { yqpoi } from './mapdata/yiqingpoi'
 // import BarChart from "../BarChart"
 import RadarChart from "../RadarChart"
@@ -408,7 +408,7 @@ class Map extends React.Component {
                         labels = [],
                         from, label;
                     // if(curObj.state.index<5){
-                    grades = [0, 1500,  3000, 4500, 6000, 6727]
+                    grades = [0, 1500, 3000, 4500, 6000, 6727]
                     grades_name = ['', '高', '较高', '一般', '较低', '低']
                     for (let i = 0; i < grades.length - 1; i++) {
                         from = grades[i];
@@ -433,11 +433,11 @@ class Map extends React.Component {
                 function getRankName(d) {
                     return d > 6000 ? '低' :
                         // d > 5000 ? '很低' :
-                            d > 4500 ? '较低' :
-                                d > 3000 ? '一般' :
-                                    // d > 2000 ? '较高' :
-                                        d > 1500 ? '较高' :
-                                            '高';
+                        d > 4500 ? '较低' :
+                            d > 3000 ? '一般' :
+                                // d > 2000 ? '较高' :
+                                d > 1500 ? '较高' :
+                                    '高';
                 }
 
                 //图层样式
@@ -577,11 +577,11 @@ class Map extends React.Component {
         if (typeof d === 'number') {
             return d > 6000 ? '#FF0000' :
                 // d > 5000 ? '#FF5500' :
-                    d > 4500 ? '#FFAA00' :
-                        d > 3000 ? '#FFFF00' :
-                            d > 1500 ? '#B0E000' :
-                                // d > 1000 ? '#6FC400' :
-                                    '#38A800';
+                d > 4500 ? '#FFAA00' :
+                    d > 3000 ? '#FFFF00' :
+                        d > 1500 ? '#B0E000' :
+                            // d > 1000 ? '#6FC400' :
+                            '#38A800';
         } else {
             // 红色色系
             return d === '高' ? '#800026' :
@@ -673,7 +673,7 @@ class Map extends React.Component {
                 </MapUtilsWrap> */}
                 <MapContainer ref={this.state.map} id={this.state.id} diffHeight={this.state.diffHeight}></MapContainer>
                 <Amap plugins={['ToolBar']} events={this.amapEvents} amapkey='4da1355b7376039312f14745617f02f9' center={this.state.center}></Amap>
-                <Tip><a href="mailto:ict@thupdi.com" style={{ color: "rgb(54, 54, 54)" }}>ict@thupdi.com </a></Tip>
+                {/* <Tip><a href="mailto:ict@thupdi.com" style={{ color: "rgb(54, 54, 54)" }}>ict@thupdi.com </a></Tip> */}
                 <Modal
                     visible={this.state.modalBar}
                     closable={true}
