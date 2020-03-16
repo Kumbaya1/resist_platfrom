@@ -136,3 +136,6 @@ body,
 .am-modal-wrap {
   z-index: 9999;
 }
+.leaflet-right .info.legend.leaflet-control{
+  margin-bottom:75px;
+}

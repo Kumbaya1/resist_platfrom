@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 const Wrap = styled.div`
     height:100%;
+    position:relative;
 `
 const Title = styled.h1`
     font-size:20px;
@@ -108,13 +109,9 @@ const Forecast = styled.div`
 `
 
 const Locate = styled.div`
-    left: 10px;
-    bottom: 260px;
-    position: fixed;
     background-color: #fff;
     width: 55px;
     height: 55px;
-    border-radius: 50%;
     color: rgb(0, 174, 102);
     display: flex;
     align-items: center;
@@ -125,8 +122,38 @@ const Locate = styled.div`
     z-index: 999;
     line-height:15px;
 `
-
-
+const MapUtilBox = styled.div`
+    position:absolute;
+    right:10px;
+    top:60px;
+    z-index:999;
+    background-color: #fff;
+    width: 40px;
+    border-radius: 4px;
+    text-align:center;
+    font-size:12px;
+`
+const MapUtilItem = styled.div`
+    width:100%;
+    padding:4px 0;
+    line-height: 14px;
+`
+const Divider = styled.div`
+    background:rgba(42,42,42,.2);
+    height:1px;
+    width:80%;
+    margin:auto;
+`
+const BtnBox = styled.div`
+    position:absolute;
+    bottom:10px;
+    left:calc(50% - 155px);
+    height:50px;
+    z-index:999;
+    background:#fff;
+    border-radius:20px;
+    padding:0 20px;
+`
 export {
     Wrap,
     Title,
@@ -138,5 +165,9 @@ export {
     TopRank,
     Join,
     Forecast,
-    Locate
+    Locate,
+    MapUtilBox,
+    MapUtilItem,
+    Divider,
+    BtnBox,
 }

@@ -34,7 +34,7 @@ class Map extends React.Component {
             radarScore: 0,
             radarTips: "",
             radarTotalscorerank: "0",
-            diffHeight: 66,
+            diffHeight: 0,
             head: [
                 {
                     label: "排名",
