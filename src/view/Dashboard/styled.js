@@ -132,6 +132,8 @@ const MapUtilBox = styled.div`
     border-radius: 4px;
     text-align:center;
     font-size:12px;
+    box-shadow: 0 0 6px rgba(0,0,0,.12);
+
 `
 const MapUtilItem = styled.div`
     width:100%;
@@ -146,13 +148,15 @@ const Divider = styled.div`
 `
 const BtnBox = styled.div`
     position:absolute;
-    bottom:10px;
-    left:calc(50% - 155px);
+    bottom:20px;
+    left:calc(50% - 156px);
     height:50px;
     z-index:999;
     background:#fff;
-    border-radius:20px;
+    border-radius:50px;
     padding:0 20px;
+    box-shadow: 0 0 6px rgba(0,0,0,.12);
+
 `
 export {
     Wrap,

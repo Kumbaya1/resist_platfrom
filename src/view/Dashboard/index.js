@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom"
-import { WhiteSpace, WingBlank } from 'antd-mobile';
+// import { WhiteSpace, WingBlank } from 'antd-mobile';
 import Map from "../../components/Map"
-import { Wrap, PlateWrap, Plate, AboutMap, TopRank, Join, Forecast, Locate, MapUtilBox, MapUtilItem, Divider, BtnBox } from "./styled"
+import { Wrap, MapUtilBox, MapUtilItem, Divider, BtnBox } from "./styled"
 import BtnItem from "../../components/BtnItem"
 import "./style.css"
 import chuachuanbofengxiannbo from "../../assets/images/dashborad/chuanbofengxian.png"
