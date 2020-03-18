@@ -77,6 +77,8 @@ const yqpoi = {
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.6025543697, 39.9264900873]}, 'properties': {'lng': 116.6025543697, '行政区': '朝阳区', 'lat': 39.9264900873, 'name': '常营（地区）乡常营中路6号院', 'FID': 71}}
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.387280934, 39.9743840039]}, 'properties': {'lng': 116.387280934, '行政区': '朝阳区', 'lat': 39.9743840039, 'name': '安贞街道裕民路甲3号', 'FID': 72}}
     ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.4180993169, 39.844125557]}, 'properties': {'lng': 116.4180993169, '行政区': '丰台区', 'lat': 39.844125557, 'name': '大红门街道石榴园南里小区', 'FID': 73}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.2738585773, 40.0649766285]}, 'properties': {'lng': 116.4115049972, '行政区': '海淀区', 'lat': 40.0649766285, 'name': '西北旺（地区）镇唐家岭新城T05小区', 'FID': 74}}
+    ,{'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [116.4115049972, 39.857481659]}, 'properties': {'lng': 116.4115049972, '行政区': '丰台区', 'lat': 39.857481659, 'name': '东铁匠营街道南三环中路65号院', 'FID': 75}}
   ]
   }
   
