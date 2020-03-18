@@ -6,7 +6,7 @@ function BtnItem(props) {
             <div>
                 <img src={isSelect ? props.img : props.unImg} alt={props.name} style={{ width: props.width ? props.width + "px" : "100%" }} />
             </div>
-            <div style={{ color: isSelect ? "rgb(0,174,102)" : "", fontSize: "12px" }}>{props.name}</div>
+            <div style={{ color: isSelect ? "rgb(0,174,102)" : "#909399", fontSize: "12px" }}>{props.name}</div>
         </div>
     )
 }

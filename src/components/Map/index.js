@@ -13,6 +13,7 @@ import 'leaflet-search/dist/leaflet-search.src.css'
 import markerIcon from '../../assets/images/yiqingpoi2.png'
 import hospitalIcon from '../../assets/images/hospital_green.png'
 import locationIcon from '../../assets/images/loc.png'
+import zhongdainfangfan from "../../assets/images/dashborad/zhongdainfangfan.png"
 import hospital from './mapdata/hospital'
 import 'leaflet.locatecontrol'
 class Map extends React.Component {
@@ -699,7 +700,7 @@ class Map extends React.Component {
                     <span style={{ color: "rgb(0,174,102)" }}>得分超过{parseInt(((6727 - this.state.radarTotalscorerank) / 6727) * 100)}%的小区</span>
 
                     <RadarChart radarData={this.state.radarData} rank={{ rankA: this.state.rankA, rankB: this.state.rankB, rankC: this.state.rankC, rankD: this.state.rankD }}></RadarChart>
-                    {this.state.radarTips.split(",").length > 0 ? (this.state.radarTips.split(",")[0].length > 0) ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}>重点防范</p>) : "" : ""}
+                    {this.state.radarTips.split(",").length > 0 ? (this.state.radarTips.split(",")[0].length > 0) ? (<p style={{ color: "rgb(170, 170, 170)", fontSize: "12px", textAlign: "left" }}> <img style={{width:"60px"}} src={zhongdainfangfan} alt="重点防范" /> </p>) : "" : ""}
                     {this.state.radarTips.split(",").map((item, index) => {
                         return (
                             <div key={index} style={{ color: "rgb(54,54,54)", textAlign: "left", fontSize: "12px" }} >·{item}</div>
