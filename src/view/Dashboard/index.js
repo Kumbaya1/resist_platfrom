@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
             active: 0,
             mapFull: false,
             mapRef: React.createRef(),
-            selectName: ""
+            selectName: "抵抗力"
         }
     }
     handleClickPlate(item, index) {
