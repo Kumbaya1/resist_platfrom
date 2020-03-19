@@ -240,7 +240,7 @@ function About(props) {
             <WhiteSpace size="xl" />
             <WhiteSpace size="xl" />
             <SectionSubTitle>项目团队</SectionSubTitle>
-            <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>城市社区大数据技术研究小组</p>
+            <p style={{ textAlign: "center", color: "rgb(54, 54, 54) " }}>清河创新小分队</p>
             <WhiteSpace size="xl" />
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>项目指导</span>:林文棋</p>
             <p style={{ textAlign: "center", lineHeight: "22px", color: "rgb(54, 54, 54) " }}><span style={{ fontWeight: "bold" }}>统筹策划</span>:李洋</p>
