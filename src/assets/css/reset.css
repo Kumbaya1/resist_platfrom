@@ -136,6 +136,21 @@ body,
 .am-modal-wrap {
   z-index: 9999;
 }
-.leaflet-right .info.legend.leaflet-control{
-  margin-bottom:90px;
+.leaflet-right .info.legend.leaflet-control {
+  margin-bottom: 90px;
+}
+body .leaflet-control-search .search-tooltip {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  right: 45px;
+}
+body .leaflet-control-search .search-tip {
+  font-size: 16px;
+  background: #fff;
+  color: rgb(144, 147, 153);
+}
+body .leaflet-control-search .search-button {
+  background-image: url(../images/search.png);
+  background-size: 50%;
+  background-position: center;
 }
